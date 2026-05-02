@@ -96,6 +96,8 @@ if page == "Overview":
             <div class="timeline-step">9</div>
             <div class="timeline-step">10</div>
             <div class="timeline-step">11</div>
+            <div class="timeline-step">12</div>
+            <div class="timeline-step">13</div>
         </div>
         """
         st.markdown(timeline_html, unsafe_allow_html=True)
@@ -278,7 +280,9 @@ elif "Stage" in page:
                     "Stage 8" if "8" in stage_key else \
                     "Stage 9" if "9" in stage_key else \
                     "Stage 10" if "10" in stage_key else \
-                    "Stage 11" if "11" in stage_key else "Stage 6"
+                    "Stage 11" if "11" in stage_key else \
+                    "Stage 12" if "12" in stage_key else \
+                    "Stage 13" if "13" in stage_key else "Stage 6"
         
         for tool in TOOLS_CHECKLIST[tools_key]:
             st.markdown(f"✅ {tool}")
