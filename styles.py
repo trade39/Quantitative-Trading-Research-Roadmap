@@ -436,7 +436,7 @@ def apply_styles():
         }
 
         /* ═══════════════════════════════════
-           RESOURCE LINKS
+           RESOURCE LINKS & CARDS
         ═══════════════════════════════════ */
         .resource-link {
             color: #64748B;
@@ -449,6 +449,26 @@ def apply_styles():
 
         .resource-link:hover {
             color: #00F2FF;
+        }
+
+        /* Clickable resource card */
+        a:has(.resource-card) {
+            display: block;
+            text-decoration: none !important;
+        }
+
+        .resource-card {
+            border-radius: 12px !important;
+            padding: 0.85rem 1rem !important;
+            margin-bottom: 0.6rem !important;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(167, 139, 250, 0.5) !important;
+            box-shadow: 0 8px 28px rgba(167, 139, 250, 0.15) !important;
+            background: rgba(167, 139, 250, 0.06) !important;
         }
 
         /* ═══════════════════════════════════
