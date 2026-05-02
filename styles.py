@@ -65,16 +65,48 @@ def apply_styles():
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: transform 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
         }
         
         .glass-card:hover {
             transform: translateY(-5px);
             border-color: rgba(0, 242, 255, 0.4);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Clickable Card Wrapper (Smooth Navigation) */
+        .card-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card-wrapper .stButton {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+
+        .card-wrapper .stButton > button {
+            width: 100% !important;
+            height: 150px !important; /* Matches approximate card height */
+            opacity: 0 !important;
+            border: none !important;
+            background: transparent !important;
+            cursor: pointer !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .card-wrapper .stButton > button:hover {
+            background: transparent !important;
+            border: none !important;
+        }
+
+        .card-wrapper .stButton > button:focus {
+            box-shadow: none !important;
+            outline: none !important;
         }
 
         .stage-badge {
