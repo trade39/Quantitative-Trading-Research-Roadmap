@@ -65,6 +65,10 @@ def apply_styles():
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
         }
         
         .glass-card:hover {
