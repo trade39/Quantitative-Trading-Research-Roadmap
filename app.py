@@ -318,25 +318,35 @@ elif "Stage" in page:
 
     # --- QUIZ SECTION ---
     if "quiz" in stage_data:
+        import random
         st.markdown("---")
         st.markdown("### 🧠 The Knowledge Check")
         st.markdown('<p style="color:#94A3B8; font-size:0.9rem; margin-bottom:1.5rem;">Test your mastery of this stage\'s concepts before moving forward.</p>', unsafe_allow_html=True)
         
         quiz_score = 0
-        total_qs = len(stage_data["quiz"])
         
-        for q_idx, quiz_item in enumerate(stage_data["quiz"]):
-            q_key = f"quiz_{stage_key}_{q_idx}"
+        quiz_indices_key = f"quiz_indices_{stage_key}"
+        if quiz_indices_key not in st.session_state:
+            pool_size = len(stage_data["quiz"])
+            sample_size = min(5, pool_size)
+            st.session_state[quiz_indices_key] = random.sample(range(pool_size), sample_size)
+            
+        selected_indices = st.session_state[quiz_indices_key]
+        total_qs = len(selected_indices)
+        
+        for q_idx_disp, original_idx in enumerate(selected_indices):
+            quiz_item = stage_data["quiz"][original_idx]
+            q_key = f"quiz_{stage_key}_{original_idx}"
             st.markdown(f"""
             <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
-                <div style="font-size: 0.75rem; font-weight: 700; color: #A78BFA; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Question {q_idx + 1}</div>
+                <div style="font-size: 0.75rem; font-weight: 700; color: #A78BFA; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Question {q_idx_disp + 1}</div>
                 <div style="font-size: 1rem; color: #E2E8F0; font-weight: 500; margin-bottom: 1rem;">{quiz_item['question']}</div>
             </div>
             """, unsafe_allow_html=True)
             
             # Using radio for options
             user_choice = st.radio(
-                f"Select an answer for Question {q_idx + 1}",
+                f"Select an answer for Question {q_idx_disp + 1}",
                 options=quiz_item["options"],
                 key=q_key,
                 label_visibility="collapsed"
@@ -346,7 +356,7 @@ elif "Stage" in page:
             btn_key = f"btn_{q_key}"
             submitted_key = f"submitted_{q_key}"
             
-            if st.button(f"Submit Answer {q_idx + 1}", key=btn_key):
+            if st.button(f"Submit Answer {q_idx_disp + 1}", key=btn_key):
                 st.session_state[submitted_key] = True
 
             if st.session_state.get(submitted_key, False):
@@ -367,7 +377,7 @@ elif "Stage" in page:
                 """, unsafe_allow_html=True)
 
         # Quiz completion summary
-        if all(st.session_state.get(f"submitted_quiz_{stage_key}_{i}", False) for i in range(total_qs)):
+        if all(st.session_state.get(f"submitted_quiz_{stage_key}_{idx}", False) for idx in selected_indices):
             st.markdown(f"""
             <div style="background: linear-gradient(90deg, rgba(34,197,94,0.1), rgba(167,139,250,0.1)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1rem;">
                 <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎓</div>
@@ -452,8 +462,8 @@ elif page == "Progress Tracker":
 
     if st.button("🔄 Reset All Progress", type="secondary"):
         st.session_state.progress = {}
-        # Clear all quiz submissions
-        keys_to_delete = [k for k in st.session_state.keys() if k.startswith("submitted_quiz_")]
+        # Clear all quiz submissions and randomly selected questions
+        keys_to_delete = [k for k in st.session_state.keys() if k.startswith("submitted_quiz_") or k.startswith("quiz_indices_")]
         for k in keys_to_delete:
             del st.session_state[k]
         st.rerun()
