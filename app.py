@@ -16,15 +16,15 @@ st.set_page_config(
 apply_styles()
 
 # --- STATE MANAGEMENT ---
-if 'sidebar_radio' not in st.session_state:
-    st.session_state.sidebar_radio = "Overview"
+if 'active_page' not in st.session_state:
+    st.session_state.active_page = "Overview"
 
 if 'progress' not in st.session_state:
     st.session_state.progress = {}
 
 # Helper to change page
 def navigate_to(page_name):
-    st.session_state.sidebar_radio = page_name
+    st.session_state.active_page = page_name
 
 # --- NAVIGATION CONSTANTS ---
 CATEGORIES = {
@@ -45,12 +45,38 @@ with st.sidebar:
     # Navigation Structure
     nav_options = ["Overview"] + list(CATEGORIES.keys()) + ["Tools & Traps", "Progress Tracker"]
     
+    # The radio button state needs to be managed carefully
+    # If the active_page is a Stage, we find its parent category to highlight it
+    radio_index = 0
+    current_active = st.session_state.active_page
+    
+    # Determine which radio option should be selected
+    default_radio_val = "Overview"
+    if current_active in nav_options:
+        default_radio_val = current_active
+    else:
+        # Check if it's a stage and find its category
+        for cat_name, stages in CATEGORIES.items():
+            if any(s_key in current_active for s_key in stages):
+                default_radio_val = cat_name
+                break
+    
+    try:
+        radio_index = nav_options.index(default_radio_val)
+    except ValueError:
+        radio_index = 0
+
     selected_nav = st.radio(
         "Navigation",
         options=nav_options,
-        key="sidebar_radio",
+        index=radio_index,
         label_visibility="collapsed"
     )
+    
+    # Sync radio selection back to active_page if it changed
+    if selected_nav != default_radio_val:
+        st.session_state.active_page = selected_nav
+        st.rerun()
     
     # If a category is selected, show its stages
     if selected_nav in CATEGORIES:
@@ -66,8 +92,9 @@ with st.sidebar:
     st.markdown("---")
     st.caption("v1.3.0 | Institutional Grade")
 
-# Rename 'page' to 'current_page' for clarity
-current_page = st.session_state.sidebar_radio
+# Use active_page for rendering logic
+current_page = st.session_state.active_page
+
 # --- OVERVIEW & CATEGORY PAGES ---
 if current_page == "Overview" or current_page in CATEGORIES:
     is_category_view = current_page in CATEGORIES
