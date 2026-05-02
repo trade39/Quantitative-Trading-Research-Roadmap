@@ -193,10 +193,7 @@ def apply_styles():
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
         }
 
-        /* Hide Streamlit elements */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
+
 
         /* Resource Links */
         .resource-link {
@@ -215,6 +212,49 @@ def apply_styles():
         .trap-card {
             border-left: 4px solid #EF4444;
             background: rgba(239, 68, 68, 0.05);
+        }
+
+        /* Tutorial Components */
+        .tutorial-overview {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #CBD5E1;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border-left: 4px solid #00F2FF;
+        }
+
+        .guide-container {
+            background: rgba(138, 43, 226, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px dashed rgba(138, 43, 226, 0.3);
+        }
+
+        .guide-step {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .exercise-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .exercise-header {
+            color: #10B981;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
         }
         </style>
     """, unsafe_allow_html=True)
