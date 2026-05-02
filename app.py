@@ -250,11 +250,25 @@ elif "Stage" in page:
             st.markdown("### ⚠️ Common Mistakes to Avoid")
             for mistake in stage_data['common_mistakes']:
                 st.markdown(f"""
-            <div style="background: rgba(239,68,68,0.08); border-left: 3px solid #EF4444; border-radius: 0 8px 8px 0;
-                        padding: 0.75rem 1rem; margin-bottom: 0.6rem;">
-                <span style="font-size: 0.875rem; color: #FCA5A5; line-height: 1.7;">{mistake}</span>
-            </div>
-            """, unsafe_allow_html=True)
+                <div style="background: rgba(239,68,68,0.08); border-left: 3px solid #EF4444; border-radius: 0 8px 8px 0;
+                            padding: 0.75rem 1rem; margin-bottom: 0.6rem;">
+                    <span style="font-size: 0.875rem; color: #FCA5A5; line-height: 1.7;">{mistake}</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+        # Glossary Card Section
+        if "glossary" in stage_data:
+            st.markdown("---")
+            st.markdown("### 📖 Stage Glossary")
+            cols = st.columns(len(stage_data["glossary"]))
+            for idx, item in enumerate(stage_data["glossary"]):
+                with cols[idx]:
+                    st.markdown(f"""
+                    <div class="glass-card" style="padding: 1.25rem; height: 100%; border-top: 3px solid #A78BFA;">
+                        <div style="font-size: 0.75rem; font-weight: 700; color: #A78BFA; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">{item['term']}</div>
+                        <div style="font-size: 0.85rem; color: #CBD5E1; line-height: 1.5;">{item['definition']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
 
     with col2:
         st.markdown("### 📖 Resources")
