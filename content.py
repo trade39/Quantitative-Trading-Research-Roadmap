@@ -2,6 +2,13 @@
 
 ROADMAP_DATA = {
     "Stage 1": {
+        "title": "Market Microstructure & Order Flow",
+        "duration": "Months 1–2",
+        "difficulty": "Beginner",
+        "reading_time": "20h",
+        "prereqs": "None",
+        "goal": "Understand the mechanics of how orders are matched and how liquidity moves price.",
+        "overview": "Every trade on a modern exchange happens within the Limit Order Book (LOB). This stage strips away indicators to show you the raw physics of the market: how bids and asks interact to create the price action we see on charts.",
         "category": "Foundations",
         "guide": [
             "1. <b>Study the Tape:</b> Open a platform like TradingView or ThinkOrSwim and watch the Level 2 (Depth of Market) for 30 minutes. Notice how big orders 'absorb' price.",
@@ -67,6 +74,13 @@ ROADMAP_DATA = {
         ]
     },
     "Stage 2": {
+        "title": "Statistics & Probability in Finance",
+        "duration": "Months 2–4",
+        "difficulty": "Intermediate",
+        "reading_time": "35h",
+        "prereqs": "Basic Algebra",
+        "goal": "Master the mathematical tools used to quantify edge and detect noise.",
+        "overview": "Finance is the study of uncertainty. To be a quant, you must speak the language of probability. This stage covers the distribution of returns, the reality of fat-tails (Kurtosis), and why standard statistics often fail in financial markets.",
         "category": "Foundations",
         "guide": [
             "1. <b>Master the Histogram:</b> Plot the returns of Bitcoin vs. S&P 500. Observe the 'kurtosis' in Bitcoin—the extreme outliers.",
@@ -125,6 +139,13 @@ ROADMAP_DATA = {
         ]
     },
     "Stage 3": {
+        "title": "Data Engineering & Python for Quants",
+        "duration": "Months 3–5",
+        "difficulty": "Intermediate",
+        "reading_time": "40h",
+        "prereqs": "Stage 1, Stage 2",
+        "goal": "Build a professional research environment and master vectorized data processing.",
+        "overview": "Alpha is hidden in data. If you can't process millions of rows efficiently, you can't find it. This stage transitions you from a 'coder' to a 'data engineer,' focusing on high-performance Python (NumPy/Pandas) and robust data pipelines.",
         "category": "Foundations",
         "guide": [
             "1. <b>Set up VS Code:</b> Move away from Jupyter for production code. Use a professional IDE with Git integration.",
@@ -175,6 +196,13 @@ ROADMAP_DATA = {
         ]
     },
     "Stage 4": {
+        "title": "Strategy Research & Backtesting Alpha",
+        "duration": "Months 5–8",
+        "difficulty": "Intermediate",
+        "reading_time": "50h",
+        "prereqs": "Stage 3",
+        "goal": "Design, test, and validate quantitative trading signals without curve-fitting.",
+        "overview": "A backtest is a simulation of the past. If done poorly, it's a hallucination of the future. This stage teaches the rigorous methodology of signal research, from hypothesis generation to out-of-sample validation and cost analysis.",
         "category": "Advanced Research",
         "guide": [
             "1. <b>Pick a Niche:</b> Don't try to trade everything. Choose one asset (e.g., FX) and one style (e.g., Trend).",
@@ -221,6 +249,13 @@ ROADMAP_DATA = {
         ]
     },
     "Stage 5": {
+        "title": "Machine Learning & Portfolio Optimization",
+        "duration": "Months 8–12",
+        "difficulty": "Advanced",
+        "reading_time": "60h",
+        "prereqs": "Stage 4",
+        "goal": "Apply modern ML models to financial data and optimize capital allocation.",
+        "overview": "The market is a non-stationary machine. Simple rules often break. This stage introduces Machine Learning (Random Forests, XGBoost, Transformers) and the mathematical science of Portfolio Optimization (Markowitz, Black-Litterman).",
         "category": "Advanced Research",
         "guide": [
             "1. <b>Master mlfinlab:</b> Explore the 'Hudson & Thames' library for institutional ML implementation.",
@@ -267,6 +302,13 @@ ROADMAP_DATA = {
         ]
     },
     "Stage 6": {
+        "title": "Institutional Infrastructure & Scaling",
+        "duration": "Months 12–18",
+        "difficulty": "Advanced",
+        "reading_time": "45h",
+        "prereqs": "Stage 5",
+        "goal": "Transition from research to production and understand institutional-grade execution.",
+        "overview": "Professional quants don't trade on laptops. They use distributed systems, low-latency connectivity, and robust monitoring. This stage covers the 'plumbing' of a quant fund: from cloud deployment to risk oversight.",
         "category": "Advanced Research",
         "guide": [
             "1. <b>Build a Production Pipeline:</b> Use Docker and AWS/GCP to run your research scripts on a schedule.",
@@ -305,6 +347,13 @@ ROADMAP_DATA = {
         ]
     },
     "Stage 7": {
+        "title": "Macroeconomics for Financial Markets & Trading",
+        "duration": "Advanced Elective",
+        "difficulty": "Intermediate",
+        "reading_time": "30h",
+        "prereqs": "Stage 2",
+        "goal": "Integrate top-down macro regimes into systematic trading models.",
+        "overview": "Markets don't exist in a vacuum. Central bank policy, inflation cycles, and geopolitical events drive the 'regime' in which your strategies operate. This stage teaches you to quantify macro data to improve strategy selection.",
         "category": "Advanced Research",
         "guide": [
             "1. <b>Follow the Fed:</b> Read the FOMC statements and listen to the Chair's press conference. Note the market reaction in the 2-Year Yield.",
@@ -351,6 +400,13 @@ ROADMAP_DATA = {
         ]
     },
     "Stage 8": {
+        "title": "Options Theory & Volatility Surface",
+        "duration": "Advanced Elective",
+        "difficulty": "Expert",
+        "reading_time": "55h",
+        "prereqs": "Stage 2, 4",
+        "goal": "Master the non-linear world of derivatives and volatility trading.",
+        "overview": "Options are the only instruments that allow you to trade pure volatility. This stage covers the Black-Scholes model, the 'Greeks' (Delta, Gamma, Vega), and how to exploit the Volatility Risk Premium (VRP).",
         "category": "Expert Electives",
         "guide": [
             "1. <b>Start with Options Pricing Calculators:</b> Use an online BSM calculator (CBOE has one free). Input different strikes and expiries and observe how IV changes the price more than any other input.",
@@ -460,6 +516,10 @@ ROADMAP_DATA = {
         "title": "Crypto & DeFi Quantitative Methods",
         "duration": "Advanced Elective",
         "difficulty": "Expert",
+        "reading_time": "45h",
+        "prereqs": "Stage 1, Stage 3",
+        "goal": "Apply quantitative rigor to the frontier of decentralized finance and crypto assets.",
+        "overview": "Crypto markets are the 'Wild West' of quant finance. With 24/7 trading and on-chain transparency, they offer unique alpha opportunities in arbitrage, MEV, and liquidity provisioning.",
         "category": "Expert Electives",
         "guide": [
             "1. Study the 'Ethereum Yellow Paper' to understand gas and EVM.",
