@@ -1,3 +1,4 @@
+# styles.py
 import streamlit as st
 
 def apply_styles():
@@ -12,11 +13,65 @@ def apply_styles():
             color: #E2E8F0;
         }
 
-        /* Sidebar styles */
+        /* Sidebar Hover Effect */
         [data-testid="stSidebar"] {
-            background-color: rgba(17, 25, 40, 0.75);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            width: 80px !important;
+            min-width: 80px !important;
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            overflow-x: hidden !important;
+            background-color: rgba(17, 25, 40, 0.75) !important;
+            backdrop-filter: blur(15px) !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+            z-index: 1000 !important;
+        }
+
+        [data-testid="stSidebar"]:hover {
+            width: 320px !important;
+            min-width: 320px !important;
+            background-color: rgba(17, 25, 40, 0.98) !important;
+        }
+
+        /* Sidebar Content Fade */
+        [data-testid="stSidebarUserContent"] {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 280px !important;
+            padding: 2rem 1rem !important;
+        }
+
+        [data-testid="stSidebar"]:hover [data-testid="stSidebarUserContent"] {
+            opacity: 1;
+        }
+
+        /* Adjust Main Content to not be hidden by the narrow sidebar strip */
+        [data-testid="stAppViewContainer"] {
+            padding-left: 0 !important;
+        }
+        
+        .main .block-container {
+            padding-left: 100px !important;
+            max-width: 1200px !important;
+        }
+
+        /* Hide default sidebar toggle */
+        [data-testid="stSidebarCollapseButton"] {
+            display: none !important;
+        }
+
+        /* Sidebar indicator when collapsed */
+        [data-testid="stSidebar"]::before {
+            content: '🚀';
+            position: absolute;
+            top: 30px;
+            left: 28px;
+            font-size: 24px;
+            opacity: 1;
+            transition: opacity 0.3s;
+            z-index: 1001;
+        }
+
+        [data-testid="stSidebar"]:hover::before {
+            opacity: 0;
         }
 
         /* Hero section */
