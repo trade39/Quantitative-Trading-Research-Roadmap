@@ -1,3 +1,7 @@
 streamlit
 pandas
 pathlib
+polars
+pykalman
+scipy
+plotly
