@@ -99,24 +99,25 @@ if page == "Overview":
         
         # Summary Cards
         for i, (key, stage) in enumerate(ROADMAP_DATA.items()):
-            target_page = f"{key}: {stage['title']}"
+            # Match exact string in PAGES list
+            matching_page = next((p for p in PAGES if p.startswith(f"{key}:")), None)
+            target_page = matching_page if matching_page else f"{key}: {stage['title']}"
             
-            # Create a clickable wrapper
-            with st.container():
-                st.markdown(f'<div class="card-wrapper">', unsafe_allow_html=True)
-                
-                # Invisible button that covers the card (using callback for safe state update)
-                st.button(f"Go to {key}", key=f"btn_{key}", on_click=navigate_to, args=(target_page,), use_container_width=True)
-                
-                # Visual representation
-                st.markdown(f"""
-                <div class="glass-card">
-                    <span class="stage-badge">{stage['duration']}</span>
-                    <h3>{key}: {stage['title']}</h3>
-                    <p style="color: #A1A1AA;">{stage['goal']}</p>
-                </div>
-                """, unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
+            # Render card visually, then use a Streamlit button styled as a CTA
+            st.markdown(f"""
+            <div class="glass-card" style="margin-bottom: 0.5rem;">
+                <span class="stage-badge">{stage['duration']}</span>
+                <h3 style="margin-top: 0.75rem; margin-bottom: 0.5rem;">{key}: {stage['title']}</h3>
+                <p style="color: #A1A1AA; margin-bottom: 0;">{stage['goal']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+            st.button(
+                f"→ Open {key}",
+                key=f"btn_{key}",
+                on_click=navigate_to,
+                args=(target_page,),
+                use_container_width=True
+            )
 
 # --- STAGE PAGES ---
 elif "Stage" in page:
