@@ -77,32 +77,21 @@ if page == "Overview":
         st.markdown("### 🗺️ The Path to Mastery")
         st.markdown("""
         <p style="font-size: 0.9375rem; line-height: 1.85; color: #94A3B8; margin-bottom: 1.75rem;">
-        The journey from absolute beginner to professional quantitative researcher is a multi-phase evolution.
-        Each stage builds the foundation for the next — completion of Stages 1–4 alone puts you ahead of 90% of retail traders.
+        The journey from absolute beginner to professional quantitative researcher is a 17-stage evolution.
+        Stages 1–4 build your quant foundation; Stages 5–16 take you to institutional mastery;
+        Stage 17 prepares you for the actual recruiting gauntlet at Jane Street, Citadel, HRT, Two Sigma, and more.
         </p>
         """, unsafe_allow_html=True)
         
-        # Timeline Visualization
-        timeline_html = """
-        <div class="roadmap-timeline">
-            <div class="timeline-step active">1</div>
-            <div class="timeline-step">2</div>
-            <div class="timeline-step">3</div>
-            <div class="timeline-step">4</div>
-            <div class="timeline-step">5</div>
-            <div class="timeline-step">6</div>
-            <div class="timeline-step">7</div>
-            <div class="timeline-step">8</div>
-            <div class="timeline-step">9</div>
-            <div class="timeline-step">10</div>
-            <div class="timeline-step">11</div>
-            <div class="timeline-step">12</div>
-            <div class="timeline-step">13</div>
-            <div class="timeline-step">14</div>
-            <div class="timeline-step">15</div>
-            <div class="timeline-step">16</div>
-        </div>
-        """
+        # Timeline Visualization — dynamically built from ROADMAP_DATA
+        total_stages = len(ROADMAP_DATA)
+        steps_html = "".join(
+            f'<div class="timeline-step{" active" if i == 1 else ""}">'
+            + ("🏆" if i == total_stages else str(i))
+            + "</div>"
+            for i in range(1, total_stages + 1)
+        )
+        timeline_html = f'<div class="roadmap-timeline">{steps_html}</div>'
         st.markdown(timeline_html, unsafe_allow_html=True)
 
     st.markdown("---")
@@ -311,7 +300,13 @@ elif "Stage" in page:
             tools_key = f"Stage {stage_num}"
             
         if tools_key not in TOOLS_CHECKLIST:
-            tools_key = "Stage 6"
+            # Fallback: find nearest stage that exists
+            available_nums = sorted(
+                int(k.split()[-1]) for k in TOOLS_CHECKLIST
+                if k.split()[-1].isdigit()
+            )
+            closest = min(available_nums, key=lambda x: abs(x - stage_num))
+            tools_key = f"Stage {closest}"
         
         for tool in TOOLS_CHECKLIST[tools_key]:
             st.markdown(f"✅ {tool}")
