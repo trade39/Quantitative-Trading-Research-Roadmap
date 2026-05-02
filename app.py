@@ -212,13 +212,23 @@ elif "Stage" in page:
             with st.container():
                 st.markdown(f"<div class='topic-category'>{topic['category']}</div>", unsafe_allow_html=True)
                 for item in topic['items']:
-                    item_text = item['text'] if isinstance(item, dict) else item
-                    is_prep = item.get('is_interview_prep', False) if isinstance(item, dict) else False
+                    if isinstance(item, dict):
+                        item_text = item.get('text', '')
+                        is_prep = item.get('is_interview_prep', False)
+                        code_snippet = item.get('code', None)
+                    else:
+                        item_text = item
+                        is_prep = False
+                        code_snippet = None
                     
                     badge_html = '<span style="background:#1E293B; color:#A78BFA; font-size:0.65rem; padding:1px 6px; border-radius:4px; margin-left:8px; border:1px solid #A78BFA44; font-weight:700;">INTERVIEW PREP</span>' if is_prep else ''
-                    # Convert newlines to <br> for HTML rendering
-                    display_text = item_text.replace("\n", "<br>")
-                    st.markdown(f"<p style='margin-bottom:0.8rem; line-height:1.6;'>• {display_text}{badge_html}</p>", unsafe_allow_html=True)
+                    
+                    # Render text with LaTeX support
+                    # We use a wrapper to maintain the dot/bullet style but let Streamlit handle the LaTeX
+                    st.markdown(f"**•** {item_text} {badge_html}", unsafe_allow_html=True)
+                    
+                    if code_snippet:
+                        st.code(code_snippet, language="python")
         
         # New Step-by-Step Guide Section
         if "guide" in stage_data:
