@@ -22,6 +22,7 @@ def apply_styles():
             backdrop-filter: blur(15px) !important;
             border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
             overflow-x: hidden !important;
+            z-index: 1000 !important;
         }
 
         section[data-testid="stSidebar"]:hover {
@@ -35,21 +36,23 @@ def apply_styles():
             width: 320px !important;
         }
 
-        /* Fade out ONLY user content, keeping sidebar controls (like the arrow) visible */
-        [data-testid="stSidebarUserContent"] {
-            transition: opacity 0.3s ease;
-        }
-
+        /* Hide menu items when narrow to avoid messy clipping */
+        section[data-testid="stSidebar"]:not(:hover) [data-testid="stSidebarNav"],
         section[data-testid="stSidebar"]:not(:hover) [data-testid="stSidebarUserContent"] {
             opacity: 0;
-            pointer-events: none;
+            transition: opacity 0.2s;
         }
 
-        /* Ensure the collapse button is always visible and positioned correctly */
+        /* Force the sidebar collapse button (the arrow) to the left so it's always visible in the 80px strip */
         [data-testid="stSidebarCollapseButton"] {
+            position: absolute !important;
+            left: 20px !important;
+            right: auto !important;
+            top: 20px !important;
             opacity: 1 !important;
             visibility: visible !important;
-            z-index: 1005 !important;
+            z-index: 10001 !important;
+            color: #00F2FF !important;
         }
 
         /* Adjust Main Content Area */
@@ -62,24 +65,6 @@ def apply_styles():
             padding-right: 2rem !important;
         }
 
-        /* Sidebar indicator when collapsed */
-        section[data-testid="stSidebar"]::before {
-            content: '🚀';
-            position: absolute;
-            top: 25px;
-            left: 28px;
-            font-size: 24px;
-            z-index: 1001;
-            transition: opacity 0.3s;
-        }
-
-        section[data-testid="stSidebar"]:not(:hover)::before {
-            opacity: 1;
-        }
-
-        section[data-testid="stSidebar"]:hover::before {
-            opacity: 0;
-        }
 
         /* Hero section */
         .hero-container {
