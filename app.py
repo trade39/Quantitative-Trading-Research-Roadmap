@@ -183,7 +183,18 @@ elif "Stage" in page:
     with col2:
         st.markdown("### 📖 Resources")
         for res in stage_data['resources']:
-            st.markdown(f"<div class='glass-card' style='padding: 1rem;'>{res}</div>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <a href="{res['url']}" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                <div class="glass-card resource-card" style="padding: 0.85rem 1rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.75rem; transition: all 0.2s ease; cursor: pointer;">
+                    <span style="font-size: 1.25rem; line-height: 1;">{res['icon']}</span>
+                    <div style="flex: 1;">
+                        <div style="font-size: 0.875rem; font-weight: 600; color: #E2E8F0; line-height: 1.4;">{res['name']}</div>
+                        <div style="font-size: 0.75rem; color: #64748B; margin-top: 0.2rem; word-break: break-all;">{res['url']}</div>
+                    </div>
+                    <span style="font-size: 0.85rem; color: #A78BFA; opacity: 0.8;">↗</span>
+                </div>
+            </a>
+            """, unsafe_allow_html=True)
             
         st.markdown("### 🛠️ Recommended Tools")
         tools_key = "Stage 1-2" if "1" in stage_key or "2" in stage_key else \
