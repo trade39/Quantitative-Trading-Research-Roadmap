@@ -13,11 +13,73 @@ def apply_styles():
             color: #E2E8F0;
         }
 
-        /* Standard Sidebar Styles */
+        /* Hover-Expand Sidebar Styles */
         [data-testid="stSidebar"] {
-            background-color: rgba(17, 25, 40, 0.75);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 80px !important;
+            max-width: 80px !important;
+            width: 80px !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            background-color: rgba(17, 25, 40, 0.85) !important;
+            backdrop-filter: blur(20px) !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+            overflow: hidden !important;
+            z-index: 1000 !important;
+        }
+
+        [data-testid="stSidebar"]:hover {
+            min-width: 300px !important;
+            max-width: 300px !important;
+            width: 300px !important;
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* Sidebar Content Handling */
+        [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+            width: 260px !important; /* Fixed width for content to prevent wrapping */
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        [data-testid="stSidebar"]:hover [data-testid="stVerticalBlock"] {
+            opacity: 1;
+        }
+
+        /* Collapsed Sidebar Indicator (Optional: Add an icon or hint) */
+        [data-testid="stSidebar"]::before {
+            content: '🚀';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            opacity: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        [data-testid="stSidebar"]:hover::before {
+            opacity: 0;
+        }
+
+        /* Adjust main content to account for the narrow sidebar */
+        [data-testid="stAppViewContainer"] {
+            padding-left: 0 !important;
+        }
+
+        /* Ensure radio buttons and text are clean */
+        .stRadio > label {
+            white-space: nowrap !important;
+        }
+
+        /* Hide Streamlit's default collapse button */
+        [data-testid="collapsedControl"] {
+            display: none !important;
+        }
+
+        /* Prevent horizontal scroll on sidebar */
+        [data-testid="stSidebarContent"] {
+            overflow-x: hidden !important;
         }
 
         /* Reset main content padding to default */
