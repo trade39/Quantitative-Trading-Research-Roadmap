@@ -16,22 +16,15 @@ st.set_page_config(
 apply_styles()
 
 # --- STATE MANAGEMENT ---
-if 'active_page' not in st.session_state:
-    st.session_state.active_page = "Overview"
+if 'sidebar_radio' not in st.session_state:
+    st.session_state.sidebar_radio = "Overview"
 
 if 'progress' not in st.session_state:
     st.session_state.progress = {}
 
 # Helper to change page
 def navigate_to(page_name):
-    st.session_state.active_page = page_name
-
-# --- NAVIGATION CONSTANTS ---
-CATEGORIES = {
-    "Foundations": ["Stage 1", "Stage 2", "Stage 3"],
-    "Advanced Research": ["Stage 4", "Stage 5", "Stage 6", "Stage 7", "Stage 11"],
-    "Expert Electives": ["Stage 8", "Stage 9", "Stage 10", "Stage 12", "Stage 13"]
-}
+    st.session_state.sidebar_radio = page_name
 
 # --- SIDEBAR NAVIGATION ---
 with st.sidebar:
@@ -42,63 +35,21 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
     
-    # Navigation Structure
-    nav_options = ["Overview"] + list(CATEGORIES.keys()) + ["Tools & Traps", "Progress Tracker"]
+    # Navigation list
+    PAGES = ["Overview"] + [f"{key}: {val['title']}" for key, val in ROADMAP_DATA.items()] + ["Tools & Traps", "Progress Tracker"]
     
-    # The radio button state needs to be managed carefully
-    # If the active_page is a Stage, we find its parent category to highlight it
-    radio_index = 0
-    current_active = st.session_state.active_page
-    
-    # Determine which radio option should be selected
-    default_radio_val = "Overview"
-    if current_active in nav_options:
-        default_radio_val = current_active
-    else:
-        # Check if it's a stage and find its category
-        for cat_name, stages in CATEGORIES.items():
-            if any(s_key in current_active for s_key in stages):
-                default_radio_val = cat_name
-                break
-    
-    try:
-        radio_index = nav_options.index(default_radio_val)
-    except ValueError:
-        radio_index = 0
-
-    selected_nav = st.radio(
+    page = st.radio(
         "Navigation",
-        options=nav_options,
-        index=radio_index,
+        options=PAGES,
+        key="sidebar_radio",
         label_visibility="collapsed"
     )
     
-    # Sync radio selection back to active_page if it changed
-    if selected_nav != default_radio_val:
-        st.session_state.active_page = selected_nav
-        st.rerun()
-    
-    # If a category is selected, show its stages
-    if selected_nav in CATEGORIES:
-        st.markdown(f"### {selected_nav}")
-        for s_key in CATEGORIES[selected_nav]:
-            s_data = ROADMAP_DATA.get(s_key)
-            if s_data:
-                label = f"{s_key}: {s_data['title']}"
-                if st.button(label, key=f"nav_{s_key}", use_container_width=True):
-                    navigate_to(label)
-                    st.rerun()
-
     st.markdown("---")
-    st.caption("v1.3.0 | Institutional Grade")
+    st.caption("v1.2.0 | Institutional Grade")
 
-# Use active_page for rendering logic
-current_page = st.session_state.active_page
-
-# --- OVERVIEW & CATEGORY PAGES ---
-if current_page == "Overview" or current_page in CATEGORIES:
-    is_category_view = current_page in CATEGORIES
-    
+# --- OVERVIEW PAGE ---
+if page == "Overview":
     col1, col2 = st.columns([1.2, 1])
     
     with col1:
@@ -106,97 +57,81 @@ if current_page == "Overview" or current_page in CATEGORIES:
         <div class="hero-container" style="background-image: url('https://images.unsplash.com/photo-1611974717482-58a25a921820?auto=format&fit=crop&q=80&w=2000');">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1 class="hero-title">{current_page if is_category_view else "Quantitative Trading Research"}</h1>
-                <p class="hero-subtitle">{"Focused Deep-Dive" if is_category_view else "The Institutional Path to Alpha Generation"}</p>
+                <h1 class="hero-title">Quantitative Trading Research</h1>
+                <p class="hero-subtitle">The Institutional Path to Alpha Generation</p>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        if not is_category_view:
-            st.markdown("### 🏹 The Mission")
-            st.markdown("""
-            <div class="tutorial-overview">
-                Welcome to the <strong>Quant Lab</strong>. This is not a retail course; it is an institutional-grade 
-                roadmap for those who seek to understand the mathematical and computational engines behind 
-                global finance. We focus on <strong>Research Rigor</strong>, <strong>Execution Physics</strong>, 
-                and <strong>Risk Discipline</strong>.
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("### 🏹 The Mission")
+        st.markdown("""
+        <div class="tutorial-overview">
+            Welcome to the <strong>Quant Lab</strong>. This is not a retail course; it is an institutional-grade 
+            roadmap for those who seek to understand the mathematical and computational engines behind 
+            global finance. We focus on <strong>Research Rigor</strong>, <strong>Execution Physics</strong>, 
+            and <strong>Risk Discipline</strong>.
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        if not is_category_view:
-            st.markdown("### 🗺️ The Path to Mastery")
-            st.markdown("""
-            <p style="font-size: 0.9375rem; line-height: 1.85; color: #94A3B8; margin-bottom: 1.75rem;">
-            The journey from absolute beginner to professional quantitative researcher is a multi-phase evolution.
-            Each stage builds the foundation for the next — completion of Stages 1–4 alone puts you ahead of 90% of retail traders.
-            </p>
-            """, unsafe_allow_html=True)
-            
-            # Timeline Visualization
-            timeline_html = """
-            <div class="roadmap-timeline">
-                <div class="timeline-step active">1</div>
-                <div class="timeline-step">2</div>
-                <div class="timeline-step">3</div>
-                <div class="timeline-step">4</div>
-                <div class="timeline-step">5</div>
-                <div class="timeline-step">6</div>
-                <div class="timeline-step">7</div>
-                <div class="timeline-step">8</div>
-                <div class="timeline-step">9</div>
-                <div class="timeline-step">10</div>
-                <div class="timeline-step">11</div>
-                <div class="timeline-step">12</div>
-                <div class="timeline-step">13</div>
-            </div>
-            """
-            st.markdown(timeline_html, unsafe_allow_html=True)
-        else:
-            st.markdown(f"### 🎯 {current_page} Curriculum")
-            st.markdown(f"""
-            <p style="font-size: 0.9375rem; line-height: 1.85; color: #94A3B8;">
-            This module group covers the critical {current_page.lower()} required to build 
-            institutional-grade systems. Complete these stages to advance your proficiency.
-            </p>
-            """, unsafe_allow_html=True)
+        st.markdown("### 🗺️ The Path to Mastery")
+        st.markdown("""
+        <p style="font-size: 0.9375rem; line-height: 1.85; color: #94A3B8; margin-bottom: 1.75rem;">
+        The journey from absolute beginner to professional quantitative researcher is a multi-phase evolution.
+        Each stage builds the foundation for the next — completion of Stages 1–4 alone puts you ahead of 90% of retail traders.
+        </p>
+        """, unsafe_allow_html=True)
+        
+        # Timeline Visualization
+        timeline_html = """
+        <div class="roadmap-timeline">
+            <div class="timeline-step active">1</div>
+            <div class="timeline-step">2</div>
+            <div class="timeline-step">3</div>
+            <div class="timeline-step">4</div>
+            <div class="timeline-step">5</div>
+            <div class="timeline-step">6</div>
+            <div class="timeline-step">7</div>
+            <div class="timeline-step">8</div>
+            <div class="timeline-step">9</div>
+            <div class="timeline-step">10</div>
+            <div class="timeline-step">11</div>
+            <div class="timeline-step">12</div>
+            <div class="timeline-step">13</div>
+        </div>
+        """
+        st.markdown(timeline_html, unsafe_allow_html=True)
 
     st.markdown("---")
     
-    # --- SEARCH & FILTERS (Only on Overview) ---
-    search_query = ""
-    difficulty_filter = []
+    # --- SEARCH & FILTERS ---
+    st.markdown("### 🔍 Discovery")
+    search_col, filter_col = st.columns([2, 1])
     
-    if current_page == "Overview":
-        st.markdown("### 🔍 Discovery")
-        search_col, filter_col = st.columns([2, 1])
-        with search_col:
-            search_query = st.text_input("Search topics, tools, or concepts...", placeholder="e.g. 'Log-Returns', 'C++', 'Sharpe Ratio'", key="roadmap_search")
-        with filter_col:
-            difficulty_filter = st.multiselect("Filter by Difficulty", options=["Beginner", "Intermediate", "Advanced", "Expert"], default=[])
+    with search_col:
+        search_query = st.text_input("Search topics, tools, or concepts...", placeholder="e.g. 'Log-Returns', 'C++', 'Sharpe Ratio'", key="roadmap_search")
+    
+    with filter_col:
+        difficulty_filter = st.multiselect(
+            "Filter by Difficulty",
+            options=["Beginner", "Intermediate", "Advanced", "Expert"],
+            default=[]
+        )
 
     # Filter Logic
     filtered_stages = []
-    
-    # If in category view, only show stages in that category
-    data_to_filter = {}
-    if is_category_view:
-        for s_key in CATEGORIES[current_page]:
-            if s_key in ROADMAP_DATA:
-                data_to_filter[s_key] = ROADMAP_DATA[s_key]
-    else:
-        data_to_filter = ROADMAP_DATA
-
-    for s_key, s_data in data_to_filter.items():
+    for s_key, s_data in ROADMAP_DATA.items():
         # Match Search Query
         match_search = True
         if search_query:
             all_content = f"{s_data['title']} {s_data['overview']} {s_data['goal']}".lower()
-            for cat in s_data.get('topics', []):
+            # Also search topics
+            for cat in s_data['topics']:
                 all_content += f" {cat['category']}".lower()
                 for item in cat['items']:
                     item_text = item['text'] if isinstance(item, dict) else item
                     all_content += f" {item_text}".lower()
+            
             match_search = search_query.lower() in all_content
         
         # Match Difficulty
@@ -208,13 +143,17 @@ if current_page == "Overview" or current_page in CATEGORIES:
             filtered_stages.append((s_key, s_data))
 
     if not filtered_stages:
-        st.info("No stages match your search or filter criteria.")
+        st.info("No stages match your search or filter criteria. Try broadening your search.")
     else:
         # Render Filtered Grid
         cols = st.columns(2)
         for idx, (key, stage) in enumerate(filtered_stages):
             with cols[idx % 2]:
-                target_page = f"{key}: {stage['title']}"
+                # Match exact string in PAGES list
+                matching_page = next((p for p in PAGES if p.startswith(f"{key}:")), None)
+                target_page = matching_page if matching_page else f"{key}: {stage['title']}"
+                
+                # Render card visually, then use a Streamlit button styled as a CTA
                 diff_color = "#22C55E" if stage.get('difficulty') == "Beginner" else "#FBBF24" if stage.get('difficulty') == "Intermediate" else "#EF4444" if stage.get('difficulty') == "Expert" else "#F97316"
                 
                 st.markdown(f"""
@@ -225,6 +164,10 @@ if current_page == "Overview" or current_page in CATEGORIES:
                     </div>
                     <h3 style="font-size: 1.05rem; font-weight: 700; color: #E2E8F0; margin-top: 0.5rem; margin-bottom: 0.4rem; letter-spacing: -0.01em;">{key}: {stage['title']}</h3>
                     <p style="font-size: 0.875rem; color: #64748B; line-height: 1.65; margin-bottom: 0.75rem;">{stage['goal']}</p>
+                    <div style="display: flex; align-items: center; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.05); pt: 0.75rem; margin-top: 0.75rem; font-size: 0.75rem; color: #94A3B8;">
+                        <span>⏱️ {stage.get('reading_time', 'N/A')} study</span>
+                        <span>🧩 Prereq: {stage.get('prereqs', 'None')}</span>
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
                 st.button(
@@ -236,8 +179,8 @@ if current_page == "Overview" or current_page in CATEGORIES:
                 )
 
 # --- STAGE PAGES ---
-elif "Stage" in current_page:
-    stage_key = current_page.split(":")[0].strip()
+elif "Stage" in page:
+    stage_key = page.split(":")[0].strip()
     try:
         stage_data = ROADMAP_DATA[stage_key]
     except KeyError:
@@ -264,19 +207,18 @@ elif "Stage" in current_page:
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        if "topics" in stage_data:
-            st.markdown("### 📚 Core Curriculum")
-            for topic in stage_data['topics']:
-                with st.container():
-                    st.markdown(f"<div class='topic-category'>{topic['category']}</div>", unsafe_allow_html=True)
-                    for item in topic['items']:
-                        item_text = item['text'] if isinstance(item, dict) else item
-                        is_prep = item.get('is_interview_prep', False) if isinstance(item, dict) else False
-                        
-                        badge_html = '<span style="background:#1E293B; color:#A78BFA; font-size:0.65rem; padding:1px 6px; border-radius:4px; margin-left:8px; border:1px solid #A78BFA44; font-weight:700;">INTERVIEW PREP</span>' if is_prep else ''
-                        # Convert newlines to <br> for HTML rendering
-                        display_text = item_text.replace("\n", "<br>")
-                        st.markdown(f"<p style='margin-bottom:0.8rem; line-height:1.6;'>• {display_text}{badge_html}</p>", unsafe_allow_html=True)
+        st.markdown("### 📚 Core Curriculum")
+        for topic in stage_data['topics']:
+            with st.container():
+                st.markdown(f"<div class='topic-category'>{topic['category']}</div>", unsafe_allow_html=True)
+                for item in topic['items']:
+                    item_text = item['text'] if isinstance(item, dict) else item
+                    is_prep = item.get('is_interview_prep', False) if isinstance(item, dict) else False
+                    
+                    badge_html = '<span style="background:#1E293B; color:#A78BFA; font-size:0.65rem; padding:1px 6px; border-radius:4px; margin-left:8px; border:1px solid #A78BFA44; font-weight:700;">INTERVIEW PREP</span>' if is_prep else ''
+                    # Convert newlines to <br> for HTML rendering
+                    display_text = item_text.replace("\n", "<br>")
+                    st.markdown(f"<p style='margin-bottom:0.8rem; line-height:1.6;'>• {display_text}{badge_html}</p>", unsafe_allow_html=True)
         
         # New Step-by-Step Guide Section
         if "guide" in stage_data:
@@ -288,23 +230,12 @@ elif "Stage" in current_page:
 
         # New Practical Exercise Section
         if "exercise" in stage_data:
-            exercise = stage_data["exercise"]
-            st.markdown("### 🚀 Practical Exercise")
             st.markdown(f"""
             <div class="exercise-box">
-                <div class="exercise-header">TASK: {exercise.get('title', 'Execution')}</div>
-                <p style="margin-bottom: 1.25rem;">{exercise.get('description', '')}</p>
+                <div class="exercise-header">🚀 Practical Exercise</div>
+                {stage_data['exercise']}
             </div>
             """, unsafe_allow_html=True)
-            
-            if "scaffold" in exercise:
-                st.code(exercise["scaffold"], language="python")
-                col1, col2 = st.columns([1, 4])
-                with col1:
-                    if st.button("Copy Scaffold", key=f"copy_{stage_key}"):
-                        st.toast("Scaffold copied to clipboard!")
-                with col2:
-                    st.markdown(f"[Launch Lab in Binder](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/master?urlpath=lab) | [Run in Google Colab](https://colab.research.google.com/)")
 
         if "milestone" in stage_data:
             st.markdown(f"""
@@ -370,25 +301,16 @@ elif "Stage" in current_page:
         for tool in TOOLS_CHECKLIST[tools_key]:
             st.markdown(f"✅ {tool}")
 
-    # --- ENHANCED QUIZ SECTION ---
-    if "quiz_bank" in stage_data:
-        import random
+    # --- QUIZ SECTION ---
+    if "quiz" in stage_data:
         st.markdown("---")
         st.markdown("### 🧠 The Knowledge Check")
-        st.markdown('<p style="color:#94A3B8; font-size:0.9rem; margin-bottom:1.5rem;">Test your mastery of this stage\'s concepts. Questions are randomized each session.</p>', unsafe_allow_html=True)
+        st.markdown('<p style="color:#94A3B8; font-size:0.9rem; margin-bottom:1.5rem;">Test your mastery of this stage\'s concepts before moving forward.</p>', unsafe_allow_html=True)
         
-        # Initialize quiz questions for this session if not exists
-        quiz_session_key = f"quiz_qs_{stage_key}"
-        if quiz_session_key not in st.session_state:
-            all_qs = stage_data["quiz_bank"]
-            num_to_pick = min(3, len(all_qs)) # Pick 3 random questions
-            st.session_state[quiz_session_key] = random.sample(all_qs, num_to_pick)
-        
-        current_quiz_qs = st.session_state[quiz_session_key]
         quiz_score = 0
-        total_qs = len(current_quiz_qs)
+        total_qs = len(stage_data["quiz"])
         
-        for q_idx, quiz_item in enumerate(current_quiz_qs):
+        for q_idx, quiz_item in enumerate(stage_data["quiz"]):
             q_key = f"quiz_{stage_key}_{q_idx}"
             st.markdown(f"""
             <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
@@ -405,8 +327,11 @@ elif "Stage" in current_page:
                 label_visibility="collapsed"
             )
             
+            # Show feedback immediately if the button was clicked
+            btn_key = f"btn_{q_key}"
             submitted_key = f"submitted_{q_key}"
-            if st.button(f"Submit Answer {q_idx + 1}", key=f"btn_{q_key}"):
+            
+            if st.button(f"Submit Answer {q_idx + 1}", key=btn_key):
                 st.session_state[submitted_key] = True
 
             if st.session_state.get(submitted_key, False):
@@ -417,7 +342,7 @@ elif "Stage" in current_page:
                     st.success("✨ Correct!")
                     quiz_score += 1
                 else:
-                    st.error(f"❌ Not quite. The correct answer was: {quiz_item['options'][quiz_item['answer']]}")
+                    st.error("❌ Not quite.")
                 
                 st.markdown(f"""
                 <div style="background: rgba(167,139,250,0.1); border: 1px dashed rgba(167,139,250,0.3); border-radius: 8px; padding: 1rem; margin-top: 0.5rem; margin-bottom: 2rem;">
@@ -432,21 +357,12 @@ elif "Stage" in current_page:
             <div style="background: linear-gradient(90deg, rgba(34,197,94,0.1), rgba(167,139,250,0.1)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1rem;">
                 <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎓</div>
                 <div style="font-size: 1rem; font-weight: 700; color: #E2E8F0;">Stage Mastery: {quiz_score}/{total_qs}</div>
-                <div style="font-size: 0.85rem; color: #94A3B8; margin-top: 0.25rem;">You've completed this session's knowledge check. Return later for different questions!</div>
+                <div style="font-size: 0.85rem; color: #94A3B8; margin-top: 0.25rem;">You've completed the knowledge check for {stage_data['title']}.</div>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("🔄 Shuffle Questions", key=f"shuffle_{stage_key}"):
-                if quiz_session_key in st.session_state:
-                    del st.session_state[quiz_session_key]
-                # Clear submissions
-                for i in range(total_qs):
-                    sub_key = f"submitted_quiz_{stage_key}_{i}"
-                    if sub_key in st.session_state:
-                        del st.session_state[sub_key]
-                st.rerun()
 
 # --- TOOLS & TRAPS PAGE ---
-elif current_page == "Tools & Traps":
+elif page == "Tools & Traps":
     st.markdown("## 🛠️ The Quant's Toolkit")
     
     cols = st.columns(len(TOOLS_CHECKLIST))
@@ -472,12 +388,9 @@ elif current_page == "Tools & Traps":
             """, unsafe_allow_html=True)
 
 # --- PROGRESS TRACKER PAGE ---
-elif current_page == "Progress Tracker":
+elif page == "Progress Tracker":
     st.markdown("## 📈 Your Research Progress")
     
-    total_stages = len(ROADMAP_DATA)
-    # Estimate progress based on completed stages (optional, but let's keep it simple)
-    # For now, let's just count completed checkboxes in session state
     total_topics = sum(len(stage["topics"]) for stage in ROADMAP_DATA.values())
     completed_topics = len(st.session_state.progress)
     overall_pct = int((completed_topics / total_topics) * 100) if total_topics > 0 else 0
