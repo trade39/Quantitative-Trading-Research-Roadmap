@@ -387,10 +387,7 @@ elif page == "✅ My Progress":
 
             for i, item in enumerate(stage["topics"]):
                 key = f"{stage_key}_{i}"
-                # Strip markdown bold markers for label
-                label = item.split(":**")[0].replace("**", "").replace("*", "").strip()
-                if label.startswith("*"):
-                    label = label[1:].strip()
+                label = item.split(":")[0].strip() if ":" in item else item[:50].strip() + "..."
                 checked = st.checkbox(f"{label}", key=key, value=st.session_state.progress.get(key, False))
                 st.session_state.progress[key] = checked
 
