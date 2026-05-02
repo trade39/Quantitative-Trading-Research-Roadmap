@@ -55,6 +55,24 @@ ROADMAP_DATA = {
                 "options": ["Arbitrage", "Alpha", "Slippage", "Basis Risk"],
                 "answer": 2,
                 "explanation": "Slippage is the difference between your intended price and the actual execution price, usually caused by lack of depth in the LOB."
+            },
+            {
+                "question": "What is the term for aggressive participants who cross the spread with market orders?",
+                "options": ["Makers", "Takers", "Arbitrageurs", "Hedgers"],
+                "answer": 1,
+                "explanation": "Takers remove liquidity from the order book by crossing the spread and accepting the current best limit order."
+            },
+            {
+                "question": "What often happens to the Limit Order Book during a 'Flash Crash'?",
+                "options": ["Market Makers increase their depth", "Retail traders provide stability", "Market Makers pull their quotes to avoid toxic flow", "Spreads become tighter"],
+                "answer": 2,
+                "explanation": "Market Makers often pull their quotes during extreme volatility to avoid adverse selection, leaving the book 'thin' and causing vertical price drops."
+            },
+            {
+                "question": "Which asset class involves contracts for future delivery with embedded leverage and 'basis' risk?",
+                "options": ["Equities", "Options", "Bonds", "Futures"],
+                "answer": 3,
+                "explanation": "Futures are agreements to buy or sell an asset at a future date, embedding both leverage and the risk that the futures price diverges from the spot price (basis risk)."
             }
         ],
         "resources": [
@@ -138,6 +156,24 @@ ROADMAP_DATA = {
                 "options": ["Correlated", "Vectorized", "Cointegrated", "Normally Distributed"],
                 "answer": 2,
                 "explanation": "Cointegration is a statistical property where two 'drifting' variables never stay too far apart, forming the basis of pairs trading."
+            },
+            {
+                "question": "Which mathematical tool is widely used in Pairs Trading and tracking the 'Fair Value' of a stock in real-time?",
+                "options": ["Kalman Filters", "Moving Averages", "Bollinger Bands", "Fourier Transforms"],
+                "answer": 0,
+                "explanation": "Kalman Filters dynamically adjust their parameters to smooth out noise while remaining highly responsive to true changes in price direction."
+            },
+            {
+                "question": "What statistical fallacy assumes that returns follow a 'Bell Curve'?",
+                "options": ["The Normal Distribution Fallacy", "The Gambler's Fallacy", "The Hot Hand Fallacy", "The Base Rate Fallacy"],
+                "answer": 0,
+                "explanation": "The Normal Distribution Fallacy assumes returns are normally distributed, ignoring the 'Fat Tails' (excess kurtosis) prevalent in real financial markets."
+            },
+            {
+                "question": "Which concept is used to distinguish between 'True Signal' and 'Stochastic Noise' in Information Theory?",
+                "options": ["P-Value", "Shannon Entropy", "R-Squared", "Standard Deviation"],
+                "answer": 1,
+                "explanation": "Shannon Entropy measures the information content of signals, helping quants separate predictable edges from random noise."
             }
         ],
         "resources": [
@@ -202,6 +238,30 @@ ROADMAP_DATA = {
                 "options": ["Easier code", "Avoids memory leaks", "Replaces slow Python loops with C", "Prevents Overfitting"],
                 "answer": 2,
                 "explanation": "Vectorization performs operations on entire arrays at once using optimized C/C++ backends, bypassing Python's slow global interpreter lock (GIL) and loops."
+            },
+            {
+                "question": "Why is Survivorship Bias dangerous in backtesting?",
+                "options": ["It causes memory leaks", "It overestimates transaction costs", "It ignores bankrupt companies, artificially inflating returns", "It requires too much data"],
+                "answer": 2,
+                "explanation": "By only testing on companies that exist today, you ignore those that failed, making historical strategies look much better than they actually were."
+            },
+            {
+                "question": "What does ETL stand for in the context of data engineering?",
+                "options": ["Execute, Trade, Learn", "Extract, Transform, Load", "Evaluate, Test, Launch", "Estimate, Track, Log"],
+                "answer": 1,
+                "explanation": "ETL is the fundamental process of moving data from raw sources (APIs/files), cleaning it, and loading it into a structured database for research."
+            },
+            {
+                "question": "What is a primary benefit of using Docker for quantitative research?",
+                "options": ["Faster code execution", "Automatic strategy generation", "Reproducibility across different machines", "Lower transaction costs"],
+                "answer": 2,
+                "explanation": "Docker containerizes your environment, ensuring your backtest runs identically on any machine without missing dependency errors."
+            },
+            {
+                "question": "Which modern Python library is often preferred over Pandas for large-scale dataframes due to multithreading?",
+                "options": ["NumPy", "SciPy", "Polars", "Dask"],
+                "answer": 2,
+                "explanation": "Polars is built in Rust and uses multithreaded query engines and lazy evaluation to process large datasets significantly faster than Pandas."
             }
         ],
         "resources": [
@@ -264,6 +324,30 @@ ROADMAP_DATA = {
                 "options": ["Log-Return", "Sharpe Ratio", "Information Ratio", "Skewness"],
                 "answer": 1,
                 "explanation": "The Sharpe Ratio measures excess return per unit of volatility, helping quants determine if the returns justify the risk/drawdown."
+            },
+            {
+                "question": "What is Walk-Forward Optimization (WFO) used for?",
+                "options": ["To maximize backtest returns", "To test parameters on unseen data to avoid curve fitting", "To increase execution speed", "To predict the exact date of market crashes"],
+                "answer": 1,
+                "explanation": "WFO tests optimized parameters on subsequent 'out-of-sample' time windows to ensure the strategy is robust and not just memorizing past noise."
+            },
+            {
+                "question": "Which strategy family bets that price extremes will return to a long-term average?",
+                "options": ["Trend Following", "Mean Reversion", "Momentum", "Breakout"],
+                "answer": 1,
+                "explanation": "Mean Reversion strategies assume that prices eventually return to their historical averages after stretching too far in either direction."
+            },
+            {
+                "question": "What do 'Fama-French' factors aim to identify?",
+                "options": ["The next big tech stock", "Whether returns are from Pure Alpha or hidden Beta risk", "The cheapest broker", "The fastest execution venue"],
+                "answer": 1,
+                "explanation": "Factor models decompose returns to show if a strategy is actually skillful (Alpha) or just passively exposed to known risks like Size or Value (Beta)."
+            },
+            {
+                "question": "Why is a Sharpe Ratio calculated on only 6 months of data often considered statistically meaningless?",
+                "options": ["6 months isn't enough time to process", "It doesn't include dividends", "It lacks enough out-of-sample data for reliable statistical significance", "It assumes zero interest rates"],
+                "answer": 2,
+                "explanation": "Financial data is noisy. Quants require at least 3 years of out-of-sample data to ensure a Sharpe Ratio isn't just the result of short-term luck."
             }
         ],
         "resources": [
@@ -321,6 +405,30 @@ ROADMAP_DATA = {
                 "options": ["To predict price", "To filter false positive signals from a primary model", "To replace OLS regression", "To speed up training"],
                 "answer": 1,
                 "explanation": "Meta-labeling (López de Prado) uses a secondary model to decide *whether* to take a trade suggested by a primary model, improving overall signal precision."
+            },
+            {
+                "question": "Why is using standard K-Fold Cross Validation on time-series data a mistake?",
+                "options": ["It is too slow", "It requires too much memory", "Shuffling data leaks future information into the training set", "It only works on images"],
+                "answer": 2,
+                "explanation": "In time-series, standard K-Fold shuffles the data, allowing the model to 'see' the future while training on the past, leading to massive overfitting."
+            },
+            {
+                "question": "What type of architecture is FinBERT based on?",
+                "options": ["Recurrent Neural Network (RNN)", "Long Short-Term Memory (LSTM)", "Transformer-based architecture", "Convolutional Neural Network (CNN)"],
+                "answer": 2,
+                "explanation": "FinBERT uses a modern Transformer architecture with attention mechanisms, allowing it to understand long-range context in financial text."
+            },
+            {
+                "question": "What technique uses GANs or Diffusion models to solve the lack of historical crash data?",
+                "options": ["Data Scrubbing", "Synthetic Data Generation", "Feature Engineering", "Data Normalization"],
+                "answer": 1,
+                "explanation": "Synthetic Data Generation creates realistic but artificial financial time series, providing more data points for models to learn tail-risk events."
+            },
+            {
+                "question": "Why is Reinforcement Learning (RL) frequently used for execution in trading?",
+                "options": ["To predict the next year's GDP", "To replace all human analysts", "To learn 'Optimal Execution' and minimize market impact", "To read earnings reports"],
+                "answer": 2,
+                "explanation": "RL agents learn through trial and error how to slice and route large orders dynamically to reduce slippage and market impact."
             }
         ],
         "resources": [
@@ -381,6 +489,30 @@ ROADMAP_DATA = {
                 "options": ["The highest possible profit", "Execution that matches the day's volume profile to minimize market impact", "Instant order filling", "Arbitrage between exchanges"],
                 "answer": 1,
                 "explanation": "VWAP algorithms slice large orders into smaller ones throughout the day to hide institutional footprints and minimize price distortion."
+            },
+            {
+                "question": "What is 'Portfolio Margin' in Prime Brokerage?",
+                "options": ["A flat fee structure", "Margin based on the combined risk of all hedged positions, allowing higher leverage", "A penalty for holding too many stocks", "A retail-only feature"],
+                "answer": 1,
+                "explanation": "Portfolio Margin calculates risk holistically. If you hold offsetting positions (hedges), your margin requirement drops, granting institutional leverage."
+            },
+            {
+                "question": "Why are 'Wash Sales' (trading with yourself) illegal in institutional trading?",
+                "options": ["They waste computing power", "They are considered Market Manipulation to create fake volume", "They generate too many taxes", "They confuse the broker"],
+                "answer": 1,
+                "explanation": "Trading back and forth between your own accounts paints a false picture of market activity and liquidity, violating regulatory anti-manipulation rules."
+            },
+            {
+                "question": "What is the primary purpose of modeling Tail Risk?",
+                "options": ["To increase daily profits", "To predict the exact date of a crash", "To implement hedging strategies to protect from 'Black Swan' events", "To maximize leverage"],
+                "answer": 2,
+                "explanation": "Tail Risk management focuses on survival, using tools like deep out-of-the-money puts to ensure the fund isn't wiped out by unprecedented shocks."
+            },
+            {
+                "question": "Why can paper trading be misleading for evaluating strategy performance?",
+                "options": ["It doesn't use real math", "It doesn't simulate slippage, partial fills, or psychological stress", "The data is always delayed", "It only works for equities"],
+                "answer": 1,
+                "explanation": "Paper trading assumes you always get filled at the displayed price, ignoring the severe market impact of your own orders and the emotional difficulty of real drawdowns."
             }
         ],
         "resources": [
@@ -460,6 +592,24 @@ ROADMAP_DATA = {
                 "options": ["Prices rise due to liquidity", "Valuations compress as the discount rate increases", "No correlation", "Dividends increase"],
                 "answer": 1,
                 "explanation": "Real yields act as 'gravity' for valuations. As the risk-free real return rises, the present value of future earnings (high in growth stocks) drops."
+            },
+            {
+                "question": "What does a contraction in the 'China Credit Impulse' often precede?",
+                "options": ["A boom in US tech stocks", "Shifts in Emerging Markets (EM) and commodities like Copper", "A drop in global interest rates", "An increase in Bitcoin's price"],
+                "answer": 1,
+                "explanation": "China is a massive consumer of global commodities. When its credit cycle tightens, demand for industrial metals and EM exports typically falls."
+            },
+            {
+                "question": "Which economic data points form the 'Holy Trinity' of macroeconomic data?",
+                "options": ["GDP, Trade Deficit, Retail Sales", "Inflation, Employment, and Growth", "Interest Rates, Money Supply, Consumer Sentiment", "Housing Starts, Auto Sales, PMI"],
+                "answer": 1,
+                "explanation": "The core of all central bank policy revolves around the balance between Inflation (CPI), Employment (NFP), and Growth (GDP)."
+            },
+            {
+                "question": "What are 'Nowcasting' models used for?",
+                "options": ["Predicting 10 years into the future", "Building real-time estimates of economic data before official releases", "Casting shadows on charts", "Broadcasting trades on social media"],
+                "answer": 1,
+                "explanation": "Nowcasting uses high-frequency alternative data (like credit card swipes) to predict current economic conditions before the government's lagging reports are published."
             }
         ],
         "resources": [
@@ -543,6 +693,24 @@ ROADMAP_DATA = {
                 "options": ["They lose money if the market moves", "Their Delta increases as the underlying moves in their favor", "They are short volatility", "They benefit from time passing"],
                 "answer": 1,
                 "explanation": "Positive Gamma means your directional exposure (Delta) grows in the direction of the move, allowing you to profit from large 'jumps' in price."
+            },
+            {
+                "question": "What fundamental flaw exists in the Black-Scholes-Merton (BSM) model regarding implied volatility?",
+                "options": ["It assumes IV is always zero", "It assumes IV is constant across strikes, ignoring the 'Volatility Skew'", "It predicts IV perfectly", "It requires IV to be negative"],
+                "answer": 1,
+                "explanation": "BSM assumes a flat volatility surface, completely failing to account for the real-world 'Skew' where out-of-the-money puts trade at a premium for crash protection."
+            },
+            {
+                "question": "Which 'Greek' measures an option's sensitivity to changes in implied volatility?",
+                "options": ["Delta", "Rho", "Vega", "Gamma"],
+                "answer": 2,
+                "explanation": "Vega measures how much an option's price will change for a 1% change in the underlying asset's implied volatility."
+            },
+            {
+                "question": "What does 'Contango' mean in the context of the VIX futures curve?",
+                "options": ["Spot VIX is higher than Future VIX", "Future VIX is priced above Spot VIX, meaning futures roll down over time", "The VIX is frozen", "All VIX futures have the same price"],
+                "answer": 1,
+                "explanation": "In a normal calm market, VIX futures are in Contango (upward sloping), creating a structural 'roll yield' for strategies that short the VIX."
             }
         ],
         "resources": [
@@ -621,6 +789,24 @@ ROADMAP_DATA = {
                 "options": ["Choosing the wrong broker", "Being filled only when the market is moving against your position", "High transaction fees", "Market makers pulling their quotes"],
                 "answer": 1,
                 "explanation": "Adverse selection is the risk that a market maker provides liquidity to a 'faster' informed trader who knows the price is about to change."
+            },
+            {
+                "question": "Why do HFT firms pay for 'Colocation'?",
+                "options": ["To get cheaper electricity", "To place servers in the same exchange data center to minimize travel distance and latency", "To avoid SEC regulations", "To share data with competitors"],
+                "answer": 1,
+                "explanation": "In HFT, the speed of light is a limiting factor. Being physically closer to the exchange matching engine saves critical microseconds."
+            },
+            {
+                "question": "What does 'Kernel Bypass' allow an HFT application to do?",
+                "options": ["Skip paying taxes", "Talk directly to the Network Card, skipping the OS kernel to save microseconds", "Bypass exchange fees", "Trade without a broker"],
+                "answer": 1,
+                "explanation": "Kernel bypass (like Solarflare OpenOnload) avoids the overhead of the Linux operating system, routing network packets directly to the trading application."
+            },
+            {
+                "question": "Why are binary protocols like SBE preferred over FIX in HFT?",
+                "options": ["They look cooler", "They are required by law", "They transmit data in raw bytes to maximize throughput and minimize parsing time", "They encrypt data better"],
+                "answer": 2,
+                "explanation": "Text-based protocols (like standard FIX) require slow string parsing. Binary protocols map directly to memory structures, making them exponentially faster to read."
             }
         ],
         "resources": [
@@ -681,6 +867,30 @@ ROADMAP_DATA = {
                 "options": ["It stays the same", "It decreases", "It increases exponentially", "It fluctuates randomly"],
                 "answer": 2,
                 "explanation": "As you remove X from the pool (buy), the ratio of Y to X increases, driving the price of X higher along a curve."
+            },
+            {
+                "question": "What is 'Impermanent Loss' in DeFi?",
+                "options": ["Losing your private keys", "The cost of providing liquidity compared to just holding the assets when prices change", "A temporary exchange outage", "Paying too much gas"],
+                "answer": 1,
+                "explanation": "When asset prices diverge from when you deposited them into an AMM, the pool rebalances unfavorably, causing a relative loss compared to simply holding the tokens."
+            },
+            {
+                "question": "What does MEV stand for in the context of blockchain?",
+                "options": ["Minimum Expected Variance", "Maximal Extractable Value", "Multiple Exchange Vectors", "Market Entry Volume"],
+                "answer": 1,
+                "explanation": "MEV refers to the profit validators or bots can make by previewing, front-running, or reordering transactions within a block."
+            },
+            {
+                "question": "Why is tracking 'Exchange Flows' important in crypto?",
+                "options": ["To see which exchange has the best logo", "Large inflows to exchanges often act as a leading indicator of sell pressure", "To calculate mining rewards", "To avoid paying fees"],
+                "answer": 1,
+                "explanation": "Because the blockchain is public, quants can track 'Whales' moving Bitcoin from cold storage to an exchange, anticipating a large sell order."
+            },
+            {
+                "question": "What happens during a 'Liquidation Cascade' in crypto markets?",
+                "options": ["Prices slowly stabilize", "Forced selling of leveraged positions triggers more forced selling, driving prices far beyond fundamentals", "Exchanges halt all trading automatically", "Miners stop producing blocks"],
+                "answer": 1,
+                "explanation": "When price hits a cluster of margin call levels, the automated liquidation of those positions pushes the price into the next cluster, causing a violent chain reaction."
             }
         ],
         "resources": [
@@ -739,6 +949,30 @@ ROADMAP_DATA = {
                 "options": ["It is easier to calculate", "It is always a smaller number", "It accounts for the severity of losses in the 'tail' beyond the threshold", "It predicts the next crash"],
                 "answer": 2,
                 "explanation": "VaR only tells you the minimum loss at a certain confidence level; CVaR (Expected Shortfall) tells you the average loss in the worst-case scenarios, capturing 'tail risk' better."
+            },
+            {
+                "question": "What does the Kelly Criterion calculate?",
+                "options": ["The optimal time to execute a trade", "The exact fraction of capital to risk to maximize long-term growth without hitting 'Ruin'", "The probability of a market crash", "The Sharpe ratio of a portfolio"],
+                "answer": 1,
+                "explanation": "The Kelly Criterion mathematically determines the optimal bet size based on your strategy's win rate and payoff ratio to compound capital efficiently."
+            },
+            {
+                "question": "What is the purpose of 'Stress Testing' a portfolio?",
+                "options": ["To see if the computer crashes", "To identify hidden correlations and see how the portfolio reacts to extreme scenarios", "To increase the portfolio's leverage", "To satisfy retail investors"],
+                "answer": 1,
+                "explanation": "Stress testing simulates specific extreme events (e.g., a 100bp rate hike) to reveal vulnerabilities and correlated risks that standard daily VaR might miss."
+            },
+            {
+                "question": "What does 'Volatility Targeting' aim to achieve?",
+                "options": ["Predicting tomorrow's volatility", "Dynamically scaling position sizes so the portfolio's risk remains constant as market volatility fluctuates", "Buying the most volatile stocks", "Reducing trading fees"],
+                "answer": 1,
+                "explanation": "By sizing down during turbulent markets and sizing up during calm markets, volatility targeting ensures the fund takes a consistent amount of risk every day."
+            },
+            {
+                "question": "Why is it dangerous to rely solely on historical VaR from the last 2 years?",
+                "options": ["It takes too long to compute", "It leaves you unprepared for new types of regime shifts that haven't occurred recently", "It is illegal under SEC rules", "It overestimates risk"],
+                "answer": 1,
+                "explanation": "History is not always a perfect guide. If the last 2 years were a quiet bull market, a historical VaR will massively underestimate the risk of a sudden paradigm shift."
             }
         ],
         "resources": [
@@ -795,6 +1029,30 @@ ROADMAP_DATA = {
                 "options": ["It is faster", "It understands financial context and nuance (e.g., 'beat estimates')", "It is free", "It only works on Bloomberg data"],
                 "answer": 1,
                 "explanation": "FinBERT is specifically trained on financial corpora (news, filings), allowing it to recognize that words like 'volatile' or 'crush' have different meanings in finance vs. general language."
+            },
+            {
+                "question": "How do Hedge Funds use Large Language Models (LLMs) with 10-K filings?",
+                "options": ["To write their own 10-Ks", "To extract specific risk factors and competitive advantages hidden from purely quantitative price models", "To format the text nicely", "To predict the exact stock price tomorrow"],
+                "answer": 1,
+                "explanation": "LLMs combined with RAG allow funds to parse thousands of pages of unstructured SEC filings instantly to quantify qualitative shifts in corporate strategy."
+            },
+            {
+                "question": "What is an example of 'Alternative Data' used to predict economic shifts?",
+                "options": ["Daily moving averages", "Quarterly earnings reports", "Satellite imagery tracking retail traffic at major malls", "Option implied volatility"],
+                "answer": 2,
+                "explanation": "Alternative Data refers to non-traditional, unstructured data sources—like satellite photos, credit card swipes, or shipping logs—used to gain an edge before official numbers are released."
+            },
+            {
+                "question": "What is a major risk of using news data for backtesting?",
+                "options": ["News is always fake", "Look-ahead Bias (using news timestamped earlier than it was actually available to the public)", "It takes up too much hard drive space", "It is illegal to scrape news"],
+                "answer": 1,
+                "explanation": "If a backtest assumes it could trade on a news headline at 9:00 AM, but the article wasn't actually published to the web until 9:15 AM, the results will be entirely fabricated."
+            },
+            {
+                "question": "Why do quants use Knowledge Graphs in supply chain analysis?",
+                "options": ["To draw pretty charts for investors", "To predict how an event like a factory fire impacts related companies globally", "To manage their own software dependencies", "To track employee happiness"],
+                "answer": 1,
+                "explanation": "Knowledge Graphs map the interconnected 'nodes' of global commerce, allowing algorithms to automatically short companies that rely on a disrupted supplier before the market notices."
             }
         ],
         "resources": [
@@ -851,6 +1109,30 @@ ROADMAP_DATA = {
                 "options": ["Speed vs. Accuracy", "Market Impact vs. Opportunity Cost", "Leverage vs. Margin", "Risk vs. Reward"],
                 "answer": 1,
                 "explanation": "Quants must balance the cost of moving the market (Impact) against the risk of the price moving away from them while they wait to fill (Opportunity Cost)."
+            },
+            {
+                "question": "What is 'Implementation Shortfall' (IS)?",
+                "options": ["Not having enough money to trade", "The difference between the decision price and the final average fill price", "A bug in the execution code", "Failing to implement a model correctly"],
+                "answer": 1,
+                "explanation": "IS measures the total 'cost' of trading, capturing both slippage and the opportunity cost of unfilled orders from the moment the PM decided to trade."
+            },
+            {
+                "question": "What is the primary function of a 'Smart Order Router' (SOR)?",
+                "options": ["To connect to the WiFi", "To scan multiple lit exchanges and dark pools to fill large orders optimally", "To route emails to the trading desk", "To predict the stock market"],
+                "answer": 1,
+                "explanation": "An SOR is algorithmic plumbing that splits an order across multiple venues in milliseconds to capture the best available liquidity and rebates."
+            },
+            {
+                "question": "What is a risk of trading in 'Dark Pools'?",
+                "options": ["They are illegal", "Predatory HFTs can sniff out hidden orders and cause adverse selection", "The fees are always 10x higher", "They only operate at night"],
+                "answer": 1,
+                "explanation": "While dark pools hide your size from the public lit tape, sophisticated HFT firms use 'pinging' strategies to detect institutional flow inside the pool and trade against it."
+            },
+            {
+                "question": "Why might execution algorithms optimized for 'quiet' days fail during a panic?",
+                "options": ["They rely on news sentiment", "Market liquidity can vanish, making normal historical execution schedules ineffective", "They run out of memory", "They get turned off by the SEC"],
+                "answer": 1,
+                "explanation": "Algorithms tuned for normal conditions assume a baseline of liquidity. In a crash, depth disappears, and static VWAP or TWAP algos can aggressively drive prices into the ground."
             }
         ],
         "glossary": [
@@ -908,6 +1190,30 @@ ROADMAP_DATA = {
                 "options": ["Vasicek Model", "Cox-Ingersoll-Ross (CIR) Model", "Black-Scholes Model", "Merton Jump-Diffusion Model"],
                 "answer": 1,
                 "explanation": "The CIR model introduces a square root term in its diffusion process, which prevents interest rates from negative values, unlike the Vasicek model."
+            },
+            {
+                "question": "What is the purpose of 'Yield Curve Bootstrapping'?",
+                "options": ["To start a computer", "To construct the zero-coupon yield curve from market instruments", "To predict equity prices", "To lower transaction costs"],
+                "answer": 1,
+                "explanation": "Because pure zero-coupon bonds don't exist for all maturities, quants 'bootstrap' the curve by iteratively solving for spot rates using the prices of coupon-bearing bonds."
+            },
+            {
+                "question": "How do interest rates differ fundamentally from equities in mathematical modeling?",
+                "options": ["They are always positive", "They exhibit 'Mean Reversion' and have structural bounds", "They grow exponentially forever", "They have higher volatility"],
+                "answer": 1,
+                "explanation": "Unlike stocks which can theoretically grow to infinity, interest rates are bound by central bank policy and naturally revert to long-term macroeconomic averages."
+            },
+            {
+                "question": "What do Credit Default Swaps (CDS) allow quants to extract?",
+                "options": ["Free money", "Implied default probabilities and real-time credit health", "The exact date of a bankruptcy", "Equity dividends"],
+                "answer": 1,
+                "explanation": "A CDS is essentially insurance on debt. The spread (cost) of that insurance provides a mathematically pure, real-time indicator of the market's perceived default risk."
+            },
+            {
+                "question": "What is 'Prepayment Risk' in Mortgage-Backed Securities (MBS)?",
+                "options": ["The risk of the broker going bankrupt", "The risk that homeowners refinance when rates drop, returning principal exactly when yields are low", "The risk of inflation rising", "The risk of paying too much in fees"],
+                "answer": 1,
+                "explanation": "MBS exhibit 'negative convexity'. When rates fall, homeowners refinance their mortgages, forcing the MBS investor to reinvest their returned capital at the new, lower rate."
             }
         ],
         "glossary": [
@@ -965,6 +1271,30 @@ ROADMAP_DATA = {
                 "options": ["It is human-readable", "It uses a columnar storage format optimized for fast analytical queries", "It streams in real-time", "It uses less CPU to write"],
                 "answer": 1,
                 "explanation": "Parquet is a columnar format, meaning if you only need the 'close' price column, you don't have to read the entire file into memory, massively speeding up quantitative backtests."
+            },
+            {
+                "question": "Why is Apache Spark preferred over Pandas for massive datasets?",
+                "options": ["It is written in C++", "It partitions data across a cluster of machines and executes operations in parallel", "It has a better UI", "It is older and more stable"],
+                "answer": 1,
+                "explanation": "Pandas requires all data to fit in the RAM of a single machine. Spark enables distributed computing, seamlessly scaling calculations across hundreds of cloud nodes."
+            },
+            {
+                "question": "What is the role of Apache Kafka in a trading system?",
+                "options": ["To store historical data forever", "To handle real-time, high-throughput market data streams for event-driven architecture", "To compile C++ code", "To visualize charts"],
+                "answer": 1,
+                "explanation": "Kafka acts as the central nervous system for live trading, allowing multiple algorithms to subscribe to and process massive streams of exchange data with microsecond latency."
+            },
+            {
+                "question": "What is Kubernetes (K8s) used for in quant research?",
+                "options": ["Writing trading algorithms", "Deploying and orchestrating hundreds of containerized strategy pods for distributed workloads", "Fetching API data", "Storing passwords securely"],
+                "answer": 1,
+                "explanation": "When running grid searches or massive Monte Carlo simulations, K8s orchestrates the spinning up and tearing down of hundreds of Docker containers across cloud infrastructure dynamically."
+            },
+            {
+                "question": "What does 'Predicate Pushdown' allow a query engine to do?",
+                "options": ["Push updates to the database", "Only read specific columns and chunks from disk, ignoring irrelevant data", "Push errors to the logs", "Predict future prices"],
+                "answer": 1,
+                "explanation": "In formats like Parquet, predicate pushdown allows the engine to skip over irrelevant partitions of data entirely at the disk level, vastly improving query performance."
             }
         ],
         "glossary": [
@@ -1022,6 +1352,30 @@ ROADMAP_DATA = {
                 "options": ["The tendency to panic sell during a flash crash", "The tendency of investors to sell assets that have increased in value, while keeping assets that have dropped in value", "The tendency to follow the crowd", "The tendency to hold onto cash in high interest rate environments"],
                 "answer": 1,
                 "explanation": "The Disposition Effect causes investors to lock in small wins to feel smart, but hold onto losing trades hoping they break even, which creates structural momentum and drift anomalies."
+            },
+            {
+                "question": "What happens to dealer positioning when market Gamma Exposure (GEX) is highly positive?",
+                "options": ["Dealers buy into rallies and sell into dips, expanding volatility", "Dealers sell into rallies and buy into dips, suppressing volatility", "Dealers stop trading completely", "Dealers only buy put options"],
+                "answer": 1,
+                "explanation": "When GEX is positive, dealers must trade against the prevailing trend to remain delta-neutral, acting as a dampening force that keeps markets range-bound and suppresses realized volatility."
+            },
+            {
+                "question": "What is a 'Gamma Squeeze'?",
+                "options": ["A shortage of gamma rays", "When retail buys massive call options, forcing dealers to buy the stock to hedge, driving the price higher", "When the SEC halts trading", "When volatility drops to zero"],
+                "answer": 1,
+                "explanation": "A Gamma Squeeze exploits the structural hedging requirements of market makers. Massive OTM call buying creates an explosive feedback loop of forced dealer buying."
+            },
+            {
+                "question": "Why is 'Post-Earnings Announcement Drift' (PEAD) considered a behavioral anomaly?",
+                "options": ["Computers can't read earnings reports", "Investors anchor to old prices and under-react to surprises, causing the stock to drift upward for days", "Companies always lie on earnings", "It only happens in January"],
+                "answer": 1,
+                "explanation": "Standard finance theory says prices adjust instantly. Behavioral finance observes that humans are slow to update their beliefs (anchoring), creating a persistent, exploitable 'drift' after the news."
+            },
+            {
+                "question": "What can semantic shifts in SEC 10-K filings year-over-year indicate?",
+                "options": ["The company hired a new accountant", "When a company's lawyers are quietly preparing for a crisis or shifting risk exposure", "That the stock will split soon", "That dividends will increase"],
+                "answer": 1,
+                "explanation": "By mathematically measuring the 'cosine similarity' between this year's risk disclosures and last year's, NLP algorithms can detect subtle, deliberate changes in corporate legal language before a crisis hits."
             }
         ],
         "glossary": [
