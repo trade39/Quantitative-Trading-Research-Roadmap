@@ -1,3 +1,4 @@
+# app.py
 import streamlit as st
 import base64
 from pathlib import Path
@@ -123,21 +124,46 @@ elif "Stage" in page:
     
     st.markdown(f"## {stage_key}: {stage_data['title']}")
     st.markdown(f"<span class='stage-badge'>{stage_data['duration']}</span>", unsafe_allow_html=True)
-    st.info(f"**Goal:** {stage_data['goal']}")
+    
+    # New Overview Section
+    if "overview" in stage_data:
+        st.markdown(f"""
+        <div class="tutorial-overview">
+            {stage_data['overview']}
+        </div>
+        """, unsafe_allow_html=True)
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.markdown("### 📚 Key Topics")
+        st.markdown("### 📚 Core Curriculum")
         for topic in stage_data['topics']:
             with st.container():
                 st.markdown(f"<div class='topic-category'>{topic['category']}</div>", unsafe_allow_html=True)
                 for item in topic['items']:
                     st.markdown(f"• {item}")
         
+        # New Step-by-Step Guide Section
+        if "guide" in stage_data:
+            st.markdown("### 📝 Step-by-Step Guide")
+            st.markdown('<div class="guide-container">', unsafe_allow_html=True)
+            for step in stage_data['guide']:
+                st.markdown(f"<div class='guide-step'>{step}</div>", unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        # New Practical Exercise Section
+        if "exercise" in stage_data:
+            st.markdown(f"""
+            <div class="exercise-box">
+                <div class="exercise-header">🚀 Practical Exercise</div>
+                {stage_data['exercise']}
+            </div>
+            """, unsafe_allow_html=True)
+
         if "milestone" in stage_data:
             st.markdown(f"""
             <div class="milestone-box">
+                <div style="font-weight: bold; color: #FFD700; margin-bottom: 0.5rem;">🎯 Stage Milestone</div>
                 {stage_data['milestone']}
             </div>
             """, unsafe_allow_html=True)
