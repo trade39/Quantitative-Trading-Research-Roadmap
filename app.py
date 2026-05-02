@@ -233,6 +233,66 @@ elif "Stage" in page:
         for tool in TOOLS_CHECKLIST[tools_key]:
             st.markdown(f"✅ {tool}")
 
+    # --- QUIZ SECTION ---
+    if "quiz" in stage_data:
+        st.markdown("---")
+        st.markdown("### 🧠 The Knowledge Check")
+        st.markdown('<p style="color:#94A3B8; font-size:0.9rem; margin-bottom:1.5rem;">Test your mastery of this stage\'s concepts before moving forward.</p>', unsafe_allow_html=True)
+        
+        quiz_score = 0
+        total_qs = len(stage_data["quiz"])
+        
+        for q_idx, quiz_item in enumerate(stage_data["quiz"]):
+            q_key = f"quiz_{stage_key}_{q_idx}"
+            st.markdown(f"""
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+                <div style="font-size: 0.75rem; font-weight: 700; color: #A78BFA; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Question {q_idx + 1}</div>
+                <div style="font-size: 1rem; color: #E2E8F0; font-weight: 500; margin-bottom: 1rem;">{quiz_item['question']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Using radio for options
+            user_choice = st.radio(
+                f"Select an answer for Question {q_idx + 1}",
+                options=quiz_item["options"],
+                key=q_key,
+                label_visibility="collapsed"
+            )
+            
+            # Show feedback immediately if the button was clicked
+            btn_key = f"btn_{q_key}"
+            submitted_key = f"submitted_{q_key}"
+            
+            if st.button(f"Submit Answer {q_idx + 1}", key=btn_key):
+                st.session_state[submitted_key] = True
+
+            if st.session_state.get(submitted_key, False):
+                choice_idx = quiz_item["options"].index(user_choice)
+                is_correct = choice_idx == quiz_item["answer"]
+                
+                if is_correct:
+                    st.success("✨ Correct!")
+                    quiz_score += 1
+                else:
+                    st.error("❌ Not quite.")
+                
+                st.markdown(f"""
+                <div style="background: rgba(167,139,250,0.1); border: 1px dashed rgba(167,139,250,0.3); border-radius: 8px; padding: 1rem; margin-top: 0.5rem; margin-bottom: 2rem;">
+                    <div style="font-size: 0.75rem; font-weight: 700; color: #A78BFA; margin-bottom: 0.25rem;">PEDAGOGICAL INSIGHT</div>
+                    <div style="font-size: 0.85rem; color: #CBD5E1; line-height: 1.6;">{quiz_item['explanation']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+
+        # Quiz completion summary
+        if all(st.session_state.get(f"submitted_quiz_{stage_key}_{i}", False) for i in range(total_qs)):
+            st.markdown(f"""
+            <div style="background: linear-gradient(90deg, rgba(34,197,94,0.1), rgba(167,139,250,0.1)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1rem;">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎓</div>
+                <div style="font-size: 1rem; font-weight: 700; color: #E2E8F0;">Stage Mastery: {quiz_score}/{total_qs}</div>
+                <div style="font-size: 0.85rem; color: #94A3B8; margin-top: 0.25rem;">You've completed the knowledge check for {stage_data['title']}.</div>
+            </div>
+            """, unsafe_allow_html=True)
+
 # --- TOOLS & TRAPS PAGE ---
 elif page == "Tools & Traps":
     st.markdown("## 🛠️ The Quant's Toolkit")
@@ -393,4 +453,8 @@ elif page == "✅ My Progress":
 
     if st.button("🔄 Reset All Progress", type="secondary"):
         st.session_state.progress = {}
+        # Clear all quiz submissions
+        keys_to_delete = [k for k in st.session_state.keys() if k.startswith("submitted_quiz_")]
+        for k in keys_to_delete:
+            del st.session_state[k]
         st.rerun()
