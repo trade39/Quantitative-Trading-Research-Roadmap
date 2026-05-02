@@ -98,6 +98,9 @@ if page == "Overview":
             <div class="timeline-step">11</div>
             <div class="timeline-step">12</div>
             <div class="timeline-step">13</div>
+            <div class="timeline-step">14</div>
+            <div class="timeline-step">15</div>
+            <div class="timeline-step">16</div>
         </div>
         """
         st.markdown(timeline_html, unsafe_allow_html=True)
@@ -297,16 +300,18 @@ elif "Stage" in page:
             """, unsafe_allow_html=True)
             
         st.markdown("### 🛠️ Recommended Tools")
-        tools_key = "Stage 1-2" if "1" in stage_key or "2" in stage_key else \
-                    "Stage 3-4" if "3" in stage_key or "4" in stage_key else \
-                    "Stage 5" if "5" in stage_key else \
-                    "Stage 7" if "7" in stage_key else \
-                    "Stage 8" if "8" in stage_key else \
-                    "Stage 9" if "9" in stage_key else \
-                    "Stage 10" if "10" in stage_key else \
-                    "Stage 11" if "11" in stage_key else \
-                    "Stage 12" if "12" in stage_key else \
-                    "Stage 13" if "13" in stage_key else "Stage 6"
+        import re
+        match = re.search(r'\d+', stage_key)
+        stage_num = int(match.group()) if match else 0
+        if stage_num in (1, 2):
+            tools_key = "Stage 1-2"
+        elif stage_num in (3, 4):
+            tools_key = "Stage 3-4"
+        else:
+            tools_key = f"Stage {stage_num}"
+            
+        if tools_key not in TOOLS_CHECKLIST:
+            tools_key = "Stage 6"
         
         for tool in TOOLS_CHECKLIST[tools_key]:
             st.markdown(f"✅ {tool}")
