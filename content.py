@@ -215,8 +215,64 @@ ROADMAP_DATA = {
             "🎓 'Pioneers in Quantitative Finance' (Documentary/Series)",
             "📖 The Man Who Solved the Market — Gregory Zuckerman"
         ]
+    },
+    "Stage 7": {
+        "title": "Macroeconomics for Financial Markets & Trading",
+        "duration": "Advanced Elective",
+        "goal": "Master how macroeconomic forces drive asset prices across global markets using institutional frameworks.",
+        "overview": "A comprehensive course designed to teach you how macroeconomic forces drive asset prices across global markets. Built from the same frameworks used by institutional traders, this stage bridges the gap between pure quantitative modeling and global macro reality.",
+        "topics": [
+            {
+                "category": "Monetary Policy & Rates (The Global Cost of Capital)",
+                "items": [
+                    "**Central Bank Policy Mechanics:** You must understand the 'plumbing' of the Fed, ECB, and BoJ. This involves analyzing the Federal Funds Rate, the 'Dot Plot' for rate expectations, and the impact of Quantitative Easing/Tightening on market liquidity. We don't just follow the news; we model the OIS (Overnight Indexed Swap) spreads to see where the market thinks rates are going. \n*Example:* In early 2022, while the Fed was still officially 'dovish,' the Eurodollar futures market was already pricing in 7+ rate hikes, providing a leading signal for the massive sell-off in growth equities.",
+                    "**Rate Expectations & Forward Guidance:** Learn to decode 'Central Bank Speak.' You must distinguish between 'hawkish' and 'dovish' shifts and quantify their impact on the discount rates used in valuation models. Understanding 'Neutral Rates' (R-star) is critical for determining if policy is restrictive or stimulative. \n*Example:* A subtle change in FOMC minutes from 'patient' to 'data-dependent' can trigger a multi-standard deviation move in the USD as traders front-run the end of an easing cycle."
+                ]
+            },
+            {
+                "category": "Yield Curve Analysis & Fixed Income (The Market's Crystal Ball)",
+                "items": [
+                    "**The Term Structure of Interest Rates:** The yield curve is the most powerful leading indicator in finance. You must master the dynamics of 'Bull Flattening,' 'Bear Steepening,' and 'Inversions.' You will learn to use the 2s10s and 3m10y spreads to forecast economic recessions and regime shifts. \n*Example:* An inverted yield curve (short-term rates higher than long-term) has preceded every US recession for decades. As a quant, you model the 'risk premium' embedded in the long end of the curve.",
+                    "**Real vs. Nominal Yields:** Inflation is the enemy of fixed income. You must understand the relationship between Nominal Yields, Inflation Break-evens, and Real Yields (TIPS). Real yields are the true 'gravity' for high-multiplier tech stocks—when real yields rise, growth valuations compress. \n*Example:* In 2022, Real Yields moved from -1% to +1.5%. This shift was the primary driver behind the 'valuation reset' in the NASDAQ, regardless of individual company earnings."
+                ]
+            },
+            {
+                "category": "Cross-Asset Macro Frameworks (Capital Flows)",
+                "items": [
+                    "**The Intermarket Matrix:** Asset classes do not exist in vacuums. You must model the correlation between the USD, Commodities, Equities, and Fixed Income. Learn how a 'strong dollar' environment acts as a global liquidity drain, impacting Emerging Markets and Commodities disproportionately. \n*Example:* When the USD (DXY) surges, it often creates 'mechanical' selling in Gold and Oil, as these are priced in dollars. Understanding this 'correlation risk' is essential for portfolio diversification.",
+                    "**Risk-On vs. Risk-Off Regimes:** Macro trading is about identifying the 'dominant theme'—is it Inflation, Growth, or Liquidity? You will learn to identify 'regime shifts' using cross-asset signals, such as the AUD/JPY pair (proxy for global risk appetite) or the Copper/Gold ratio (proxy for global growth). \n*Example:* A breakdown in the Copper/Gold ratio often precedes a stock market correction, as it signals that industrial demand is falling while safety-seeking demand is rising."
+                ]
+            },
+            {
+                "category": "Economic Data Interpretation (Signal vs. Noise)",
+                "items": [
+                    "**The Holy Trinity of Data:** Inflation (CPI/PCE), Employment (NFP), and Growth (GDP/ISM). You must go beyond the 'headline' number to analyze the 'internals.' Is inflation driven by sticky services or volatile energy? Is employment growth driven by full-time jobs or part-time noise? \n*Example:* A 'beat' on the NFP headline might look bullish, but if the 'Average Hourly Earnings' are cooling, the Fed might stay on hold, making the report actually bullish for Bonds and neutral for Equities.",
+                    "**Leading vs. Lagging Indicators:** Most economic data is 'rear-view mirror.' You must learn to prioritize Leading Indicators (ISM New Orders, Building Permits, Consumer Sentiment) over Lagging ones (Unemployment Rate, GDP) to position your portfolio before the crowd. \n*Example:* The ISM Manufacturing 'New Orders' component often peaks 6-9 months before a recession begins, giving quants a massive head start on de-risking portfolios."
+                ]
+            },
+            {
+                "category": "Applied Macro Trading Strategies",
+                "items": [
+                    "**Thematic Macro Overlays:** Learn to translate macro views into 'expressive' trades. This includes 'Inflation Hedges' (Long Commodities, Short Duration), 'Growth Transitions' (Cyclicals vs. Defensives), and 'Policy Divergence' trades (Long USD / Short JPY). \n*Example:* If the Fed is hiking while the BoJ is keeping rates at zero, the 'Interest Rate Differential' creates a massive tailwind for the USD/JPY 'Carry Trade.'",
+                    "**Macro-Quant Integration:** The ultimate goal is 'Systematic Macro'—using quantitative rules to trade macro themes. You will learn to build 'Trend Following' models on macro-sensitive assets and 'Carry' models that exploit interest rate differentials across global currencies. \n*Example:* A systematic macro fund might use a 'Signal Combo' of Momentum (price action) + Macro (rate differentials) to achieve higher risk-adjusted returns than a simple trend-follower."
+                ]
+            }
+        ],
+        "guide": [
+            "1. <b>Follow the Fed:</b> Read the FOMC statements and listen to the Chair's press conference. Note the market reaction in the 2-Year Yield.",
+            "2. <b>Build a Macro Dashboard:</b> Track the DXY, 10Y Yield, Brent Oil, and S&P 500 on one screen to see the correlations.",
+            "3. <b>Study Economic Releases:</b> Use an economic calendar to track NFP and CPI releases. Observe how the 'surprise' (actual vs forecast) drives volatility."
+        ],
+        "exercise": "<b>The Yield Curve Playbook:</b> Plot the 2s10s spread over the last 20 years. Highlight the periods where it inverted and measure the time between inversion and the subsequent stock market peak.",
+        "milestone": "🎯 Build a 'Macro Regime Monitor' that classifies the current environment into one of four quadrants: Goldilocks, Reflation, Stagflation, or Deflation.",
+        "resources": [
+            "📖 Macroeconomics — Gregory Mankiw",
+            "🎓 'Real Vision' / 'Macro Voices' (Institutional macro insights)",
+            "📖 The Alchemy of Finance — George Soros"
+        ]
     }
 }
+
 
 TRAPS = [
     {"title": "Look-ahead bias", "description": "Using future data in your signals unknowingly."},
