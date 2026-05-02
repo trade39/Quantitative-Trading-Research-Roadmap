@@ -29,10 +29,13 @@ def get_img_with_href(local_img_path):
 PAGES = ["Overview", "Stage 1: Foundation", "Stage 2: Math & Stats", "Stage 3: Programming", 
          "Stage 4: Strategy", "Stage 5: Advanced", "Stage 6: Professional", "Tools & Traps"]
 
+# Helper for smooth navigation
+def navigate_to(target):
+    st.session_state.sidebar_radio = target
+
 # Initialize session state from query params for external navigation (clickable cards)
 if "nav" in st.query_params:
     st.session_state.sidebar_radio = st.query_params["nav"]
-    # Clear query params to keep URL clean after processing
     st.query_params.clear()
 
 if "sidebar_radio" not in st.session_state:
@@ -100,10 +103,8 @@ if page == "Overview":
             with st.container():
                 st.markdown(f'<div class="card-wrapper">', unsafe_allow_html=True)
                 
-                # Invisible button that covers the card
-                if st.button(f"Go to {key}", key=f"btn_{key}", use_container_width=True):
-                    st.session_state.sidebar_radio = target_page
-                    st.rerun()
+                # Invisible button that covers the card (using callback for safe state update)
+                st.button(f"Go to {key}", key=f"btn_{key}", on_click=navigate_to, args=(target_page,), use_container_width=True)
                 
                 # Visual representation
                 st.markdown(f"""
