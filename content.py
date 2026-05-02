@@ -9,27 +9,27 @@ ROADMAP_DATA = {
             {
                 "category": "Market Microstructure (The 'Why')",
                 "items": [
-                    "**The Limit Order Book (LOB):** How price actually moves. Understand the interaction between aggressive (market) and passive (limit) orders.",
-                    "**Liquidity & Slippage:** Why a strategy that looks good on paper might fail when executed with size.",
-                    "**Market Participants:** Identifying the footprint of Market Makers vs. Institutional Flow vs. Arbitrageurs.",
-                    "**Asset Classes:** Comparing Equities, Futures (leverage/basis), and Options (volatility) mechanics."
+                    "<b>The Limit Order Book (LOB):</b> How price actually moves. Understand the interaction between aggressive (market) and passive (limit) orders.",
+                    "<b>Liquidity & Slippage:</b> Why a strategy that looks good on paper might fail when executed with size.",
+                    "<b>Market Participants:</b> Identifying the footprint of Market Makers vs. Institutional Flow vs. Arbitrageurs.",
+                    "<b>Asset Classes:</b> Comparing Equities, Futures (leverage/basis), and Options (volatility) mechanics."
                 ]
             },
             {
                 "category": "The Quantitative Mindset",
                 "items": [
-                    "**Alpha vs. Beta:** Distinguishing between general market movement and your unique 'edge'.",
-                    "**Expected Value (EV):** Thinking in terms of Win Rate × Avg Win - Loss Rate × Avg Loss.",
-                    "**The 4 Pillars of a Quant Lab:** Data → Research → Backtest → Execution."
+                    "<b>Alpha vs. Beta:</b> Distinguishing between general market movement and your unique 'edge'.",
+                    "<b>Expected Value (EV):</b> Thinking in terms of Win Rate × Avg Win - Loss Rate × Avg Loss.",
+                    "<b>The 4 Pillars of a Quant Lab:</b> Data → Research → Backtest → Execution."
                 ]
             }
         ],
         "guide": [
-            "1. **Study the Tape:** Open a platform like TradingView or ThinkOrSwim and watch the Level 2 (Depth of Market) for 30 minutes. Notice how big orders 'absorb' price.",
-            "2. **Read 'Market Wizards':** Understand the psychological transition from 'gambling' to 'process-oriented' trading.",
-            "3. **Learn the Lingo:** Define every term in the LOB: Bid-Ask Spread, Mid-price, Depth, and Imbalance."
+            "1. <b>Study the Tape:</b> Open a platform like TradingView or ThinkOrSwim and watch the Level 2 (Depth of Market) for 30 minutes. Notice how big orders 'absorb' price.",
+            "2. <b>Read 'Market Wizards':</b> Understand the psychological transition from 'gambling' to 'process-oriented' trading.",
+            "3. <b>Learn the Lingo:</b> Define every term in the LOB: Bid-Ask Spread, Mid-price, Depth, and Imbalance."
         ],
-        "exercise": "**The Spread Analysis:** Download 1 day of 1-minute OHLCV data for SPY. In Excel, calculate the average candle size. Research what the typical bid-ask spread is for SPY. Calculate what percentage of your 'candle' is eaten by the spread.",
+        "exercise": "<b>The Spread Analysis:</b> Download 1 day of 1-minute OHLCV data for SPY. In Excel, calculate the average candle size. Research what the typical bid-ask spread is for SPY. Calculate what percentage of your 'candle' is eaten by the spread.",
         "milestone": "🎯 Complete the 'Financial Markets 101' certification and explain the LOB to someone who doesn't trade.",
         "resources": [
             "📖 Market Wizards — Jack Schwager",
@@ -46,26 +46,26 @@ ROADMAP_DATA = {
             {
                 "category": "Probability & Distributions",
                 "items": [
-                    "**The Normal Distribution Myth:** Understanding why 'Fat Tails' (Kurtosis) cause most models to blow up during crashes.",
-                    "**Log-Returns:** Why we use log-returns for modeling instead of simple price changes (additivity and symmetry).",
-                    "**Conditional Probability:** Bayes' Theorem and its application in updating market bias."
+                    "<b>The Normal Distribution Myth:</b> Understanding why 'Fat Tails' (Kurtosis) cause most models to blow up during crashes.",
+                    "<b>Log-Returns:</b> Why we use log-returns for modeling instead of simple price changes (additivity and symmetry).",
+                    "<b>Conditional Probability:</b> Bayes' Theorem and its application in updating market bias."
                 ]
             },
             {
                 "category": "Time Series & Econometrics",
                 "items": [
-                    "**Stationarity:** Why you can't build a model on raw prices (they wander) and must use stationary data (returns).",
-                    "**Cointegration:** The secret to Pairs Trading. Finding two assets that 'walk together' even if they drift apart.",
-                    "**Hypothesis Testing:** Using P-values and T-stats to see if your backtest result is just 'luck'."
+                    "<b>Stationarity:</b> Why you can't build a model on raw prices (they wander) and must use stationary data (returns).",
+                    "<b>Cointegration:</b> The secret to Pairs Trading. Finding two assets that 'walk together' even if they drift apart.",
+                    "<b>Hypothesis Testing:</b> Using P-values and T-stats to see if your backtest result is just 'luck'."
                 ]
             }
         ],
         "guide": [
-            "1. **Master the Histogram:** Plot the returns of Bitcoin vs. S&P 500. Observe the 'kurtosis' in Bitcoin—the extreme outliers.",
-            "2. **Linear Algebra Basics:** Understand how matrices represent portfolios (Weights × Returns).",
-            "3. **Statistical Significance:** Learn why a Sharpe Ratio of 1.0 requires at least 3 years of data to be statistically valid."
+            "1. <b>Master the Histogram:</b> Plot the returns of Bitcoin vs. S&P 500. Observe the 'kurtosis' in Bitcoin—the extreme outliers.",
+            "2. <b>Linear Algebra Basics:</b> Understand how matrices represent portfolios (Weights × Returns).",
+            "3. <b>Statistical Significance:</b> Learn why a Sharpe Ratio of 1.0 requires at least 3 years of data to be statistically valid."
         ],
-        "exercise": "**The Cointegration Search:** Pick two related stocks (e.g., KO and PEP). Use a simple spreadsheet or Python to plot their price ratio over 1 year. Identify 'mean-reverting' periods where the ratio stretched too far.",
+        "exercise": "<b>Statistical Arbitrage Setup:</b> Pick two related stocks (e.g., KO and PEP). Use a simple spreadsheet or Python to plot their price ratio over 1 year. Identify 'mean-reverting' periods where the ratio stretched too far.",
         "milestone": "🎯 Pass the 'Statistics for Finance' module and build a spreadsheet that calculates Z-Scores for any price series.",
         "resources": [
             "📖 Statistics — Freedman, Pisani & Purves",
@@ -82,26 +82,26 @@ ROADMAP_DATA = {
             {
                 "category": "The Python Quant Stack",
                 "items": [
-                    "**Pandas Mastery:** Vectorization is king. If you use a 'for' loop in Pandas, you're doing it wrong. Learn `.apply()`, `.shift()`, and `.rolling()`.",
-                    "**NumPy:** Fast numerical arrays for high-performance calculations.",
-                    "**Visualization:** Using Plotly for interactive charts that allow you to zoom into specific trades."
+                    "<b>Pandas Mastery:</b> Vectorization is king. If you use a 'for' loop in Pandas, you're doing it wrong. Learn `.apply()`, `.shift()`, and `.rolling()`.",
+                    "<b>NumPy:</b> Fast numerical arrays for high-performance calculations.",
+                    "<b>Visualization:</b> Using Plotly for interactive charts that allow you to zoom into specific trades."
                 ]
             },
             {
                 "category": "Data Engineering & Integrity",
                 "items": [
-                    "**ETL Pipelines:** Extract, Transform, Load. How to pull data from APIs (Alpaca, Polygon) and store it locally.",
-                    "**Survivorship Bias:** Building a 'Point-in-Time' database so you don't test on stocks that only survived to today.",
-                    "**Data Cleaning:** Handling 'fat-finger' errors and missing ticks in high-frequency data."
+                    "<b>ETL Pipelines:</b> Extract, Transform, Load. How to pull data from APIs (Alpaca, Polygon) and store it locally.",
+                    "<b>Survivorship Bias:</b> Building a 'Point-in-Time' database so you don't test on stocks that only survived to today.",
+                    "<b>Data Cleaning:</b> Handling 'fat-finger' errors and missing ticks in high-frequency data."
                 ]
             }
         ],
         "guide": [
-            "1. **Set up VS Code:** Move away from Jupyter for production code. Use a professional IDE with Git integration.",
-            "2. **Build a Data Loader:** Write a script that downloads 5 years of daily data for the NASDAQ 100 and saves it to a Parquet file.",
-            "3. **Learn Git:** Commit your code daily. Use branches for new strategy ideas."
+            "1. <b>Set up VS Code:</b> Move away from Jupyter for production code. Use a professional IDE with Git integration.",
+            "2. <b>Build a Data Loader:</b> Write a script that downloads 5 years of daily data for the NASDAQ 100 and saves it to a Parquet file.",
+            "3. <b>Learn Git:</b> Commit your code daily. Use branches for new strategy ideas."
         ],
-        "exercise": "**The Vectorized Backtester:** Build a 10-line Python script using Pandas that calculates the performance of a 'Moving Average Crossover' strategy. No 'if' statements—use only vectorized logic.",
+        "exercise": "<b>The Vectorized Backtester:</b> Build a 10-line Python script using Pandas that calculates the performance of a 'Moving Average Crossover' strategy. No 'if' statements—use only vectorized logic.",
         "milestone": "🎯 Successfully build a local database that auto-updates every night with closing prices for 500 tickers.",
         "resources": [
             "📖 Python for Finance — Yves Hilpisch",
@@ -118,26 +118,26 @@ ROADMAP_DATA = {
             {
                 "category": "Alpha Generation",
                 "items": [
-                    "**Cross-Sectional Momentum:** Buying the 'winners' and selling the 'losers' across an index.",
-                    "**Mean Reversion:** Trading 'stretched' rubber bands using RSI, Bollinger, or Z-Scores.",
-                    "**Factor Models:** Decomposing returns into Size, Value, Quality, and Low Volatility components."
+                    "<b>Cross-Sectional Momentum:</b> Buying the 'winners' and selling the 'losers' across an index.",
+                    "<b>Mean Reversion:</b> Trading 'stretched' rubber bands using RSI, Bollinger, or Z-Scores.",
+                    "<b>Factor Models:</b> Decomposing returns into Size, Value, Quality, and Low Volatility components."
                 ]
             },
             {
                 "category": "The Backtesting Protocol",
                 "items": [
-                    "**Transaction Cost Modeling:** Implementing realistic slippage (0.01% - 0.05%) and commissions.",
-                    "**Overfitting (p-hacking):** Understanding why testing 1,000 parameter combinations will always find a 'perfect' (but fake) backtest.",
-                    "**Walk-Forward Optimization:** Testing on 'Unseen' data to ensure the strategy generalizes."
+                    "<b>Transaction Cost Modeling:</b> Implementing realistic slippage (0.01% - 0.05%) and commissions.",
+                    "<b>Overfitting (p-hacking):</b> Understanding why testing 1,000 parameter combinations will always find a 'perfect' (but fake) backtest.",
+                    "<b>Walk-Forward Optimization:</b> Testing on 'Unseen' data to ensure the strategy generalizes."
                 ]
             }
         ],
         "guide": [
-            "1. **Pick a Niche:** Don't try to trade everything. Choose one asset (e.g., FX) and one style (e.g., Trend).",
-            "2. **Write a Strategy Thesis:** Before coding, write 1 paragraph explaining *why* this strategy should make money (e.g., 'It exploits the slow reaction of retail to news').",
-            "3. **Analyze Drawdowns:** Look at the 'worst-case' periods. Could you have survived them mentally?"
+            "1. <b>Pick a Niche:</b> Don't try to trade everything. Choose one asset (e.g., FX) and one style (e.g., Trend).",
+            "2. <b>Write a Strategy Thesis:</b> Before coding, write 1 paragraph explaining *why* this strategy should make money (e.g., 'It exploits the slow reaction of retail to news').",
+            "3. <b>Analyze Drawdowns:</b> Look at the 'worst-case' periods. Could you have survived them mentally?"
         ],
-        "exercise": "**The Alpha Hunt:** Research 'The Turn of the Month Effect' or 'The Monday Effect'. Use your Python tools to see if these seasonalities still exist in the S&P 500 today.",
+        "exercise": "<b>The Alpha Hunt:</b> Research 'The Turn of the Month Effect' or 'The Monday Effect'. Use your Python tools to see if these seasonalities still exist in the S&P 500 today.",
         "milestone": "🎯 Create a 10-page 'Strategy Tear Sheet' including Sharpe, Max Drawdown, Win Rate, and Return Distribution.",
         "resources": [
             "📖 Algorithmic Trading — Ernest Chan",
@@ -154,26 +154,26 @@ ROADMAP_DATA = {
             {
                 "category": "Financial Machine Learning",
                 "items": [
-                    "**Labeling:** Moving beyond 'price-up/price-down' to the 'Triple Barrier Method'.",
-                    "**Feature Engineering:** Building features from Order Flow, Sentiment, and Volatility surfaces.",
-                    "**Purging & Embargoing:** Special cross-validation techniques to prevent data leakage in time series."
+                    "<b>Labeling:</b> Moving beyond 'price-up/price-down' to the 'Triple Barrier Method'.",
+                    "<b>Feature Engineering:</b> Building features from Order Flow, Sentiment, and Volatility surfaces.",
+                    "<b>Purging & Embargoing:</b> Special cross-validation techniques to prevent data leakage in time series."
                 ]
             },
             {
                 "category": "Portfolio Construction",
                 "items": [
-                    "**Risk Parity:** Allocating based on 'Risk Contribution' rather than dollar amounts.",
-                    "**Hierarchical Risk Parity (HRP):** Using graph theory to diversify portfolios more robustly.",
-                    "**Black-Litterman:** Combining market equilibrium with your private views."
+                    "<b>Risk Parity:</b> Allocating based on 'Risk Contribution' rather than dollar amounts.",
+                    "<b>Hierarchical Risk Parity (HRP):</b> Using graph theory to diversify portfolios more robustly.",
+                    "<b>Black-Litterman:</b> Combining market equilibrium with your private views."
                 ]
             }
         ],
         "guide": [
-            "1. **Learn Scikit-Learn:** Master Random Forests and Gradient Boosting for classification tasks.",
-            "2. **Study Volatility:** Understand 'GARCH' models to forecast when markets will become dangerous.",
-            "3. **Factor Neutralization:** Learn how to hedge out 'Market Risk' so you only profit from your specific alpha."
+            "1. <b>Learn Scikit-Learn:</b> Master Random Forests and Gradient Boosting for classification tasks.",
+            "2. <b>Study Volatility:</b> Understand 'GARCH' models to forecast when markets will become dangerous.",
+            "3. <b>Factor Neutralization:</b> Learn how to hedge out 'Market Risk' so you only profit from your specific alpha."
         ],
-        "exercise": "**The Regime Detector:** Build a K-Means clustering model in Python that categorizes the market into 3 states: 'Low Vol/Bull', 'High Vol/Bear', and 'Sideways/Chop'.",
+        "exercise": "<b>The Regime Detector:</b> Build a K-Means clustering model in Python that categorizes the market into 3 states: 'Low Vol/Bull', 'High Vol/Bear', and 'Sideways/Chop'.",
         "milestone": "🎯 Implement a machine learning model that achieves a 'Precision' of >55% on out-of-sample directional signals.",
         "resources": [
             "📖 Advances in Financial Machine Learning — López de Prado",
@@ -190,26 +190,26 @@ ROADMAP_DATA = {
             {
                 "category": "Institutional Execution",
                 "items": [
-                    "**Execution Algorithms:** VWAP, TWAP, and Implementation Shortfall. Minimizing your own market impact.",
-                    "**OMS/EMS Design:** Building the 'Plumbing' that connects your research to the exchange securely.",
-                    "**Real-time Monitoring:** Tracking 'Tracking Error' and 'Alpha Decay' in live trading."
+                    "<b>Execution Algorithms:</b> VWAP, TWAP, and Implementation Shortfall. Minimizing your own market impact.",
+                    "<b>OMS/EMS Design:</b> Building the 'Plumbing' that connects your research to the exchange securely.",
+                    "<b>Real-time Monitoring:</b> Tracking 'Tracking Error' and 'Alpha Decay' in live trading."
                 ]
             },
             {
                 "category": "Advanced Risk & Psychology",
                 "items": [
-                    "**Tail Risk Hedging:** Using out-of-the-money options to protect against 'Black Swan' events.",
-                    "**Capacity Analysis:** Determining at what AUM (Assets Under Management) your strategy stops working.",
-                    "**The Professional Journal:** Documenting every model failure and iteration with academic rigor."
+                    "<b>Tail Risk Hedging:</b> Using out-of-the-money options to protect against 'Black Swan' events.",
+                    "<b>Capacity Analysis:</b> Determining at what AUM (Assets Under Management) your strategy stops working.",
+                    "<b>The Professional Journal:</b> Documenting every model failure and iteration with academic rigor."
                 ]
             }
         ],
         "guide": [
-            "1. **Build a Production Pipeline:** Use Docker and AWS/GCP to run your research scripts on a schedule.",
-            "2. **Network:** Start contributing to open-source quant libraries or publishing research on SSRN/arXiv.",
-            "3. **Capital Allocation:** Learn the business of quant: how to pitch a strategy to a PM or Seed Fund."
+            "1. <b>Build a Production Pipeline:</b> Use Docker and AWS/GCP to run your research scripts on a schedule.",
+            "2. <b>Network:</b> Start contributing to open-source quant libraries or publishing research on SSRN/arXiv.",
+            "3. <b>Capital Allocation:</b> Learn the business of quant: how to pitch a strategy to a PM or Seed Fund."
         ],
-        "exercise": "**The 'Flash Crash' Test:** Simulate how your current 'best' strategy would have performed during the 2010 Flash Crash or the 2020 COVID crash. Did it blow up?",
+        "exercise": "<b>The 'Flash Crash' Test:</b> Simulate how your current 'best' strategy would have performed during the 2010 Flash Crash or the 2020 COVID crash. Did it blow up?",
         "milestone": "🎯 Deploy a live 'Paper Trading' portfolio of 3+ diversified strategies and maintain a Sharpe > 1.5 for 6 months.",
         "resources": [
             "📖 Active Portfolio Management — Grinold & Kahn",
