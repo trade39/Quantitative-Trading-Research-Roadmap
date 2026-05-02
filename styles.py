@@ -33,12 +33,23 @@ def apply_styles():
         /* Sidebar Content Visibility */
         [data-testid="stSidebarContent"] {
             width: 320px !important;
+        }
+
+        /* Fade out ONLY user content, keeping sidebar controls (like the arrow) visible */
+        [data-testid="stSidebarUserContent"] {
             transition: opacity 0.3s ease;
         }
 
-        section[data-testid="stSidebar"]:not(:hover) [data-testid="stSidebarContent"] {
+        section[data-testid="stSidebar"]:not(:hover) [data-testid="stSidebarUserContent"] {
             opacity: 0;
             pointer-events: none;
+        }
+
+        /* Ensure the collapse button is always visible and positioned correctly */
+        [data-testid="stSidebarCollapseButton"] {
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 1005 !important;
         }
 
         /* Adjust Main Content Area */
