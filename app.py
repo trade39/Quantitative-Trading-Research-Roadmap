@@ -95,15 +95,25 @@ if page == "Overview":
         # Summary Cards
         for i, (key, stage) in enumerate(ROADMAP_DATA.items()):
             target_page = f"{key}: {stage['title']}"
-            st.markdown(f"""
-            <a href="/?nav={target_page}" target="_self">
+            
+            # Create a clickable wrapper
+            with st.container():
+                st.markdown(f'<div class="card-wrapper">', unsafe_allow_html=True)
+                
+                # Invisible button that covers the card
+                if st.button(f"Go to {key}", key=f"btn_{key}", use_container_width=True):
+                    st.session_state.sidebar_radio = target_page
+                    st.rerun()
+                
+                # Visual representation
+                st.markdown(f"""
                 <div class="glass-card">
                     <span class="stage-badge">{stage['duration']}</span>
                     <h3>{key}: {stage['title']}</h3>
                     <p style="color: #A1A1AA;">{stage['goal']}</p>
                 </div>
-            </a>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
 
 # --- STAGE PAGES ---
 elif "Stage" in page:
