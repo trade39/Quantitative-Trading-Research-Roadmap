@@ -33,13 +33,23 @@ page = st.sidebar.radio("Jump to Section",
 )
 
 # Hero Section Image Path
-hero_img_path = r"C:\Users\John Erwin Dapol\.gemini\antigravity\brain\34cc56e5-079b-49e9-a7f1-191f8a815c8d\quant_trading_hero_1777706612138.png"
-hero_img_base64 = get_img_with_href(hero_img_path)
+hero_img_path = Path("assets/hero.png")
+hero_img_base64 = ""
+
+if hero_img_path.exists():
+    try:
+        hero_img_base64 = get_img_with_href(str(hero_img_path))
+    except Exception as e:
+        st.error(f"Error loading hero image: {e}")
+else:
+    # Fallback or placeholder if needed
+    pass
 
 # --- OVERVIEW PAGE ---
 if page == "Overview":
+    hero_style = f"background-image: url('{hero_img_base64}');" if hero_img_base64 else "background: linear-gradient(135deg, #1E1E2E 0%, #11111B 100%);"
     st.markdown(f"""
-        <div class="hero-container" style="background-image: url('{hero_img_base64}');">
+        <div class="hero-container" style="{hero_style}">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <div class="hero-title">Quantitative Trading Research</div>
