@@ -28,7 +28,7 @@ def get_img_with_href(local_img_path):
 
 # Navigation Options
 PAGES = ["Overview", "Stage 1: Foundation", "Stage 2: Math & Stats", "Stage 3: Programming", 
-         "Stage 4: Strategy", "Stage 5: Advanced", "Stage 6: Professional", "Tools & Traps"]
+         "Stage 4: Strategy", "Stage 5: Advanced", "Stage 6: Professional", "Stage 7: Macroeconomics", "Tools & Traps"]
 
 # Helper for smooth navigation
 def navigate_to(target):
@@ -92,6 +92,7 @@ if page == "Overview":
             <div class="timeline-step">4</div>
             <div class="timeline-step">5</div>
             <div class="timeline-step">6</div>
+            <div class="timeline-step">7</div>
         </div>
         """
         st.markdown(timeline_html, unsafe_allow_html=True)
@@ -120,7 +121,11 @@ if page == "Overview":
 # --- STAGE PAGES ---
 elif "Stage" in page:
     stage_key = page.split(":")[0].strip()
-    stage_data = ROADMAP_DATA[stage_key]
+    try:
+        stage_data = ROADMAP_DATA[stage_key]
+    except KeyError:
+        st.error(f"KeyError: '{stage_key}' not found in ROADMAP_DATA. Available keys: {list(ROADMAP_DATA.keys())}")
+        st.stop()
     
     st.markdown(f"## {stage_key}: {stage_data['title']}")
     st.markdown(f"<span class='stage-badge'>{stage_data['duration']}</span>", unsafe_allow_html=True)
@@ -176,7 +181,8 @@ elif "Stage" in page:
         st.markdown("### 🛠️ Recommended Tools")
         tools_key = "Stage 1-2" if "1" in stage_key or "2" in stage_key else \
                     "Stage 3-4" if "3" in stage_key or "4" in stage_key else \
-                    "Stage 5" if "5" in stage_key else "Stage 6"
+                    "Stage 5" if "5" in stage_key else \
+                    "Stage 6" if "6" in stage_key else "Stage 6" # Default to Stage 6 tools for Macro
         
         for tool in TOOLS_CHECKLIST[tools_key]:
             st.markdown(f"✅ {tool}")
