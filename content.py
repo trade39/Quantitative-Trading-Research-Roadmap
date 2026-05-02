@@ -99,6 +99,29 @@ ROADMAP_DATA = {
         "overview": "Finance is 'noisy'. Most patterns you see are just random chance. This stage teaches you the 'Bullshit Detector'—the mathematical rigorousness required to prove an edge exists.",
         "topics": [
             {
+                "category": "Conditional Probability & Bayes' Theorem (The Quant's Most-Tested Topic)",
+                "items": [
+                    {"text": "Conditional Probability: For two dependent events A and B, the chance of A occurring given that B has occurred is the conditional probability $P(A|B)$. Its definitional formula is:\n$$P(A|B) = \\frac{P(A \\cap B)}{P(B)}$$\nWe think of $P(A|B)$ as the fraction of B's probability space that is taken up by the intersection of A and B.\n\nExample: If 15% of taxis are blue and a witness with 80% accuracy says the taxi was blue, Bayes' Theorem gives $P(\\text{blue}|\\text{witness says blue}) = \\frac{0.8 \\times 0.15}{0.8 \\times 0.15 + 0.2 \\times 0.85} \\approx 0.41$ — surprisingly low, because blue taxis are rare. This is a classic Tversky & Kahneman brainteaser.", "is_interview_prep": True},
+                    {"text": "Bayes' Theorem: From the symmetry $P(A|B)P(B) = P(A \\cap B) = P(B|A)P(A)$, we derive:\n$$P(A|B) = \\frac{P(B|A)P(A)}{P(B)}$$\nWhere $P(B|A)$ is the **likelihood**, $P(A)$ is the **prior**, and $P(B)$ is the **evidence** (often computed via the law of total probability: $P(B) = P(B|A)P(A) + P(B|\\neg A)P(\\neg A)$).\n\nInterview Classic: Suppose 1% of people have Ebola. A test has a 1% false positive and 1% false negative rate. What is the probability a positive-tested person actually has Ebola? $P(S|+) = \\frac{0.99 \\times 0.01}{0.99 \\times 0.01 + 0.01 \\times 0.99} = 0.5$. The test is shockingly inaccurate!", "is_interview_prep": True},
+                    {"text": "Interview Classic — The Biased Coin: We have 1000 coins; 999 are fair and 1 has heads on both sides. We pick a random coin, flip it 10 times, and get 10 heads. What is the probability we picked the unfair coin?\n$$P(UF|10H) = \\frac{1}{1 + \\frac{999}{1024}} \\approx 0.506$$\nBayes' Theorem shows the posterior is roughly 50/50 — the 10 heads strongly suggests the biased coin despite its rarity. This is asked frequently at trading firms in early phone screens.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Expected Value, Variance & Linearity of Expectation",
+                "items": [
+                    {"text": "Expected Value: The weighted average of all values a random variable can take, weighted by their probabilities:\n$$E[X] = \\sum_{x \\in \\Omega} x \\cdot p(x) \\quad \\text{or} \\quad \\int_{\\Omega} x f(x) dx$$\n**Linearity of Expectation** (the most powerful tool in interview math):\n$$E[X_1 + X_2 + \\ldots + X_n] = E[X_1] + E[X_2] + \\ldots + E[X_n]$$\nThis holds even when $X_1, \\ldots, X_n$ are **dependent** — a fact that unlocks elegant solutions to seemingly hard problems.", "is_interview_prep": True},
+                    {"text": "Linearity of Expectation in Action: We have a classroom of 10 boys and 10 girls arranged randomly in a line of 20. What is the expected number of adjacent pairs of different genders?\n\nLet $X_i$ be 1 if the $i$-th and $(i+1)$-th students are different genders. $P(X_i = 1) = \\frac{2 \\times 10 \\times 10}{20 \\times 19} = \\frac{10}{19}$. Even though the $X_i$ are pairwise dependent, by linearity: $E[\\sum X_i] = 19 \\times \\frac{10}{19} = 10$.", "is_interview_prep": True},
+                    {"text": "Variance: Measures how much an r.v. deviates from its mean:\n$$\\text{Var}(X) = E[(X-\\mu)^2] = E[X^2] - E[X]^2$$\nKey variance rules:\n$$\\text{Var}(aX+b) = a^2 \\text{Var}(X)$$\n$$\\text{Var}(X_1 + \\ldots + X_n) = n\\sigma^2 \\quad \\text{(for i.i.d. r.v.s)}$$\n$$\\text{Var}(\\bar{X}_n) = \\frac{\\sigma^2}{n} \\quad \\text{(variance of sample mean)}", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Key Random Variables (Memorize These Cold)",
+                "items": [
+                    {"text": "Discrete Distributions Reference:\n\n| Distribution | PMF | $E[X]$ | $\\text{Var}(X)$ |\n|---|---|---|---|\n| Bernoulli | $p$ if $x=1$, $1-p$ if $x=0$ | $p$ | $pq$ |\n| Binomial$(n,p)$ | $\\binom{n}{x}p^x q^{n-x}$ | $np$ | $npq$ |\n| Poisson$(\\lambda)$ | $\\frac{\\lambda^x e^{-\\lambda}}{x!}$ | $\\lambda$ | $\\lambda$ |\n| Geometric$(p)$ | $(1-p)^{x-1}p$ | $\\frac{1}{p}$ | $\\frac{1-p}{p^2}$ |\n\n**Continuous Distributions Reference:**\n\n| Distribution | $E[X]$ | $\\text{Var}(X)$ |\n|---|---|---|\n| Uniform$(a,b)$ | $\\frac{a+b}{2}$ | $\\frac{(b-a)^2}{12}$ |\n| Normal$(\\mu,\\sigma^2)$ | $\\mu$ | $\\sigma^2$ |\n| Exponential$(\\lambda)$ | $\\frac{1}{\\lambda}$ | $\\frac{1}{\\lambda^2}$ |\n\n**Key facts:** Geometric and Exponential are both **memoryless**. Poisson comes from Binomial with $n \\to \\infty$, $p \\to 0$, $np = \\lambda$.", "is_interview_prep": True},
+                    {"text": "Covariance & Correlation:\n$$\\text{Cov}(X,Y) = E[XY] - E[X]E[Y]$$\n$$\\rho(X,Y) = \\frac{\\text{Cov}(X,Y)}{\\sqrt{\\text{Var}(X)\\text{Var}(Y)}} \\in [-1,1]$$\nKey facts: If $X$ and $Y$ are independent then $\\text{Cov}(X,Y)=0$, but zero covariance does **not** imply independence. $\\text{Cov}(X,X) = \\text{Var}(X)$. Covariance is **bilinear**.", "is_interview_prep": True}
+                ]
+            },
+            {
                 "category": "Probability & Distributions (The Foundation of Signal)",
                 "items": [
                     "The Normal Distribution Fallacy: Most introductory finance courses assume that returns follow a 'Bell Curve' (Normal Distribution). In the real world, markets exhibit 'Fat Tails' (Excess Kurtosis) and 'Skewness'. This means 'Six-Sigma' events (crashes like 1987 or 2008) happen thousands of times more often than the theory predicts. A quant's job is not to assume normality, but to build models that survive its inevitable breakdown.\n\nExample: On 'Black Monday' in 1987, the S&P 500 dropped 22% in one day. Under a normal distribution, this was a '20-sigma' event, which should only happen once in a trillion years. In reality, market structure makes these 'outliers' much more frequent.",
@@ -295,6 +318,19 @@ ROADMAP_DATA = {
                 ]
             },
             {
+                "category": "Regression & Statistical Learning (The ESL Framework)",
+                "items": [
+                    {"text": "Ordinary Least Squares (OLS): The core regression equation every quant must memorize cold:\n$$\\hat{\\beta} = (X^TX)^{-1}X^Ty$$\nMinimizes the Residual Sum of Squares $RSS(\\beta) = \\sum_{i=1}^N (y_i - x_i^T \\beta)^2$. The 'hat matrix' $H = X(X^TX)^{-1}X^T$ projects $y$ onto the column space of $X$. If $X$ is not full rank (e.g., two perfectly correlated inputs), $X^TX$ is singular and $\\hat{\\beta}$ is undefined.",
+                     "code": "import numpy as np\n\n# OLS closed-form solution\nX = np.column_stack([np.ones(100), np.random.randn(100)])\ny = 2 + 3*X[:,1] + np.random.randn(100)\n\nbeta = np.linalg.solve(X.T @ X, X.T @ y)\nprint(f'Intercept: {beta[0]:.3f}, Slope: {beta[1]:.3f}')",
+                     "is_interview_prep": True},
+                    {"text": "Bias-Variance Tradeoff: Total error $= \\text{Bias}^2 + \\text{Variance}$. Linear regression has low variance/high bias (assumes linearity). 1-Nearest Neighbor has zero bias on training data but extremely high variance. Effective degrees of freedom $df$ controls this tradeoff: higher $df$ means lower bias but higher variance.\n\n| Method | Bias | Variance | Assumption |\n|---|---|---|---|\n| Linear Regression | Moderate | Low | Linear CEF |\n| 1-NN | **Zero** | **Very High** | None |\n| Ridge | Higher than OLS | Lower than OLS | Shrinks $\\beta$ |\n| Lasso | Like Ridge | Like Ridge | Sparsity |\n\nThe curse of dimensionality hurts nearest neighbors exponentially: boundary effects and sparse neighborhoods make prediction unreliable in high dimensions.", "is_interview_prep": True},
+                    {"text": "Ridge & Lasso Regularization:\n$$\\hat{\\beta}^{\\text{ridge}} = \\arg\\min_\\beta \\left[ RSS + \\lambda \\sum_j \\beta_j^2 \\right] = (X^TX + \\lambda I)^{-1}X^Ty$$\n$$\\hat{\\beta}^{\\text{lasso}} = \\arg\\min_\\beta \\left[ RSS + \\lambda \\sum_j |\\beta_j| \\right]$$\nKey difference: **Ridge** shrinks all coefficients proportionally (never zero). **Lasso** performs soft thresholding, driving some $\\beta_j$ exactly to zero (sparsity). Elastic Net blends both. Ridge relates to PCA: it shrinks principal components proportional to $d_i^2/(d_i^2 + \\lambda)$.",
+                     "code": "from sklearn.linear_model import Ridge, Lasso\nimport numpy as np\n\nX = np.random.randn(100, 10)\ny = X[:, 0] + 0.5*X[:, 1] + np.random.randn(100)\n\nridge = Ridge(alpha=1.0).fit(X, y)\nlasso = Lasso(alpha=0.1).fit(X, y)\nprint(f'Ridge non-zero coefs: {np.sum(ridge.coef_ != 0)}')\nprint(f'Lasso non-zero coefs: {np.sum(lasso.coef_ != 0)}')",
+                     "is_interview_prep": True},
+                    {"text": "Econometrics & Causal Inference: Regression finds the best linear approximation to the Conditional Expectation Function (CEF) $E[Y_i|X_i]$. In econometrics, the goal is *causal* inference, not just prediction.\n\n- **Omitted Variable Bias (OVB):** $\\text{OVB} = (\\text{short} - \\text{long effect}) = \\pi_1 \\times \\gamma$ where $\\pi_1$ is the omitted variable's correlation with treatment and $\\gamma$ is its effect on outcome.\n- **Bivariate regression anatomy:** $\\beta = \\text{Cov}(Y,X)/\\text{Var}(X)$, $\\alpha = E[Y] - \\beta E[X]$.\n- Regressing $Y$ on $X$ vs. $X$ on $Y$ gives different betas (minimizing vertical vs. horizontal residuals).\n- **Doubling data** leaves $\\hat{\\beta}$ unchanged (verify via the closed form or $\\text{Cov}/\\text{Var}$ formula).", "is_interview_prep": True}
+                ]
+            },
+            {
                 "category": "The Backtesting Protocol (Scientific Validation)",
                 "items": [
                     {"text": "Walk-Forward Optimization (WFO): Static backtests are prone to 'Curve Fitting'. You must learn WFO—optimizing your strategy on a 'training' window and testing it on a subsequent 'unseen' window, then sliding both windows forward in time. This is the gold standard for verifying that a strategy's parameters are robust.\n\nFormula: The Sharpe Ratio is calculated as:\n$$S = \\frac{E[R_p - R_f]}{\\sigma_p}$$\nWhere $R_p$ is portfolio return, $R_f$ is the risk-free rate, and $\\sigma_p$ is the portfolio standard deviation.\n\nExample: You optimize your RSI period on 2018-2019 data. You test it on 2020. Then you re-optimize on 2019-2020 and test on 2021. If performance holds, the strategy is 'Walk-Forward Stable'.", 
@@ -453,6 +489,22 @@ ROADMAP_DATA = {
         "goal": "Operate as a full-stack Quant Researcher capable of running institutional capital.",
         "overview": "The final stage is about infrastructure, scale, and longevity. You transition from a 'researcher' to a 'portfolio manager' who manages risk as much as they seek returns.",
         "topics": [
+            {
+                "category": "Market Making Theory (Core Interview Framework)",
+                "items": [
+                    {"text": "The Three Pillars of a Market: A market maker's bid-ask quote is determined by three factors:\n1. **Theoretical Value (TV):** Your calculated fair value based on first principles. For a die roll, TV = 3.5. For the number of windows in a building, you estimate via Fermi reasoning. The more uncertain your TV, the wider your market must be.\n2. **Last Price Traded:** The going market price. If it deviates from your TV, you balance faith in your model vs. the market's information.\n3. **Current Position:** Your net long/short exposure. If you are long, skew your market lower (sell cheaper, buy higher) to flatten. A flat position means a symmetric market equidistant from TV.\n\nA market is expressed as **bid@ask** (e.g., $3.40@3.60$ around a TV of $3.50$). You are *required* to execute at your quoted prices.", "is_interview_prep": True},
+                    {"text": "Confidence Intervals as Markets: A 95% confidence interval IS your market. For a known Binomial(n=162, p=0.5) distribution, your 90% CI is $\\mu \\pm 1.64\\sigma$. For unknown quantities (e.g., number of windows in SIG's building), your CI should widen with uncertainty. The tightest and fastest markets get the most trades — but a market too wide to attract trades defeats the purpose of being a market maker.", "is_interview_prep": True},
+                    {"text": "Market Adaptation (Reading Trade Direction): When the interviewer buys from you (at your ask), it signals they think fair value is ABOVE your ask. You must:\n1. Move your market UP to reflect this new information\n2. Flatten your short position (you just sold, so you want to buy back)\n3. Move by *more* early (high uncertainty) and *less* later (narrowing bounds)\n\nWhen they sell to you (at your bid), fair value is likely BELOW your bid. Move DOWN. Keep track of every trade for your position and PNL.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Market Making Cases (Interview Simulations)",
+                "items": [
+                    {"text": "Case 1 — Sports Betting (Red Sox Wins): Make a 10-wide market on Red Sox wins in a 162-game season. TV = $162 \\times 0.5 = 81$. Market: $76@86$. Assume Binomial $\\approx N(81, 6.36^2)$:\n- 50% CI: $81 \\pm 0.67 \\times 6.36 \\approx [76.8, 85.2]$\n- 90% CI: $81 \\pm 1.64 \\times 6.36 \\approx [70.6, 91.5]$\n\n**Adaptation:** If interviewer buys at 86, move to 81@91 (they think value > 86). If they buy again at 91, move to 85@95. If they sell at 85, you've now bounded fair value between 86-90. Track PNL on every trade.", "is_interview_prep": True},
+                    {"text": "Case 2 — Country Population (Tanzania): Given constraint that ask ≤ 1.5× bid. True value = 56M (unknown to you). Opening market: 20@30. Interviewer buys → triple your TV → 60@90. They sell → value bounded between 30M and 60M → 40@60. They buy → value near 60M → 50@75. They sell → flat position.\n\n**Key lesson:** You lost money ($-20) but that's fine. The game tests your *process* (moving markets rationally in response to trades), not your knowledge of Tanzanian demographics.", "is_interview_prep": True},
+                    {"text": "Case 3 — Trade or Tighten: You and the interviewer each receive a TV drawn from Uniform(90, 110). You receive TV = 100. You alternate tightening the market or trading. The interviewer's actions reveal their TV (usually near the midmarket of their quotes). Strategy:\n- Open 90@110 (the full prior range)\n- Each tighten reveals information — use it to update your TV estimate\n- Avoid selling below your TV or buying above it\n- The game rewards patience: wait until the inside market is attractive before trading", "is_interview_prep": True}
+                ]
+            },
             {
                 "category": "Institutional Execution (The 'Plumbing' of Alpha)",
                 "items": [
@@ -1388,6 +1440,150 @@ ROADMAP_DATA = {
             {"icon": "🌐", "name": "SqueezeMetrics: GEX and DIX Data", "url": "https://squeezemetrics.com/monitor/dix"},
             {"icon": "📖", "name": "Misbehaving: The Making of Behavioral Economics — Richard Thaler", "url": "https://www.amazon.com/Misbehaving-Making-Behavioral-Economics-Richard/dp/039335279X"}
         ]
+    },
+    "Stage 17": {
+        "title": "Interview Prep & Question Bank",
+        "duration": "Ongoing",
+        "difficulty": "Expert",
+        "reading_time": "40h",
+        "prereqs": "Stage 2, 4, 6",
+        "goal": "Master the probability, statistics, and market-making brainteasers asked at top quant firms.",
+        "overview": "This stage compiles the actual interview questions from Jane Street, Citadel, HRT, Two Sigma, Five Rings, SIG, Optiver, Virtu, and Akuna Capital — with full worked solutions. Questions span probability puzzles, expected value calculations, dice games, combinatorics, regression theory, and live market-making simulations. This is your final preparation layer before recruiting season.",
+        "topics": [
+            {
+                "category": "Jane Street — Probability & Dice Games",
+                "items": [
+                    {"text": "**Dice Game (1 re-roll, no cost):** You roll a d6. You may re-roll once and keep the result. What is a fair price?\n\nSolution: Only re-roll if result < 3.5. Expected value = $\\frac{3}{6} \\times 3.5 + \\frac{1}{6}(4+5+6) = \\mathbf{4.25}$.", "is_interview_prep": True},
+                    {"text": "**Dice Game (re-roll costs $1):** Same game but each re-roll costs $1. What is the fair price?\n\nSolution: After paying $1, expected value of re-roll is $3.5 - 1 = 2.5$. Only re-roll if current roll < 2.5, i.e., roll of 1 or 2. Expected value = $\\frac{2}{6}(3.5-1) + \\frac{1}{6}(3+4+5+6) = \\frac{23}{6} \\approx 3.83$.", "is_interview_prep": True},
+                    {"text": "**Infinite Re-rolls at $1 each — Optimal Strategy:** Let $X$ = payoff of playing optimally. Let $p$ = probability of re-rolling. Then $X = 3.5(1-p) + (X-1)p$. Solving: $X = \\frac{3.5 - 4.5p}{1-p}$. This is maximized at $p=0$ (never re-roll!), giving $X = 3.5$.\n\nKey insight: Each re-roll costs $1 of expected value — paying to re-roll a fair die never makes sense.", "is_interview_prep": True},
+                    {"text": "**Rank the expectations:** Product of two d6s vs. square of one d6 vs. square of median of 5 d6s.\n\n- Product of two d6s: $3.5^2 = 12.25$ (by independence)\n- Square of one d6: $E[X^2] = \\frac{1}{6}(1+4+9+16+25+36) = \\frac{91}{6} \\approx 15.17$\n- Square of median of 5 d6s: Skewed toward middle values, less extreme than one die alone\n\n**Ranking (least to greatest):** Product of two < Square of median < Square of one.", "is_interview_prep": True},
+                    {"text": "**Three Correlations Problem (Jane Street classic):** Given Corr(X,Y) = 0.9, Corr(Y,Z) = 0.8. What are the bounds on Corr(X,Z)?\n\nThe 3×3 correlation matrix must be positive semi-definite (det ≥ 0):\n$$\\det = -c^2 + 1.44c - 0.45 \\geq 0 \\implies 0.46 \\leq c \\leq 0.98$$\n\nGeometric interpretation: Correlations correspond to cosines of angles between vectors. The constraint is equivalent to the triangle inequality on these angles.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Virtu Financial — Probability Classics",
+                "items": [
+                    {"text": "**Rain Probability (with/without independence):** 40% chance of rain Saturday, 70% chance Sunday. What is the probability it does NOT rain all weekend?\n\n- *Assuming independence:* $P = 0.6 \\times 0.3 = 0.18$\n- *Without assumption (bounds):* $P(A \\cup B) \\in [0.7, 1]$, so $P(\\text{no rain}) \\in [0, 0.3]$", "is_interview_prep": True},
+                    {"text": "**Chord Intersection Problem:** 4 points chosen randomly on a circle, labeled A, B, C, D. Draw chords AB and CD. What is P(chords intersect)?\n\nKey insight: There are 3 equally likely pairings of 4 points into 2 chords: {AB,CD}, {AC,BD}, {AD,BC}. Exactly 1 of 3 pairings results in intersection. Answer: **1/3**.", "is_interview_prep": True},
+                    {"text": "**Two Planes Safety:** 4-engine plane goes down if ≥3 engines fail. 2-engine plane goes down if both fail. Each engine fails independently with probability $p$.\n\n- $P(\\text{4-engine fails}) = \\binom{4}{3}p^3(1-p) + p^4$\n- $P(\\text{2-engine fails}) = p^2$\n\nSetting equal: $p = \\frac{1}{3}$. Below this threshold the 4-engine plane is safer; above it, the 2-engine is safer.", "is_interview_prep": True},
+                    {"text": "**St. Petersburg Paradox:** You flip a coin until heads. You receive $2^k$ where $k$ = number of flips. Expected value = $\\sum_{k=1}^{\\infty} 2^k \\cdot \\frac{1}{2^k} = \\infty$. Yet no rational person pays infinite money. Resolution: diminishing marginal utility (Bernoulli). Practical answer: set a cutoff probability (e.g., ignore events with $p < 1/32$) and compute finite EV.", "is_interview_prep": True},
+                    {"text": "**Reservoir Sampling (Camera Problem):** You photograph an unknown number of houses. You can hold only 1 photo. Strategy to ensure any house is equally likely to be in memory:\n\nFor house $n$, take its photo with probability $\\frac{1}{n}$ (replacing current photo). Proof: After $n$ houses, each has probability $\\frac{1}{n}$ by induction. This is the **Reservoir Sampling** algorithm.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Akuna Capital — Geometric Probability & Coin Simulation",
+                "items": [
+                    {"text": "**n i.i.d. Uniform(0,1) sum ≤ 1:** What is the probability?\n\nGeometric argument: The sample space is the unit $n$-hypercube. The feasible region (sum ≤ 1) is the $n$-simplex with volume $\\frac{1}{n!}$. Answer: $\\mathbf{\\frac{1}{n!}}$.", "is_interview_prep": True},
+                    {"text": "**Simulate 1/3 probability with fair coins:** Flip twice. Assign HH, HT, TH → outcomes 1, 2, 3. If TT, re-flip. Expected flips = $2 + \\frac{1}{4}(2 + \\ldots) = \\frac{8}{3}$.\n\n**Minimum flips for a single 1/3 event:** Flip once. If H (prob 1/2), output 'miss'. If T, flip again: TH (prob 1/4) = success, TT (prob 1/4) = restart. $E[\\text{flips}] = \\frac{1}{2}(1) + \\frac{1}{4}(2) + \\frac{1}{4}(2+E) \\Rightarrow E = \\frac{8}{3}$ — same! But this uses fewer flips in the success path.", "is_interview_prep": True},
+                    {"text": "**General n equal probabilities with coins:** Need $k$ flips where $2^k \\geq n$, i.e., $k = \\lceil \\log_2 n \\rceil$. Assign $n$ outcomes to valid bit strings, re-flip if invalid string encountered.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Citadel — Advanced Probability & CS Algorithms",
+                "items": [
+                    {"text": "**Octahedron Ant Problem:** Two ants start at opposite vertices of an octahedron. They alternate moving to random adjacent vertices. What is P(Ant A lands on Ant B's vertex)?\n\nUse state probabilities based on distance between ants (1 or 2 edges apart) and whose turn it is. Set up system of equations. Answer: **2/5**.", "is_interview_prep": True},
+                    {"text": "**Airplane Seating (100 passengers):** Passenger 1 takes a random seat. Each subsequent passenger sits in their own seat if available, else a random empty seat. What is P(passenger 100 sits in seat 100)?\n\nKey symmetry: Whenever a passenger must choose randomly, they are equally likely to 'fix' the problem (choose seat 1) or 'doom' passenger 100 (choose seat 100). By this symmetry: **P = 1/2**.", "is_interview_prep": True},
+                    {"text": "**k Maximum Elements in Array of n:** \n- Naive: Sort in $O(n \\log n)$, take first $k$\n- Single pass with sorted array of size $k$: $O(nk + k \\log k)$\n- **Best:** Build max-heap in $O(n)$, extract max $k$ times in $O(k \\log n)$: total $O(n + k \\log n)$\n\nConclusion: Heap is best when $k \\ll n$. Full sort wins for large $k$.", "is_interview_prep": True},
+                    {"text": "**Product of beta coefficients in reverse regression:** Regress $Y$ on $X$ → $\\beta_1 = \\text{Cov}(Y,X)/\\text{Var}(X)$. Regress $X$ on $Y$ → $\\beta_2 = \\text{Cov}(X,Y)/\\text{Var}(Y)$.\n\n$$\\beta_1 \\cdot \\beta_2 = \\frac{\\text{Cov}(X,Y)^2}{\\text{Var}(X)\\text{Var}(Y)} = \\rho^2 \\in [0, 1]$$\n\nBy Cauchy-Schwarz, the product is always between 0 and 1 (not necessarily equal to 1).", "is_interview_prep": True},
+                    {"text": "**Max profit from single stock trade (no shorting):** Classic single-pass $O(n)$ algorithm. Scan forward, tracking minimum price seen so far and maximum profit achievable. Update profit whenever (current price − min so far) > current max profit.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Hudson River Trading — Normal Distribution & Calculus",
+                "items": [
+                    {"text": "**P(Y > 3X) for X, Y i.i.d. N(0,1):**\n\n*Method 1:* $Y - 3X \\sim N(0, 1+9) = N(0,10)$. P(Y - 3X > 0) = **1/2** by symmetry of the normal.\n\n*Method 2:* Joint pdf of (X, Y) has radial symmetry. The plane $y = 3x$ passes through the center, splitting the symmetric distribution exactly in half.", "is_interview_prep": True},
+                    {"text": "**P(Y > 3X | X > 0):** The joint pdf of (3X, Y) is radially symmetric. The condition X > 0 restricts to a half-plane. We need the angle fraction:\n$$P(Y > 3X | X > 0) = \\frac{\\arctan(1/3)}{\\pi}$$\nBecause the region satisfying both $X > 0$ AND $Y > 3X$ subtends an angle of $\\arctan(1/3)$ out of the total $\\pi$ radians available in the right half-plane.", "is_interview_prep": True},
+                    {"text": "**Expected draws for running sum to exceed 1 (Uniform[0,1]):** Let $f(x)$ = expected draws to exceed $x$ starting from 0. Then $f(x) = 1 + \\int_0^x f(x-t)dt$. Try $f = e^x$: satisfies the equation since $f(0) = 1$ (correct). Therefore $f(1) = \\mathbf{e} \\approx 2.718$.", "is_interview_prep": True},
+                    {"text": "**Expected people before someone taller than first person:** If first person is at percentile $p$, then $E_p[\\text{wait}] = \\frac{1}{1-p}$. Since $p \\sim \\text{Uniform}(0,1)$:\n$$E = \\int_0^1 \\frac{1}{1-p} dp = \\infty$$\nThere is nonzero probability the first person is the world's tallest — and then you'd wait forever. The right tail dominates.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Two Sigma — Logic & Probability",
+                "items": [
+                    {"text": "**1000 Wine Bottles, 10 Rats, 1 Hour:** One bottle is poisoned. Strategy: binary encode bottles 0–999. Rat $i$ drinks from bottle $b$ if the $i$-th bit of $b$'s binary representation is 1. The pattern of dead rats uniquely identifies the poisoned bottle.\n\n- 10 rats → $2^{10} = 1024$ bottles solvable in 1 hour\n- 2 hours → use base-3 encoding → $3^{10}$ bottles\n- $k$ hours → $(k+1)^n$ bottles with $n$ rats", "is_interview_prep": True},
+                    {"text": "**Die Roll Sequence (add evens, restart on odd, stop on 1):** The sequence only contains 1, 2, 4, 6 — rolling 3 or 5 restarts and doesn't contribute to length. Conditional on rolling one of {1, 2, 4, 6}, each has equal probability 1/4. We expect **4 rolls** before rolling 1 from this restricted set.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "Five Rings — Tournament & Socks Problems",
+                "items": [
+                    {"text": "**Tournament Probability (A and B play each other):** In an $n$-team tournament, there are $n-1$ total games. The expected number of games A and B play together = number of games × P(A and B in that specific game) = $(n-1) \\times \\frac{2}{n(n-1)} \\times \\ldots$\n\nSimpler: A and B each independently reach any round with equal probability. P(they play) = **2/n** by symmetry. Verify: n=8 → 2/8 = 1/4 ✓.", "is_interview_prep": True},
+                    {"text": "**Sock Drawer Game (n pairs, adjacent labels satisfactory):** Let $P_n$ = win probability. Key insights:\n1. In any winning game, label-1 socks must pair together (either two 1s, or two (1,2) pairs)\n2. Recursion: $P_n = \\frac{1}{2n-1} P_{n-1} + \\frac{2}{(2n-1)(2n-3)} P_{n-2}$\n\nBase: $P_2 = 1$, $P_3 = 2/3$. The recursion is the key deliverable — Five Rings cares about the logic, not the closed form.", "is_interview_prep": True},
+                    {"text": "**Kelly Criterion Application (n=3 sock game, 1:1 odds):**\nWin probability = 2/3. Expected return = $\\frac{2}{3}(2) + \\frac{1}{3}(0) - 1 = \\frac{1}{3}$ per dollar.\n\nKelly fraction: $f^* = \\frac{p}{a} - \\frac{q}{b} = \\frac{2/3}{1} - \\frac{1/3}{1} = \\frac{1}{3}$\n\nBet **1/3 of total wealth** each round to maximize long-term geometric growth.", "is_interview_prep": True}
+                ]
+            },
+            {
+                "category": "SIG & Optiver — Classic Brainteasers",
+                "items": [
+                    {"text": "**Painted Cube Problem:** Paint outside of a 3×3×3 cube red, cut into 27 unit cubes. Pick a random cube and roll it. The face showing is red. What is P(it's a corner cube)?\n\n- Total red faces: $6 \\times 9 = 54$\n- Corner cubes: 8, each with 3 red faces → 24 red faces from corners\n- Answer: $\\frac{24}{54} = \\mathbf{\\frac{4}{9}}$", "is_interview_prep": True},
+                    {"text": "**Gambler's Ruin (Biased):** You have $1, opponent has $2. You win each game with probability 2/3. Game ends when someone is bankrupt. What is P(you win)?\n\nLet $P[x]$ = P(you win given you have $x). System of equations:\n$P[1] = \\frac{1}{3}P[2] + \\frac{2}{3}P[0]$, $P[2] = \\frac{1}{3}P[3] + \\frac{2}{3}P[1]$, $P[0]=1$, $P[3]=0$.\n\nSolving: **P[1] = 4/7**.", "is_interview_prep": True},
+                    {"text": "**SIG Option Pricing:** Stock trades at $10. 50% chance of takeover. If no takeover: $5 (40%) or $0 (60%). If takeover: $15 (80%) or $x (20%). You hold an option to buy at $22. What do you pay?\n\nExpected payoff = $0.5[0.8 \\times \\max(15-22,0) + 0.2 \\times \\max(x-22,0)] + 0.5[0] = 0$\nunless $x > 22$. The question is structured so $x$ is given — compute the expected intrinsic value weighted by its probability: **$0.80**.", "is_interview_prep": True},
+                    {"text": "**Optiver Mental Math Drill:** Common categories: square roots, squares of 2-digit numbers, percentages, expected values of dice games. Practice target: compute $\\sqrt{1369}$, $87^2$, $E[\\max(d6, d6)]$ within 10 seconds each.\n\nFormula to know cold: $E[\\max(X,Y)] = E[X] + E[Y] - E[\\min(X,Y)]$; for two d6s, $E[\\max] = \\frac{161}{36} \\approx 4.47$.", "is_interview_prep": True}
+                ]
+            }
+        ],
+        "guide": [
+            "1. <b>Work Through 'Heard on the Street' Ch. 2:</b> All 70 math brainteasers — timed, no calculator.",
+            "2. <b>Read the Green Book:</b> 'A Practical Guide to Quantitative Finance Interviews', Chapters 2 and 4.",
+            "3. <b>Practice Market Making:</b> Find a partner and run live market-making simulations using dice and estimation questions.",
+            "4. <b>Mental Math Daily:</b> Use anzan or mental math apps to build calculation speed for Optiver/SIG screens.",
+            "5. <b>Mock Interviews:</b> Simulate full rounds — brainteaser → market making → data science → coding."
+        ],
+        "exercise": "<b>The Full Mock Round:</b> Set a 45-minute timer. Solve: (1) the biased coin Bayes problem, (2) make a market on the number of Starbucks locations in the US, (3) write OLS in Python from scratch without looking it up.",
+        "milestone": "🎯 Complete all 70 problems in 'Heard on the Street' Chapter 2 with ≥80% accuracy without a calculator.",
+        "common_mistakes": [
+            "Ignoring base rates in Bayes problems: The prior probability is always relevant — don't anchor only on likelihoods.",
+            "Forgetting Linearity of Expectation works even for dependent variables: This is the key insight behind most elegant interview solutions.",
+            "Not tracking PnL in market-making games: Interviewers always ask at the end — keep a running tally mentally on every trade.",
+            "Solving for exact answers when the question asks for a bound: Many brainteasers only require bounding or a symmetry argument.",
+            "Not explaining your reasoning: Quant interviewers care as much about your thought process as your final answer."
+        ],
+        "quiz": [
+            {
+                "question": "You roll a fair d6. You may re-roll once for free. What is the fair price to play (you keep the final value)?",
+                "options": ["3.50", "4.00", "4.25", "4.50"],
+                "answer": 2,
+                "explanation": "Re-roll only if the first roll < 3.5. E = (3/6)×3.5 + (1/6)×(4+5+6) = 1.75 + 2.50 = 4.25."
+            },
+            {
+                "question": "Four random points on a circle are labeled A, B, C, D. What is the probability that chords AB and CD intersect inside the circle?",
+                "options": ["1/4", "1/3", "1/2", "2/3"],
+                "answer": 1,
+                "explanation": "There are 3 equally likely ways to pair 4 labeled points into 2 chords. Exactly 1 of 3 pairings results in an intersection. Answer: 1/3."
+            },
+            {
+                "question": "In a gambler's ruin game where you have $1, your opponent has $2, and you win each round with P=2/3, what is your probability of winning?",
+                "options": ["1/3", "1/2", "4/7", "2/3"],
+                "answer": 2,
+                "explanation": "Solve the system of equations: P[1] = (1/3)P[2] + (2/3)(1), P[2] = (1/3)(0) + (2/3)P[1], giving P[1] = 4/7."
+            },
+            {
+                "question": "You paint the outside of a 3×3×3 cube and cut it into 27 unit cubes. You pick a random cube and roll it — a red face shows. What is P(it's a corner cube)?",
+                "options": ["8/27", "3/9", "4/9", "1/2"],
+                "answer": 2,
+                "explanation": "24 red faces come from 8 corner cubes (3 each). Total red faces = 54. P = 24/54 = 4/9."
+            },
+            {
+                "question": "What is the expected number of Uniform(0,1) draws needed for the running sum to exceed 1?",
+                "options": ["2", "2.5", "e ≈ 2.718", "3"],
+                "answer": 2,
+                "explanation": "Let f(x) = expected draws to exceed x. f satisfies f(x) = 1 + ∫f(x-t)dt. f(x) = e^x is the solution, so f(1) = e."
+            }
+        ],
+        "resources": [
+            {"icon": "📖", "name": "Heard on the Street — Timothy Crack", "url": "https://www.amazon.com/Heard-Street-Quantitative-Questions-Finance/dp/0994118252"},
+            {"icon": "📖", "name": "A Practical Guide to Quantitative Finance Interviews — Xinfeng Zhou", "url": "https://www.amazon.com/Practical-Guide-Quantitative-Finance-Interviews/dp/1438236662"},
+            {"icon": "📖", "name": "Probability & Statistics for Finance — Fabozzi", "url": "https://www.amazon.com/Probability-Statistics-Finance-Frank-Fabozzi/dp/0470400005"},
+            {"icon": "🌐", "name": "Glassdoor: Jane Street Interview Questions", "url": "https://www.glassdoor.com/Interview/Jane-Street-Interview-Questions-E255549.htm"},
+            {"icon": "🌐", "name": "Glassdoor: Citadel Interview Questions", "url": "https://www.glassdoor.com/Interview/Citadel-Interview-Questions-E281675.htm"},
+            {"icon": "💻", "name": "Brainstellar: Quant Interview Puzzles", "url": "https://brainstellar.com/"}
+        ],
+        "glossary": [
+            {"term": "Linearity of Expectation", "definition": "The property that E[X+Y] = E[X] + E[Y] holds even when X and Y are dependent random variables."},
+            {"term": "Gambler's Ruin", "definition": "A classic probability problem determining the probability of a player going bankrupt before their opponent given a biased coin."},
+            {"term": "Kelly Criterion", "definition": "A formula for determining the optimal fraction of capital to bet: f* = p/a - q/b, where p is win probability, q=1-p, a is loss fraction, and b is gain fraction."},
+            {"term": "Reservoir Sampling", "definition": "An algorithm to sample k items uniformly at random from a stream of unknown length, in a single pass."}
+        ]
     }
 }
 
@@ -1414,5 +1610,7 @@ TOOLS_CHECKLIST = {
     "Stage 13": ["Smart Order Router (SOR) Simulators", "FIX Protocol Engines", "C++20", "Tick Data Warehouses (KDB+/Timescale)"],
     "Stage 14": ["QuantLib", "Python (scipy/numpy)", "Bloomberg Terminal"],
     "Stage 15": ["Apache Spark", "Apache Kafka", "Docker & Kubernetes", "AWS/GCP/Azure"],
-    "Stage 16": ["SqueezeMetrics API", "Twitter/Reddit Scrapers", "Options Flow Scanners"]
+    "Stage 16": ["SqueezeMetrics API", "Twitter/Reddit Scrapers", "Options Flow Scanners"],
+    "Stage 17": ["Heard on the Street (book)", "Green Book (Quant Finance Interviews)", "Mental Math Trainers", "Probability Calculators"]
 }
+
