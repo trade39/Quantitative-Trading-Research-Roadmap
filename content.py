@@ -695,6 +695,106 @@ ROADMAP_DATA = {
             {"icon": "🎓", "name": "CFA Institute: Risk Management Overview", "url": "https://www.cfainstitute.org/en/membership/professional-development/refresher-readings/risk-management"},
             {"icon": "🌐", "name": "Risk.net: Institutional Risk News", "url": "https://www.risk.net/"}
         ]
+    },
+    "Stage 12": {
+        "title": "NLP & Alternative Data Alpha",
+        "duration": "Advanced Elective",
+        "difficulty": "Expert",
+        "reading_time": "45h",
+        "prereqs": "Stage 3, 5",
+        "goal": "Extract alpha from unstructured text, news, and unconventional data sources using modern NLP and LLMs.",
+        "overview": "90% of the world's data is unstructured. While most quants fight over the same price-action signals, the next frontier of alpha lies in reading earnings calls, tracking satellite imagery, and quantifying the sentiment of central bank speakers. This elective teaches you to turn 'words' into 'numbers' and 'noise' into 'signals'.",
+        "topics": [
+            {
+                "category": "Modern NLP for Finance",
+                "items": [
+                    {"text": "Sentiment Analysis & FinBERT: You must move beyond simple 'word counts' to context-aware models. You will learn to use FinBERT—a BERT model pre-trained on financial text—to quantify the tone of news and earnings reports.\n\nExample: A traditional sentiment model might flag the word 'crushing' as negative. FinBERT understands that in the context of 'crushing earnings estimates,' it is highly positive.", "is_interview_prep": True},
+                    "LLMs & Retrieval-Augmented Generation (RAG): Learn how Hedge Funds are using Large Language Models to parse 1,000-page 10-K filings in seconds, extracting specific risk factors and competitive advantages that are hidden from purely quantitative price models."
+                ]
+            },
+            {
+                "category": "Alternative Data Sources",
+                "items": [
+                    {"text": "Satellite Imagery & Geopolitical Tracking: Quantifying physical reality. You will study how funds use satellite data to track oil storage in China or retail traffic at major malls to predict economic shifts before they are officially reported.\n\nExample: By counting cars in Walmart parking lots across the US, a quant can estimate quarterly revenue with higher precision than the street consensus.", "is_interview_prep": True},
+                    "Credit Card Flows & ESG Data: Using anonymized consumer spending data to forecast retail sales, and integrating ESG (Environmental, Social, Governance) scores as a long-term risk factor in portfolio construction."
+                ]
+            }
+        ],
+        "guide": [
+            "1. Learn the HuggingFace `transformers` library.",
+            "2. Build a scraper for FOMC minutes and run a sentiment model.",
+            "3. Research 'Nowcasting'—using high-frequency data to predict slow-moving GDP."
+        ],
+        "exercise": "<b>The Earnings Scraper:</b> Build a Python tool that scrapes the latest earnings call transcript for a stock and uses a GPT-4 or FinBERT model to assign a 'Hawkish/Dovish' score to the CEO's commentary.",
+        "milestone": "🎯 Build a sentiment-based strategy that trades the 'News Gap' and achieves a positive Sharpe over 1 year of backtested data.",
+        "common_mistakes": [
+            "Ignoring 'Look-ahead Bias' in news: Using news that was 'timestamped' at 9:00 AM but only available to the public at 9:15 AM will produce a fake backtest.",
+            "Underestimating the cost of Alt-Data: Many datasets cost $50k-$200k/year. A retail quant must focus on 'Web Scraping' and open-source alternatives.",
+            "Overfitting on small text samples: Sentiment on a single tweet is noise. Focus on aggregate flow across thousands of sources."
+        ],
+        "quiz": [
+            {
+                "question": "What makes FinBERT superior to a standard sentiment dictionary for financial text?",
+                "options": ["It is faster", "It understands financial context and nuance (e.g., 'beat estimates')", "It is free", "It only works on Bloomberg data"],
+                "answer": 1,
+                "explanation": "FinBERT is specifically trained on financial corpora (news, filings), allowing it to recognize that words like 'volatile' or 'crush' have different meanings in finance vs. general language."
+            }
+        ],
+        "resources": [
+            {"icon": "🌐", "name": "HuggingFace: Transformer Models", "url": "https://huggingface.co/"},
+            {"icon": "📖", "name": "Alternative Data — Alexander Denev", "url": "https://www.amazon.com/Book-Alternative-Data-Alexander-Denev/dp/1119601703"},
+            {"icon": "🎓", "name": "NLP in Finance — Coursera", "url": "https://www.coursera.org/learn/nlp-finance"}
+        ]
+    },
+    "Stage 13": {
+        "title": "Execution Science & Market Impact",
+        "duration": "Advanced Elective",
+        "difficulty": "Expert",
+        "reading_time": "40h",
+        "prereqs": "Stage 6, 9",
+        "goal": "Optimize the 'Implementation Shortfall' by mastering the science of order routing and market impact modeling.",
+        "overview": "Alpha is what you 'think' you make; P&L is what you 'actually' keep. In institutional trading, your own size is your biggest enemy. This stage teaches you the Almgren-Chriss models and the engineering of 'Smart Order Routers' to hide your footprint from the market.",
+        "topics": [
+            {
+                "category": "Optimal Execution Models",
+                "items": [
+                    {"text": "Almgren-Chriss Framework: The industry standard for 'Optimal Execution'. You will learn to solve the optimization problem: how to split a large order to balance 'Market Impact' (costs from moving the price) against 'Opportunity Cost' (risk of price moving before you finish).\n\nExample: If you sell too fast, you crash the price yourself. If you sell too slow, the market might crash while you still hold the position. Almgren-Chriss finds the 'Efficient Frontier' of execution.", "is_interview_prep": True},
+                    "Implementation Shortfall (IS): Learn to measure the difference between the decision price (when you decided to trade) and the final average fill price. Minimizing IS is the primary goal of an execution desk."
+                ]
+            },
+            {
+                "category": "Smart Order Routing & Dark Pools",
+                "items": [
+                    {"text": "Dark Pools & Liquidity Fragmentation: Institutional liquidity is hidden. You will study how 'Dark Pools' (private exchanges) allow for large trades without immediate public disclosure, and the risks of 'predatory' HFTs sniffing out your hidden orders.\n\nExample: A quant uses a 'Smart Order Router' (SOR) to scan multiple lit exchanges and dark pools simultaneously, filling a 100k share order across 20 venues in milliseconds.", "is_interview_prep": True},
+                    "Order Routing Logic: Building SORs that prioritize venues based on 'Fill Rate,' 'Rebate Structure,' and 'Latency'. You will learn the 'Maker-Taker' economics of exchange connectivity."
+                ]
+            }
+        ],
+        "guide": [
+            "1. Derive the Almgren-Chriss linear impact model.",
+            "2. Build a simulation of an 'Iceberg' order and its impact on the LOB.",
+            "3. Study the 'IEX' Speed Bump and its impact on HFT arbitrage."
+        ],
+        "exercise": "<b>The Execution Optimizer:</b> Write a Python script that takes a 1-million share order and splits it into a VWAP schedule. Calculate the 'Market Impact' cost using a square-root impact formula.",
+        "milestone": "🎯 Design an execution algorithm that achieves a 'Beating VWAP' benchmark on a historical tick-data simulation.",
+        "common_mistakes": [
+            "Ignoring 'Adverse Selection' in Dark Pools: Sometimes the only person who will trade with you in a dark pool is someone who knows more than you.",
+            "Over-optimizing execution for 'quiet' days: Algorithms that work in low-volatility fail spectacularly during a market panic when liquidity vanishes.",
+            "Trusting broker 'SOR' logic blindly: Institutional quants often build their own routers to ensure their 'Alpha' isn't leaked to the broker's HFT desk."
+        ],
+        "quiz": [
+            {
+                "question": "What is the primary trade-off in the Almgren-Chriss optimal execution model?",
+                "options": ["Speed vs. Accuracy", "Market Impact vs. Opportunity Cost", "Leverage vs. Margin", "Risk vs. Reward"],
+                "answer": 1,
+                "explanation": "Quants must balance the cost of moving the market (Impact) against the risk of the price moving away from them while they wait to fill (Opportunity Cost)."
+            }
+        ],
+        "resources": [
+            {"icon": "📖", "name": "Algorithmic Trading & DMA — Barry Johnson", "url": "https://www.amazon.com/Algorithmic-Trading-DMA-introduction-strategies/dp/0956399207"},
+            {"icon": "🎓", "name": "Optimal Execution (Almgren) — Original Paper", "url": "https://www.math.nyu.edu/financial_mathematics/content/02_financial/almgren_chriss.pdf"},
+            {"icon": "🌐", "name": "IEX: The Speed Bump Explained", "url": "https://www.iextrading.com/"}
+        ]
     }
 }
 
@@ -716,5 +816,7 @@ TOOLS_CHECKLIST = {
     "Stage 8": ["OptionStat", "CBOE Tools", "Greeks Calculators", "QuantLib (C++/Python)"],
     "Stage 9": ["C++ (Modern C++20)", "Solarflare OpenOnload", "FIX/SBE Engines", "FPGA Dev Kits"],
     "Stage 10": ["Dune Analytics", "Ethers.js / Web3.py", "Solidity/Rust", "MetaMask/Hardware Wallets"],
-    "Stage 11": ["RiskMetrics", "Monte Carlo Simulators", "GARCH Modeling (arch library)", "VaR/CVaR Engines"]
+    "Stage 11": ["RiskMetrics", "Monte Carlo Simulators", "GARCH Modeling (arch library)", "VaR/CVaR Engines"],
+    "Stage 12": ["HuggingFace Transformers", "NLTK/SpaCy", "BeautifulSoup/Scrapy", "OpenAI/Anthropic APIs"],
+    "Stage 13": ["Smart Order Router (SOR) Simulators", "FIX Protocol Engines", "C++20", "Tick Data Warehouses (KDB+/Timescale)"]
 }
