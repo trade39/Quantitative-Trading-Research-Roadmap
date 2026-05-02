@@ -418,7 +418,7 @@ elif "Stage" in current_page:
                 st.rerun()
 
 # --- TOOLS & TRAPS PAGE ---
-elif page == "Tools & Traps":
+elif current_page == "Tools & Traps":
     st.markdown("## 🛠️ The Quant's Toolkit")
     
     cols = st.columns(len(TOOLS_CHECKLIST))
