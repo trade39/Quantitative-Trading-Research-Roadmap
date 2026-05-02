@@ -169,7 +169,9 @@ elif "Stage" in page:
                     is_prep = item.get('is_interview_prep', False) if isinstance(item, dict) else False
                     
                     badge_html = '<span style="background:#1E293B; color:#A78BFA; font-size:0.65rem; padding:1px 6px; border-radius:4px; margin-left:8px; border:1px solid #A78BFA44; font-weight:700;">INTERVIEW PREP</span>' if is_prep else ''
-                    st.markdown(f"<p style='margin-bottom:0.8rem; line-height:1.6;'>• {item_text}{badge_html}</p>", unsafe_allow_html=True)
+                    # Convert newlines to <br> for HTML rendering
+                    display_text = item_text.replace("\n", "<br>")
+                    st.markdown(f"<p style='margin-bottom:0.8rem; line-height:1.6;'>• {display_text}{badge_html}</p>", unsafe_allow_html=True)
         
         # New Step-by-Step Guide Section
         if "guide" in stage_data:
