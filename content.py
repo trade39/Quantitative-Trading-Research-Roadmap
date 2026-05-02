@@ -1,4 +1,5 @@
 # content.py
+
 ROADMAP_DATA = {
     "Stage 1": {
         "title": "Foundation",
@@ -510,6 +511,77 @@ ROADMAP_DATA = {
             {"icon": "🎓", "name": "tastytrade: Practical Options Trading", "url": "https://tastytrade.com/learn/"},
             {"icon": "🌐", "name": "QuantLib: Options Pricing Library", "url": "https://www.quantlib.org/"}
         ]
+    },
+    "Stage 9": {
+        "title": "HFT & Low-Latency Infrastructure",
+        "duration": "Months 12–18",
+        "difficulty": "Expert",
+        "reading_time": "60h",
+        "prereqs": "Stage 1, Stage 6",
+        "goal": "Master the hardware and software architectures required to compete in the sub-millisecond trading domain.",
+        "overview": "The world of HFT is the extreme frontier of quantitative finance. At this level, alpha is measured in microseconds. This stage bridges the gap between pure mathematical finance and high-performance engineering, covering the 'plumbing' that allows institutional firms to harvest liquidity and manage risk at lightning speed.",
+        "topics": [
+            {
+                "category": "The HFT Tech Stack (Hardware & OS)",
+                "items": [
+                    {"text": "Colocation & The Physics of Latency: In HFT, the speed of light is a constraint. You must understand 'Colocation'—placing servers in the same exchange data center to minimize travel distance. You will study how 'Fiber Optics' vs 'Microwave Towers' transmit data between hubs (e.g., Chicago to New Jersey), and why a 1-microsecond advantage can be worth millions.\n\nExample: HFT firms pay for 'Equalized Cable Lengths' within a data center to ensure no participant has a physical advantage over another. Even a 50-foot difference in cable length can create a 'latency' gap that is exploitable.", "is_interview_prep": True},
+                    "Kernel Bypass & Low-Latency Linux: Standard operating systems are too slow. You must learn about 'Kernel Bypass' (e.g., Solarflare OpenOnload) which allows applications to talk directly to the Network Interface Card (NIC), skipping the OS kernel to save microseconds. You will study 'Interrupt Coalescing,' 'CPU Pinning,' and 'L1/L2 Cache Optimization' to ensure your trading logic never leaves the processor.",
+                    {"text": "FPGA & Hardware Acceleration: When C++ is too slow, we use hardware. You must understand the role of Field-Programmable Gate Arrays (FPGAs) in HFT—chips that are 'hard-wired' for specific tasks like order parsing and risk checks. FPGAs provide 'Deterministic Latency,' meaning every trade takes exactly the same amount of time, regardless of market volatility.\n\nExample: An FPGA can receive a market tick, run a simple risk check, and generate a 'cancel order' message in under 100 nanoseconds—far faster than any software-based system."}
+                ]
+            },
+            {
+                "category": "Network Protocols & Connectivity",
+                "items": [
+                    "FIX, SBE, & Binary Protocols: Financial Information eXchange (FIX) is the industry standard, but for HFT, it is often too 'chatty' (text-based). You must master 'Binary Protocols' like Simple Binary Encoding (SBE) and ITCH/OUCH, which transmit data in raw bytes to maximize throughput and minimize parsing time.",
+                    "Market Data Dissemination: You will study how exchanges 'multicast' data to participants. You must learn about 'Gap Recovery' (how to handle missed packets) and the trade-offs between 'TCP' (reliable but slow) and 'UDP' (fast but unreliable) in a high-traffic environment.",
+                    {"text": "Direct Market Access (DMA) & Pre-Trade Risk: Every HFT order must pass through a risk gate. You will study 'Lamped' vs 'Naked' DMA and how to build sub-microsecond pre-trade risk checks that ensure you don't accidentally bankrupt the firm due to a software bug.\n\nExample: A 'Fat Finger' check on an FPGA ensures that no single order can exceed $1M in value. If a bug tries to send a $100M order, the hardware blocks it before it ever hits the network."}
+                ]
+            },
+            {
+                "category": "Advanced Microstructure II",
+                "items": [
+                    {"text": "Adverse Selection & Toxic Flow: In HFT, 'losing' often means being 'picked off' by someone faster. You must model 'Adverse Selection'—the risk that you only get filled when the market is about to move against you. You will study 'VPIN' (Volume-Synchronized Probability of Informed Trading) and how to detect 'Informed Flow'.\n\nExample: If you are bidding $100.00 and a 'faster' participant sees a massive buy order coming in, they will 'taker' your liquidity instantly, and you are left short as the price moves to $100.05.", "is_interview_prep": True},
+                    "Order Type Physics: Beyond simple Limit/Market orders, you must master 'Icebergs' (hidden size), 'Post-Only' (ensuring you are a maker), and 'Immediate-or-Cancel' (IOC). You will study 'Queue Position Optimization'—how to stay at the front of the line at a specific price level.",
+                    {"text": "The Math of Tick-by-Tick Signal: You will move from 'Bar-based' research to 'Tick-based' research. You must learn to model 'Order Book Imbalance,' 'Trade-Flow Centrality,' and 'Micro-Price' dynamics using High-Frequency Econometrics.\n\nExample: By analyzing the ratio of 'Cancelled' vs 'Executed' orders in the first 5 levels of the book, you can predict the direction of the next 'mid-price' move with 60% accuracy over a 50-millisecond horizon."}
+                ]
+            }
+        ],
+        "guide": [
+            "1. Learn C++ (Focus on Template Metaprogramming and RAII)",
+            "2. Study Network Engineering (TCP/IP stack, Multicast, UDP)",
+            "3. Build a simple Order Book Parser in Python, then port it to C++",
+            "4. Research 'Market Impact' models using L3 (Message-level) data",
+            "5. Apply for internships at HFT firms (Citadel, Optiver, Jane Street, Hudson River Trading)"
+        ],
+        "exercise": "<b>The Latency Race:</b> Write a C++ program that parses a simulated binary market data feed. Measure the 'Tick-to-Trade' latency using a high-resolution clock. Optimize the code until your parsing time is under 5 microseconds.",
+        "milestone": "🎯 Build a 'Micro-Regime Classifier' that detects 'Toxic Order Flow' in real-time using a 50ms rolling imbalance window.",
+        "common_mistakes": [
+            "Ignoring 'Tick-to-Trade' latency: A 1ms signal is useless in an HFT environment if your execution takes 10ms.",
+            "Overfitting on 'Empty' Books: Many strategies look great on historical data but fail in live markets because they assume they can get 'at the front of the queue' instantly.",
+            "Underestimating hardware costs: HFT isn't just about code; it requires millions in specialized hardware and fiber-optic leases to compete at the top level.",
+            "Ignoring 'Reg NMS' and Exchange Rules: Not understanding 'Price/Time Priority' or 'Maker-Taker' rebate structures can turn a winning strategy into a loser."
+        ],
+        "quiz": [
+            {
+                "question": "What is the primary benefit of using an FPGA in a High-Frequency Trading system?",
+                "options": ["Lower power consumption", "Higher storage capacity", "Deterministic, ultra-low latency for simple logic", "Easier debugging than C++"],
+                "answer": 2,
+                "explanation": "FPGAs allow logic to be implemented in hardware, providing nanosecond-level processing with zero jitter (deterministic latency)."
+            },
+            {
+                "question": "In HFT, what does 'Adverse Selection' refer to?",
+                "options": ["Choosing the wrong broker", "Being filled only when the market is moving against your position", "High transaction fees", "Market makers pulling their quotes"],
+                "answer": 1,
+                "explanation": "Adverse selection is the risk that a market maker provides liquidity to a 'faster' informed trader who knows the price is about to change."
+            }
+        ],
+        "resources": [
+            {"icon": "📖", "name": "Trading and Exchanges — Larry Harris", "url": "https://www.amazon.com/Trading-Exchanges-Market-Microstructure-Practitioners/dp/0195144708"},
+            {"icon": "📖", "name": "High-Frequency Trading — Irene Aldridge", "url": "https://www.amazon.com/High-Frequency-Trading-Practical-Algorithmic-Strategies/dp/1118343506"},
+            {"icon": "🌐", "name": "Solarflare: Introduction to Kernel Bypass", "url": "https://www.xilinx.com/products/boards-and-kits/solarflare-network-adapters.html"},
+            {"icon": "🌐", "name": "FIX Protocol Official Documentation", "url": "https://www.fixtrading.org/online-specification/"},
+            {"icon": "🎓", "name": "QuantConnect: HFT Research Environment", "url": "https://www.quantconnect.com/"}
+        ]
     }
 }
 
@@ -528,5 +600,6 @@ TOOLS_CHECKLIST = {
     "Stage 5": ["scikit-learn", "PyTorch/TF", "QuantLib", "Interactive Brokers API"],
     "Stage 6": ["Custom execution infra", "Bloomberg/Refinitiv", "AWS/GCP", "FIX Protocol"],
     "Stage 7": ["FRED API", "TradingView/ThinkOrSwim", "Economic Calendars"],
-    "Stage 8": ["OptionStat", "CBOE Tools", "Greeks Calculators"]
+    "Stage 8": ["OptionStat", "CBOE Tools", "Greeks Calculators", "QuantLib (C++/Python)"],
+    "Stage 9": ["C++ (Modern C++20)", "Solarflare OpenOnload", "FIX/SBE Engines", "FPGA Dev Kits"]
 }
