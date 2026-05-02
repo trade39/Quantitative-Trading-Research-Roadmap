@@ -863,15 +863,17 @@ ROADMAP_DATA = {
             {
                 "category": "Yield Curve & Rates Modeling",
                 "items": [
-                    {"text": "Yield Curve Bootstrapping: You must learn to construct the zero-coupon yield curve from market instruments (deposits, FRAs, swaps). This is the foundation of all fixed income pricing.", "is_interview_prep": True},
-                    "Interest Rate Models: Understand term structure models like Vasicek, Cox-Ingersoll-Ross (CIR), and the Hull-White model to price interest rate derivatives and capture the evolution of the yield curve."
+                    {"text": "Yield Curve Bootstrapping: You must learn to construct the zero-coupon yield curve from market instruments (deposits, FRAs, swaps). This is the foundation of all fixed income pricing. You cannot simply observe zero-coupon rates for 30 years; you must extract them from coupon-bearing bonds using root-finding algorithms.\n\nExample: If a 2-year Treasury pays a 5% coupon, its price is the discounted present value of the year-1 cash flow (using the 1-year spot rate) and the year-2 cash flow (using the unknown 2-year spot rate). Bootstrapping solves for these unknown spot rates iteratively.", "is_interview_prep": True},
+                    {"text": "Interest Rate Models & Stochastic Calculus: Understand term structure models like Vasicek, Cox-Ingersoll-Ross (CIR), and the Hull-White model. Unlike equities, interest rates exhibit 'Mean Reversion' (they don't drift to infinity) and have structural bounds. You must master Itô's Lemma to model these stochastic differential equations (SDEs).\n\nExample: The Vasicek model $dr_t = a(b - r_t)dt + \\sigma dW_t$ explicitly models the rate $r_t$ reverting to a long-term mean $b$ at a speed $a$. This allows quants to price complex interest rate derivatives like Swaptions.", 
+                     "code": "import numpy as np\n\n# Simulating the Vasicek Interest Rate Model\ndef simulate_vasicek(r0, a, b, sigma, T, steps):\n    dt = T / steps\n    rates = np.zeros(steps)\n    rates[0] = r0\n    for t in range(1, steps):\n        dr = a * (b - rates[t-1]) * dt + sigma * np.sqrt(dt) * np.random.normal()\n        rates[t] = rates[t-1] + dr\n    return rates\n\n# Example: 5% current rate, mean reverting to 4%\npath = simulate_vasicek(0.05, 0.1, 0.04, 0.01, 1.0, 252)\nprint(f'Terminal Rate: {path[-1]:.4f}')",
+                     "is_interview_prep": True}
                 ]
             },
             {
                 "category": "Credit Risk & Derivatives",
                 "items": [
-                    {"text": "Credit Default Swaps (CDS): Learn the mechanics of CDS contracts, how to extract implied default probabilities, and the concept of the 'credit triangle' (spread, default probability, and recovery rate).", "is_interview_prep": True},
-                    "Securitization & MBS: Quantitative evaluation of Mortgage-Backed Securities, including prepayment modeling (CPR/PSA) and structuring collateralized debt obligations (CDOs)."
+                    {"text": "Credit Default Swaps (CDS) & Hazard Rates: Learn the mechanics of CDS contracts, how to extract implied default probabilities, and the concept of the 'credit triangle' (spread $\\approx$ hazard rate $\\times$ loss given default). Quants do not rely on rating agencies; they derive real-time credit health directly from the CDS market.\n\nExample: If a company's 5-year CDS spread jumps from 100 bps to 500 bps, the market is pricing in a massive increase in default probability, regardless of what Moody's or S&P says.", "is_interview_prep": True},
+                    "Securitization & MBS: Quantitative evaluation of Mortgage-Backed Securities (MBS) and Collateralized Debt Obligations (CDOs). You must model 'Prepayment Risk' (CPR/PSA models)—the risk that homeowners refinance their mortgages when interest rates drop, returning principal to the investor exactly when yields are low.\n\nExample: In a falling rate environment, an MBS loses its 'duration' because the cash flows are returned early. This negative convexity makes MBS mathematically distinct from standard corporate bonds."
                 ]
             }
         ],
@@ -917,15 +919,17 @@ ROADMAP_DATA = {
             {
                 "category": "Distributed Computing",
                 "items": [
-                    {"text": "Apache Spark & Dask: Transition from Pandas/Polars to distributed frameworks. You will learn to parallelize tick-level aggregations and backtesting logic across clusters of machines.", "is_interview_prep": True},
-                    "Data Lakes & Parquet: Designing highly optimized storage architectures (like Delta Lake or Iceberg) to store and query decades of L3 order book data instantly."
+                    {"text": "Apache Spark & Distributed DataFrames: Transition from Pandas/Polars to distributed frameworks. Pandas requires the entire dataset to fit in RAM. When testing 10 years of tick data (terabytes), you must use PySpark to partition the data across a cluster of machines and execute vectorized aggregations in parallel.\n\nExample: Calculating a rolling VWAP for the entire US equity market tick-by-tick over 5 years. PySpark automatically splits the calculation by ticker across multiple worker nodes, returning the result in minutes rather than days.", 
+                     "code": "from pyspark.sql import SparkSession\nimport pyspark.sql.functions as F\nfrom pyspark.sql.window import Window\n\nspark = SparkSession.builder.appName('QuantBacktest').getOrCreate()\n\n# Distributed VWAP calculation across millions of rows\nwindowSpec = Window.partitionBy('ticker').orderBy('timestamp').rowsBetween(-100, 0)\n\ndf = spark.read.parquet('s3://quant-data/ticks/')\ndf_vwap = df.withColumn('vwap', F.sum(df.price * df.volume).over(windowSpec) / F.sum(df.volume).over(windowSpec))",
+                     "is_interview_prep": True},
+                    "Data Lakes & Parquet/Delta Lake: Designing highly optimized storage architectures. CSVs are dead. You must store historical L3 order book data in columnar formats like Parquet or Delta Lake. These formats allow 'predicate pushdown,' meaning if you only query the 'Bid Price' column for 'AAPL,' the engine only reads that specific chunk from disk, ignoring terabytes of irrelevant data."
                 ]
             },
             {
                 "category": "Streaming & Orchestration",
                 "items": [
-                    {"text": "Event-Driven Architecture (Kafka): Learn to handle real-time, high-throughput market data streams for live feature generation and alpha calculation.", "is_interview_prep": True},
-                    "Kubernetes (K8s) for Quants: Deploying and orchestrating hundreds of containerized strategy pods and optimization workers on AWS or GCP."
+                    {"text": "Event-Driven Architecture (Kafka): Learn to handle real-time, high-throughput market data streams. In live trading, you cannot poll a database. You must build streaming pipelines where exchange ticks are published to an Apache Kafka topic, and your alpha models consume them with microsecond latency to update signals dynamically.\n\nExample: A live order book feed pushes 100,000 messages per second into Kafka. Three separate models (a vol model, a momentum model, and a risk model) all consume the same Kafka stream simultaneously without slowing each other down.", "is_interview_prep": True},
+                    "Kubernetes (K8s) for Quants: Deploying and orchestrating hundreds of containerized strategy pods. When performing hyperparameter optimization (Grid Search) on an ML model, you use K8s to dynamically spin up 500 AWS EC2 instances, run the simulations, collect the results, and tear them down, paying only for the exact compute time used."
                 ]
             }
         ],
@@ -971,15 +975,17 @@ ROADMAP_DATA = {
             {
                 "category": "Behavioral Anomalies & Crowding",
                 "items": [
-                    {"text": "Retail Crowding & Meme Dynamics: Modeling short squeezes and momentum ignition. You will study how coordinated retail flow impacts market maker hedging.", "is_interview_prep": True},
-                    "Dealer Positioning (GEX/DIX): Understanding Gamma Exposure (GEX) and how option dealers are forced to buy or sell the underlying to remain delta-neutral, creating predictable market pin risks or accelerations."
+                    {"text": "Retail Crowding & Meme Dynamics: Modeling short squeezes and momentum ignition. Traditional finance assumes rational actors. Behavioral finance models the 'madness of crowds.' You will study how coordinated retail flow impacts market maker hedging, creating self-fulfilling price spirals.\n\nExample: In the GameStop squeeze, retail traders bought massive amounts of out-of-the-money call options. This forced institutional option sellers to buy the underlying stock to delta-hedge, pushing the price higher, which triggered further hedging—a classic Gamma Squeeze.", "is_interview_prep": True},
+                    {"text": "Dealer Positioning (GEX/DIX): Understanding Gamma Exposure (GEX) and Dark Index (DIX). Option dealers are required to remain 'delta-neutral.' When market GEX is highly positive, dealers sell into rallies and buy into dips, suppressing volatility. When GEX is negative, dealers buy into rallies and sell into dips, expanding volatility.\n\nExample: If the S&P 500 drops below a major options strike wall (e.g., 5000), dealer gamma flips negative. Quants build models to short the market aggressively in this regime, knowing that dealers will be structurally forced to sell alongside them.",
+                     "code": "# Conceptual logic for Gamma Exposure (GEX) impact\ndef calculate_regime(dealer_gex):\n    if dealer_gex > 0:\n        return 'Mean Reversion Regime (Dealers suppress Volatility)'\n    else:\n        return 'Momentum Regime (Dealers expand Volatility)'\n\n# If GEX is -$5 Billion per 1% move\nprint(calculate_regime(-5e9))",
+                     "is_interview_prep": True}
                 ]
             },
             {
                 "category": "Game Theory & Panic Execution",
                 "items": [
-                    {"text": "Distressed Liquidations: Anticipating the moves of other participants during forced liquidations (e.g., hedge fund blowups, crypto cascades).", "is_interview_prep": True},
-                    "Cognitive Biases in Trading: Structurally exploiting biases like the 'Disposition Effect' (selling winners too early and riding losers) which creates post-earnings announcement drift."
+                    {"text": "Distressed Liquidations & Fire Sales: Anticipating the moves of other participants during forced liquidations. When a leveraged fund gets a margin call, they don't sell what they want to sell; they sell what they *can* sell. This creates massive, temporary mispricings in high-liquidity assets.\n\nExample: During the Archegos Capital collapse, banks prime brokers aggressively dumped blocks of ViacomCBS. A quant aware of the liquidation dynamic could short the stock ahead of the block sales, knowing the selling was structural, not fundamental.", "is_interview_prep": True},
+                    "Cognitive Biases in Trading: Structurally exploiting psychological heuristics. You will model biases like the 'Disposition Effect' (investors sell winners too early and ride losers) which creates 'Post-Earnings Announcement Drift' (PEAD). Because investors anchor to old prices, they under-react to massive earnings surprises, allowing quants to buy the stock *after* the gap up and still capture days of upward drift."
                 ]
             }
         ],
