@@ -25,11 +25,24 @@ def get_img_with_href(local_img_path):
     bin_str = get_base64_of_bin_file(local_img_path)
     return f"data:image/{img_format};base64,{bin_str}"
 
+# Navigation Options
+PAGES = ["Overview", "Stage 1: Foundation", "Stage 2: Math & Stats", "Stage 3: Programming", 
+         "Stage 4: Strategy", "Stage 5: Advanced", "Stage 6: Professional", "Tools & Traps"]
+
+# Initialize session state from query params for external navigation (clickable cards)
+if "nav" in st.query_params:
+    st.session_state.sidebar_radio = st.query_params["nav"]
+    # Clear query params to keep URL clean after processing
+    st.query_params.clear()
+
+if "sidebar_radio" not in st.session_state:
+    st.session_state.sidebar_radio = "Overview"
+
 # Sidebar Navigation
 st.sidebar.title("🚀 Navigation")
 page = st.sidebar.radio("Jump to Section", 
-    ["Overview", "Stage 1: Foundation", "Stage 2: Math & Stats", "Stage 3: Programming", 
-     "Stage 4: Strategy", "Stage 5: Advanced", "Stage 6: Professional", "Tools & Traps"]
+    PAGES,
+    key="sidebar_radio"
 )
 
 # Hero Section Image Path
@@ -81,12 +94,15 @@ if page == "Overview":
         
         # Summary Cards
         for i, (key, stage) in enumerate(ROADMAP_DATA.items()):
+            target_page = f"{key}: {stage['title']}"
             st.markdown(f"""
-            <div class="glass-card">
-                <span class="stage-badge">{stage['duration']}</span>
-                <h3>{key}: {stage['title']}</h3>
-                <p style="color: #A1A1AA;">{stage['goal']}</p>
-            </div>
+            <a href="/?nav={target_page}" target="_self">
+                <div class="glass-card">
+                    <span class="stage-badge">{stage['duration']}</span>
+                    <h3>{key}: {stage['title']}</h3>
+                    <p style="color: #A1A1AA;">{stage['goal']}</p>
+                </div>
+            </a>
             """, unsafe_allow_html=True)
 
 # --- STAGE PAGES ---
