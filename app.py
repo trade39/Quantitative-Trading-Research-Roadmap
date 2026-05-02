@@ -70,7 +70,7 @@ if page == "Overview":
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <div class="hero-title">Quantitative Trading Research</div>
-                <p style="font-size: 1.2rem; color: #A1A1AA;">The Complete 19-Month Learning Journey</p>
+                <div class="hero-subtitle">The Complete 19-Month Learning Journey</div>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -79,9 +79,11 @@ if page == "Overview":
     with col2:
         st.markdown("### 🗺️ The Path to Mastery")
         st.markdown("""
-        The journey from absolute beginner to professional quantitative researcher is a multi-phase evolution. 
-        Each stage builds the foundation for the next. Completion of Stages 1–4 alone puts you ahead of 90% of retail traders.
-        """)
+        <p style="font-size: 0.9375rem; line-height: 1.85; color: #94A3B8; margin-bottom: 1.75rem;">
+        The journey from absolute beginner to professional quantitative researcher is a multi-phase evolution.
+        Each stage builds the foundation for the next — completion of Stages 1–4 alone puts you ahead of 90% of retail traders.
+        </p>
+        """, unsafe_allow_html=True)
         
         # Timeline Visualization
         timeline_html = """
@@ -105,10 +107,10 @@ if page == "Overview":
             
             # Render card visually, then use a Streamlit button styled as a CTA
             st.markdown(f"""
-            <div class="glass-card" style="margin-bottom: 0.5rem;">
+            <div class="glass-card">
                 <span class="stage-badge">{stage['duration']}</span>
-                <h3 style="margin-top: 0.75rem; margin-bottom: 0.5rem;">{key}: {stage['title']}</h3>
-                <p style="color: #A1A1AA; margin-bottom: 0;">{stage['goal']}</p>
+                <h3 style="font-size: 1.05rem; font-weight: 700; color: #E2E8F0; margin-top: 0.85rem; margin-bottom: 0.4rem; letter-spacing: -0.01em;">{key}: {stage['title']}</h3>
+                <p style="font-size: 0.875rem; color: #64748B; line-height: 1.65; margin-bottom: 0;">{stage['goal']}</p>
             </div>
             """, unsafe_allow_html=True)
             st.button(
@@ -128,8 +130,12 @@ elif "Stage" in page:
         st.error(f"KeyError: '{stage_key}' not found in ROADMAP_DATA. Available keys: {list(ROADMAP_DATA.keys())}")
         st.stop()
     
-    st.markdown(f"## {stage_key}: {stage_data['title']}")
-    st.markdown(f"<span class='stage-badge'>{stage_data['duration']}</span>", unsafe_allow_html=True)
+    st.markdown(f"""
+    <div style="margin-bottom: 0.35rem;">
+        <span class="stage-badge">{stage_data['duration']}</span>
+    </div>
+    <h1 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; color: #F1F5F9; margin-top: 0.25rem; margin-bottom: 0.25rem;">{stage_key}: {stage_data['title']}</h1>
+    """, unsafe_allow_html=True)
     
     # New Overview Section
     if "overview" in stage_data:
@@ -169,8 +175,8 @@ elif "Stage" in page:
         if "milestone" in stage_data:
             st.markdown(f"""
             <div class="milestone-box">
-                <div style="font-weight: bold; color: #FFD700; margin-bottom: 0.5rem;">🎯 Stage Milestone</div>
-                {stage_data['milestone']}
+                <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #FBBF24; margin-bottom: 0.75rem;">🎯 Stage Milestone</div>
+                <div style="font-size: 0.9rem; line-height: 1.8; color: #CBD5E1;">{stage_data['milestone']}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -195,9 +201,13 @@ elif page == "Tools & Traps":
     cols = st.columns(len(TOOLS_CHECKLIST))
     for i, (stage, tools) in enumerate(TOOLS_CHECKLIST.items()):
         with cols[i]:
-            st.markdown(f"#### {stage}")
+            st.markdown(f"""
+            <div style="margin-bottom: 0.25rem;">
+                <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #A78BFA;">{stage}</span>
+            </div>
+            """, unsafe_allow_html=True)
             for tool in tools:
-                st.markdown(f"• {tool}")
+                st.markdown(f"<p style='font-size:0.875rem; color:#94A3B8; line-height:1.65; margin-bottom:0.3rem;'>• {tool}</p>", unsafe_allow_html=True)
                 
     st.markdown("---")
     st.markdown("## ⚠️ The 5 Traps That Kill Researchers")
@@ -205,8 +215,8 @@ elif page == "Tools & Traps":
     for trap in TRAPS:
         st.markdown(f"""
         <div class="glass-card trap-card">
-            <h4 style="color: #EF4444; margin-top:0;">{trap['title']}</h4>
-            <p style="margin-bottom:0;">{trap['description']}</p>
+            <h4 style="font-size: 0.925rem; font-weight: 700; color: #FCA5A5; margin-top: 0; margin-bottom: 0.5rem;">{trap['title']}</h4>
+            <p style="font-size: 0.875rem; line-height: 1.75; color: #94A3B8; margin-bottom: 0;">{trap['description']}</p>
         </div>
         """, unsafe_allow_html=True)
 
