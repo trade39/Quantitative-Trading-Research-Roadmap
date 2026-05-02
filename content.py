@@ -61,7 +61,13 @@ ROADMAP_DATA = {
             {"icon": "📖", "name": "Quantitative Trading — Ernest Chan (Ch. 1-2)", "url": "https://www.amazon.com/Quantitative-Trading-Build-Algorithmic-Business/dp/1119800064"},
             {"icon": "🎓", "name": "CME Group: Introduction to Futures", "url": "https://www.cmegroup.com/education/courses/introduction-to-futures.html"},
             {"icon": "🎓", "name": "Yale: Financial Markets (Shiller) — Coursera", "url": "https://www.coursera.org/learn/financial-markets-global"},
-            {"icon": "🌐", "name": "Investopedia: Limit Order Book Explained", "url": "https://www.investopedia.com/terms/l/limitorderbook.asp"}
+            {"icon": "🌐", "name": "Investopedia: Limit Order Book Explained", "url": "https://www.investopedia.com/terms/l/limitorderbook.asp"},
+            {"icon": "💻", "name": "Jigsaw Trading: Order Flow & DOM Training", "url": "https://www.jigsawtrading.com/"}
+        ],
+        "glossary": [
+            {"term": "Limit Order Book (LOB)", "definition": "A record of all outstanding limit orders for a financial instrument, showing depth at each price level."},
+            {"term": "Liquidity", "definition": "The ability to trade an asset quickly without causing a significant price change."},
+            {"term": "Mid-Price", "definition": "The average of the best bid and best ask prices in the order book."}
         ]
     },
     "Stage 2": {
@@ -78,6 +84,7 @@ ROADMAP_DATA = {
                 "items": [
                     "The Normal Distribution Fallacy: Most introductory finance courses assume that returns follow a 'Bell Curve' (Normal Distribution). In the real world, markets exhibit 'Fat Tails' (Excess Kurtosis) and 'Skewness'. This means 'Six-Sigma' events (crashes like 1987 or 2008) happen thousands of times more often than the theory predicts. A quant's job is not to assume normality, but to build models that survive its inevitable breakdown.\n\nExample: On 'Black Monday' in 1987, the S&P 500 dropped 22% in one day. Under a normal distribution, this was a '20-sigma' event, which should only happen once in a trillion years. In reality, market structure makes these 'outliers' much more frequent.",
                     {"text": "The Logic of Log-Returns: We do not model simple percentage changes ($ (P_t - P_{t-1}) / P_{t-1} $) because they are not additive over time and are asymmetric (a 50% loss requires a 100% gain to break even). Instead, we use Log-Returns ($ \\ln(P_t / P_{t-1}) $), which allow for time-series additivity and assume a more theoretically sound 'Log-Normal' distribution of prices.\n\nExample: If a stock goes from $100 to $110 (10% gain) and then back to $100 (9.09% loss), the simple returns don't sum to zero. The log-returns, however, would be $+0.0953$ and $-0.0953$, summing perfectly to zero.", "is_interview_prep": True},
+                    {"text": "Information Theory (Entropy & Edge): Signal processing meets finance. You must understand 'Shannon Entropy' to measure the information content of your signals. We use Information Theory to distinguish between 'True Signal' and 'Stochastic Noise'.\n\nExample: If a signal is 100% predictable, its entropy is zero (it contains no new information). A signal with high 'Mutual Information' with future returns is the Holy Grail of Alpha.", "is_interview_prep": True},
                     {"text": "Conditional Probability & Bayesian Updating: The market is not a static game. As new data (price action, earnings, news) arrives, you must update your prior beliefs. Bayesian Statistics provides the framework for this: moving from a 'Prior' probability to a 'Posterior' one. We don't ask 'What will happen?'; we ask 'Given what just happened, what is the new probability of X?'\n\nExample: You have a 'Prior' belief that a stock is bullish (60% probability). After a surprise earnings beat, you use Bayes' Theorem to update that belief to 80% based on how similar companies reacted to beats in the past.", "is_interview_prep": True}
                 ]
             },
@@ -85,7 +92,8 @@ ROADMAP_DATA = {
                 "category": "Mathematics for Quants (The Language of Finance)",
                 "items": [
                     {"text": "Linear Algebra for Quants: Matrix operations are the language of modern finance. You must master Vectorized operations for portfolio weights, Eigenvectors for PCA (Principal Component Analysis) to extract risk factors, and Covariance Matrix estimation to understand how assets move together.\n\nExample: Instead of calculating each asset's risk individually, we use matrix multiplication ($ w^T \\Sigma w $) to find the total portfolio variance in a single step.", "is_interview_prep": True},
-                    {"text": "Kalman Filters & Adaptive Signal Filtering: Markets are noisy. A Kalman Filter is an optimal estimator that updates its 'belief' about the state of a system as new data arrives. It is widely used in Pairs Trading and tracking the 'Fair Value' of a stock in real-time.\n\nExample: While a Moving Average is slow to react, a Kalman Filter can dynamically adjust its parameters to 'smooth' out noise while remaining highly responsive to a true change in price direction.", "is_interview_prep": True}
+                    {"text": "Kalman Filters & Adaptive Signal Filtering: Markets are noisy. A Kalman Filter is an optimal estimator that updates its 'belief' about the state of a system as new data arrives. It is widely used in Pairs Trading and tracking the 'Fair Value' of a stock in real-time.\n\nExample: While a Moving Average is slow to react, a Kalman Filter can dynamically adjust its parameters to 'smooth' out noise while remaining highly responsive to a true change in price direction.", "is_interview_prep": True},
+                    {"text": "MCMC (Markov Chain Monte Carlo): When distributions are too complex to solve analytically, we simulate them. MCMC is the standard tool for Bayesian parameter estimation and regime detection.\n\nExample: You want to estimate the probability of a market crash, but your model has 20 interdependent variables. You use MCMC to 'walk' through the distribution and find the most likely outcomes.", "is_interview_prep": True}
                 ]
             },
             {
@@ -102,7 +110,7 @@ ROADMAP_DATA = {
             "2. <b>Linear Algebra Basics:</b> Understand how matrices represent portfolios (Weights × Returns).",
             "3. <b>Statistical Significance:</b> Learn why a Sharpe Ratio of 1.0 requires at least 3 years of data to be statistically valid."
         ],
-        "exercise": "<b>Statistical Arbitrage Setup:</b> Pick two related stocks (e.g., KO and PEP). Use a simple spreadsheet or Python to plot their price ratio over 1 year. Identify 'mean-reverting' periods where the ratio stretched too far.",
+        "exercise": "<b>The Statistical Bullshit Detector:</b> Download 5 years of daily data for 50 random stocks. Calculate their correlations. Use the Bonferroni correction to see if any 'significant' correlations remain after adjusting for multiple testing.",
         "milestone": "🎯 Pass the 'Statistics for Finance' module and build a spreadsheet that calculates Z-Scores for any price series.",
         "common_mistakes": [
             "Assuming normality everywhere: Using a z-score alert system that assumes normal returns will catastrophically misfire during fat-tail events like crashes or squeezes.",
@@ -130,6 +138,11 @@ ROADMAP_DATA = {
             {"icon": "📖", "name": "Analysis of Financial Time Series — Ruey Tsay", "url": "https://www.amazon.com/Analysis-Financial-Time-Series-Tsay/dp/0470414359"},
             {"icon": "🎓", "name": "Khan Academy: Statistics & Probability", "url": "https://www.khanacademy.org/math/statistics-probability"},
             {"icon": "🌐", "name": "QuantLib: Open Source Quant Library", "url": "https://www.quantlib.org/"}
+        ],
+        "glossary": [
+            {"term": "Stationarity", "definition": "A property of a time series where statistical properties like mean and variance remain constant over time."},
+            {"term": "Kurtosis", "definition": "A measure of the 'tailedness' of a probability distribution; high kurtosis indicates frequent outliers."},
+            {"term": "P-Value", "definition": "The probability of obtaining results at least as extreme as the observed results, assuming the null hypothesis is true."}
         ]
     },
     "Stage 3": {
@@ -150,11 +163,11 @@ ROADMAP_DATA = {
                 ]
             },
             {
-                "category": "Data Engineering & Integrity (The 'GIGO' Principle)",
+                "category": "Data Engineering & Vendor Selection",
                 "items": [
-                    "ETL Pipelines & Database Architecture: Garbage In, Garbage Out (GIGO). A professional research lab requires a robust ETL (Extract, Transform, Load) pipeline. You must learn to pull data from APIs (Polygon, Alpaca) or flat files (Parquet, HDF5) and store them in a local SQL or NoSQL database. This ensures data persistence and allows you to run complex queries without re-downloading data every time.\n\nExample: You build a script that runs at 4:05 PM every day, pulls the closing prices for the Russell 3000, checks for missing values, and appends them to your local PostgreSQL database for tonight's research.",
-                    "Survivorship Bias & Point-in-Time Data: This is where 90% of retail backtests fail. If you only test on stocks that are in the S&P 500 *today*, you are ignoring all the companies that went bankrupt or were delisted (Survivorship Bias). You must learn to build 'Point-in-Time' datasets that represent the market exactly as it looked on any specific day in the past.\n\nExample: A strategy that buys 'low price-to-book' stocks looks amazing in 2007 if you ignore the dozens of banks that went to zero in 2008. Your backtest must include those bankrupt companies to be realistic.",
-                    "The Art of Data Cleaning: Financial data is messy. You will encounter 'bad prints' (erroneous price ticks), missing bars, and corporate actions (Splits, Dividends). You must write robust cleaning algorithms that 'adjust' prices so that a 2-for-1 stock split doesn't look like a 50% crash in your backtest.\n\nExample: Tesla (TSLA) has had several stock splits. Without 'Adjusted Close' data, your backtest would think the stock lost 60-80% of its value in a single day, triggering a false 'stop loss' in your model."
+                    "Data Vendor Comparison: Not all data is created equal. You must learn the trade-offs between 'Retail' vendors (yFinance, AlphaVantage), 'Semi-Pro' (Polygon.io, Alpaca), and 'Institutional' terminals (Bloomberg, Refinitiv). You will study 'Data Fidelity' and 'API Latency'.\n\nExample: A free data vendor might skip 1 in 1,000 ticks. In a high-frequency backtest, those missing ticks could hide a massive price move, leading to a fake 'profitable' result.",
+                    "ETL Pipelines & Database Architecture: Garbage In, Garbage Out (GIGO). A professional research lab requires a robust ETL (Extract, Transform, Load) pipeline. You must learn to pull data from APIs (Polygon, Alpaca) or flat files (Parquet, HDF5) and store them in a local SQL or NoSQL database.\n\nExample: You build a script that runs at 4:05 PM every day, pulls the closing prices for the Russell 3000, checks for missing values, and appends them to your local PostgreSQL database for tonight's research.",
+                    "Survivorship Bias & Point-in-Time Data: This is where 90% of retail backtests fail. If you only test on stocks that are in the S&P 500 *today*, you are ignoring all the companies that went bankrupt or were delisted (Survivorship Bias). You must learn to build 'Point-in-Time' datasets that represent the market exactly as it looked on any specific day in the past.\n\nExample: A strategy that buys 'low price-to-book' stocks looks amazing in 2007 if you ignore the dozens of banks that went to zero in 2008. Your backtest must include those bankrupt companies to be realistic."
                 ]
             }
         ],
@@ -180,11 +193,14 @@ ROADMAP_DATA = {
             }
         ],
         "resources": [
-            {"icon": "📖", "name": "Python for Finance — Yves Hilpisch", "url": "https://www.amazon.com/Python-Finance-Mastering-Data-Driven/dp/1492024333"},
-            {"icon": "💻", "name": "QuantConnect Bootcamps (Free)", "url": "https://www.quantconnect.com/learning"},
             {"icon": "📖", "name": "Python for Data Analysis — Wes McKinney", "url": "https://www.amazon.com/Python-Data-Analysis-Wes-McKinney/dp/109810403X"},
             {"icon": "🌐", "name": "Pandas Official Documentation", "url": "https://pandas.pydata.org/docs/"},
             {"icon": "🌐", "name": "Alpaca Markets: Free Market Data API", "url": "https://alpaca.markets/data"}
+        ],
+        "glossary": [
+            {"term": "Vectorization", "definition": "A method of computer programming where operations are applied to whole arrays rather than individual elements."},
+            {"term": "ETL", "definition": "Extract, Transform, Load; the process of moving data from source systems to a destination database."},
+            {"term": "Survivorship Bias", "definition": "The logical error of concentrating on the people or things that made it past some selection process and overlooking those that did not."}
         ]
     },
     "Stage 4": {
@@ -201,16 +217,16 @@ ROADMAP_DATA = {
                 "items": [
                     {"text": "Mean Reversion vs. Trend Following: These are the two fundamental strategy 'families'. Trend-followers (CTAs) bet that price moves will persist, while Mean-Reversionists bet that price extremes will return to a long-term average. You must identify which regime the market is in to choose the right strategy.\n\nExample: A Trend strategy buys a stock at a new 52-week high; a Mean Reversion strategy sells it, betting the move is 'overextended'.", "is_interview_prep": True},
                     {"text": "Event-Driven Alpha (Earnings & M&A): Markets often react predictably to specific events. You must learn to model 'Earnings Drift' (PEAD), Index Rebalancing (front-running ETFs), and M&A Arbitrage (betting on deal completion). These are structural sources of alpha that rely on corporate events rather than pure price action.\n\nExample: When a company is added to the S&P 500, massive passive ETFs are *forced* to buy it. Quants front-run this demand by buying the stock as soon as the announcement is made.", "is_interview_prep": True},
-                    {"text": "Factor Models & Risk Premia: We move beyond single-indicator signals to Multi-Factor Models. You must understand the 'Fama-French' factors (Size, Value, Momentum) and learn to decompose your returns. Are you actually generating 'Alpha,' or are you just taking on hidden 'Beta' risk (like exposure to small-cap stocks)?\n\nExample: A strategy that buys 'High Dividend' stocks might just be a 'Value' factor in disguise. If 'Value' stocks drop across the board, your strategy will fail, proving it wasn't 'Pure Alpha'.", "is_interview_prep": True},
-                    "Alternative Data & Signal Combination: Modern alpha is found in unconventional places: satellite imagery, credit card flows, and Sentiment Analysis of news/social media. You must learn to 'clean' these signals and combine them using techniques like Grinold's Fundamental Law of Active Management ($ IR = IC \\times \\sqrt{Breadth} $).\n\nExample: A hedge fund uses satellite images of Walmart parking lots to predict quarterly sales before they are reported. If the parking lots are fuller than last year, they buy the stock."
+                    {"text": "Seasonality & Calendar Alpha: Markets exhibit predictable patterns based on the calendar. You must study 'Turn of the Month' effects, 'Monday Effect', and 'Window Dressing' by funds at quarter-end.\n\nExample: Small-cap stocks historically outperform in January (The January Effect) as investors return to the market after year-end tax-loss harvesting.", "is_interview_prep": True},
+                    {"text": "Factor Models & Risk Premia: We move beyond single-indicator signals to Multi-Factor Models. You must understand the 'Fama-French' factors (Size, Value, Momentum) and learn to decompose your returns. Are you actually generating 'Alpha,' or are you just taking on hidden 'Beta' risk (like exposure to small-cap stocks)?\n\nExample: A strategy that buys 'High Dividend' stocks might just be a 'Value' factor in disguise. If 'Value' stocks drop across the board, your strategy will fail, proving it wasn't 'Pure Alpha'.", "is_interview_prep": True}
                 ]
             },
             {
                 "category": "The Backtesting Protocol (Scientific Validation)",
                 "items": [
+                    {"text": "Walk-Forward Optimization (WFO): Static backtests are prone to 'Curve Fitting'. You must learn WFO—optimizing your strategy on a 'training' window and testing it on a subsequent 'unseen' window, then sliding both windows forward in time. This is the gold standard for verifying that a strategy's parameters are robust.\n\nExample: You optimize your RSI period on 2018-2019 data. You test it on 2020. Then you re-optimize on 2019-2020 and test on 2021. If performance holds, the strategy is 'Walk-Forward Stable'.", "is_interview_prep": True},
                     "Modeling Transaction Costs & Market Impact: A 1% annual edge is easily erased by commissions and slippage. You must learn to build high-fidelity cost models that account for the Bid-Ask Spread and 'Market Impact'—the way your own trades push the price against you.\n\nExample: A high-frequency strategy that makes $0.01 per share might look profitable in a backtest, but once you subtract the $0.005 exchange fee and $0.01 average slippage, the strategy is actually losing money.",
-                    "Overfitting & The Multiple Testing Bias: If you torture the data long enough, it will confess to anything. You must learn to detect P-Hacking and avoid the 'Backtest Overfitting' trap. We use techniques like Walk-Forward Analysis and Monte Carlo Simulations to verify that a strategy's performance is robust across different market regimes.\n\nExample: You test 10,000 different combinations of RSI and Moving Averages. You find one that worked perfectly in 2021. This is likely 'overfitting'—the model memorized 2021's specific noise and will fail in 2022.",
-                    "Performance Metrics & Risk-Adjusted Returns: We don't just care about the 'P&L'. You must master the Sharpe Ratio, Sortino Ratio (focusing on downside risk), and Maximum Drawdown. A strategy that makes 20% but drops 40% along the way is 'uninvestable' for most institutional capital.\n\nExample: Strategy A returns 15% with a 5% drawdown. Strategy B returns 25% with a 30% drawdown. Most professionals prefer Strategy A because its 'Risk-Adjusted Return' (Sharpe Ratio) is much higher."
+                    "Overfitting & The Multiple Testing Bias: If you torture the data long enough, it will confess to anything. You must learn to detect P-Hacking and avoid the 'Backtest Overfitting' trap. We use techniques like Walk-Forward Analysis and Monte Carlo Simulations to verify that a strategy's performance is robust across different market regimes.\n\nExample: You test 10,000 different combinations of RSI and Moving Averages. You find one that worked perfectly in 2021. This is likely 'overfitting'—the model memorized 2021's specific noise and will fail in 2022."
                 ]
             }
         ],
@@ -233,12 +249,6 @@ ROADMAP_DATA = {
                 "options": ["Log-Return", "Sharpe Ratio", "Information Ratio", "Skewness"],
                 "answer": 1,
                 "explanation": "The Sharpe Ratio measures excess return per unit of volatility, helping quants determine if the returns justify the risk/drawdown."
-            },
-            {
-                "question": "Which bias occurs if you test a strategy only on stocks currently in the S&P 500, ignoring those that went bankrupt?",
-                "options": ["Look-ahead Bias", "Overfitting", "Survivorship Bias", "Small Sample Bias"],
-                "answer": 2,
-                "explanation": "Survivorship bias creates an upward tilt in results by only including the 'winners' that survived until today."
             }
         ],
         "resources": [
@@ -247,6 +257,11 @@ ROADMAP_DATA = {
             {"icon": "🎓", "name": "WorldQuant University: Free MSc Modules", "url": "https://www.wqu.edu/"},
             {"icon": "🌐", "name": "SSRN: Factor Investing Research Papers", "url": "https://www.ssrn.com/index.cfm/en/"},
             {"icon": "💻", "name": "Backtrader: Python Backtesting Framework", "url": "https://www.backtrader.com/"}
+        ],
+        "glossary": [
+            {"term": "Alpha", "definition": "The excess return of an investment relative to the return of a benchmark index."},
+            {"term": "Sharpe Ratio", "definition": "A measure for calculating risk-adjusted return, defined as the average return earned in excess of the risk-free rate per unit of volatility."},
+            {"term": "Drawdown", "definition": "The peak-to-trough decline during a specific period for an investment, trading account, or fund."}
         ]
     },
     "Stage 5": {
@@ -262,25 +277,17 @@ ROADMAP_DATA = {
                 "category": "Financial Machine Learning (Beyond Prediction)",
                 "items": [
                     {"text": "Transformers & Attention Models for Finance: LSTM and RNNs are dated. Modern quants use Transformer-based architectures (like FinBERT) to process sequences of price action and text. You must understand the 'Attention' mechanism and how it can identify long-range dependencies in financial time series.\n\nExample: An attention-based model can recognize that a volatility spike 20 days ago is more relevant to today's risk than a minor price move yesterday.", "is_interview_prep": True},
+                    {"text": "Graph Neural Networks (GNN) for Factor Research: Modeling the 'Connectedness' of markets. You will learn to represent supply chains, sector relationships, and company competition as a 'Graph' and use GNNs to predict how a shock to one company propagates to others.\n\nExample: A strike at a major lithium mine (Node A) impacts EV manufacturers (Node B) and battery tech firms (Node C). A GNN identifies these lead-lag relationships that a standard regression misses.", "is_interview_prep": True},
                     {"text": "Reinforcement Learning (RL) for Execution: Trading is a sequential decision process. You must learn how RL agents (like PPO or DQN) are used to learn 'Optimal Execution'—deciding when and how to place orders to minimize market impact while staying within a risk budget.\n\nExample: An RL agent learns that in a high-volatility market, it should split an order into smaller chunks to avoid 'moving the market' against its own trade.", "is_interview_prep": True},
                     {"text": "The Triple Barrier Method & Meta-Labeling: Traditional ML classification (Buy/Sell) is insufficient for finance. You must master Marcos López de Prado's techniques: the 'Triple Barrier' for labeling events and 'Meta-Labeling' to filter out false signals. This allows your model to decide *whether* to take a trade, rather than just predicting direction, significantly improving the 'Precision' of your signals.\n\nExample: Your primary model predicts 'Buy' for a stock. A secondary 'Meta-Model' (trained only on the success/failure of the first) says 'Ignore this signal' because the current volatility is too high. You avoid a losing trade.", "is_interview_prep": True},
-                    "Feature Engineering & Feature Importance: A model is only as good as its inputs. You must learn to engineer 'stationary' features from raw order flow, volatility surfaces, and microstructural imbalances. Crucially, you must use MDA (Mean Decrease Accuracy) or SHAP values to understand *which* features are driving your model and ensure they aren't just memorizing 'noise' from the training set.\n\nExample: You feed a model 'raw price'. It learns that whenever price is $150, it should buy. This is useless. If you feed it 'Z-Score of Volume,' it learns that abnormal volume precedes a move, which is a generalized feature.",
-                    "Purging & Embargoing (Time Series CV): Standard Cross-Validation fails in finance because of 'Information Leakage' (future data influencing the past via overlapping time series). You must learn to implement Purged K-Fold Cross-Validation, which removes data points between training and testing sets to ensure the model is truly generalizing to unseen environments.\n\nExample: If your trade label spans 5 days, and you use day 3 in your training set and day 4 in your test set, the model already 'knows' the outcome of the trade. Purging removes those overlapping days to prevent cheating."
-                ]
-            },
-            {
-                "category": "Modern Portfolio Construction",
-                "items": [
-                    "From Mean-Variance to Hierarchical Risk Parity (HRP): Traditional Markowitz optimization is 'unstable'—small changes in inputs lead to massive changes in allocations. You must study Hierarchical Risk Parity (HRP), which uses graph theory and machine learning to cluster assets based on correlation and allocate risk more robustly, avoiding the 'concentration risk' of older models.\n\nExample: In 2022, both Stocks and Bonds dropped together. A traditional 60/40 portfolio failed. An HRP portfolio might have identified the rising correlation early and shifted weight into commodities or cash to maintain its risk target.",
-                    "Factor Neutralization & Hedging: A professional quant doesn't just want to make money; they want to make 'uncorrelated' money. You must learn to Factor Neutralize your portfolio—hedging out unwanted exposures to Market, Sector, or Interest Rate risks so that only your 'Pure Alpha' remains. This is how you achieve the 'Holy Grail' of finance: a Sharpe Ratio > 2.0.\n\nExample: You have a strategy that buys Tech stocks. To ensure you aren't just 'Long Tech,' you sell an equal dollar amount of a Tech ETF (QQQ). Now, you only profit if your specific stocks outperform the rest of the Tech sector.",
-                    "The Black-Litterman Model: This is the bridge between market equilibrium and your subjective research views. You must learn to use Bayesian Inference to combine the 'Market Cap Weighted' portfolio with your specific alpha signals, allowing for a more stable and theoretically sound allocation than raw optimization.\n\nExample: The market says Apple should be 7% of your portfolio. Your AI model says Apple is overvalued. Black-Litterman allows you to tilt your weight to 5% without completely ignoring the market's collective wisdom."
+                    "Feature Engineering & Feature Importance: A model is only as good as its inputs. You must learn to engineer 'stationary' features from raw order flow, volatility surfaces, and microstructural imbalances. Crucially, you must use MDA (Mean Decrease Accuracy) or SHAP values to understand *which* features are driving your model and ensure they aren't just memorizing 'noise' from the training set.\n\nExample: You feed a model 'raw price'. It learns that whenever price is $150, it should buy. This is useless. If you feed it 'Z-Score of Volume,' it learns that abnormal volume precedes a move, which is a generalized feature."
                 ]
             }
         ],
         "guide": [
-            "1. <b>Learn Scikit-Learn:</b> Master Random Forests and Gradient Boosting for classification tasks.",
-            "2. <b>Study Volatility:</b> Understand 'GARCH' models to forecast when markets will become dangerous.",
-            "3. <b>Factor Neutralization:</b> Learn how to hedge out 'Market Risk' so you only profit from your specific alpha."
+            "1. <b>Master mlfinlab:</b> Explore the 'Hudson & Thames' library for institutional ML implementation.",
+            "2. <b>Build a Factor Neutral Portfolio:</b> Use Python to hedge out 'Market Beta' and 'Sector Risk'.",
+            "3. <b>Regularize Everything:</b> Learn Lasso and Ridge regression to prevent over-reliance on noisy features."
         ],
         "exercise": "<b>The Regime Detector:</b> Build a K-Means clustering model in Python that categorizes the market into 3 states: 'Low Vol/Bull', 'High Vol/Bear', and 'Sideways/Chop'.",
         "milestone": "🎯 Implement a machine learning model that achieves a 'Precision' of >55% on out-of-sample directional signals.",
@@ -296,12 +303,6 @@ ROADMAP_DATA = {
                 "options": ["To predict price", "To filter false positive signals from a primary model", "To replace OLS regression", "To speed up training"],
                 "answer": 1,
                 "explanation": "Meta-labeling (López de Prado) uses a secondary model to decide *whether* to take a trade suggested by a primary model, improving overall signal precision."
-            },
-            {
-                "question": "Why is 'Purged Cross-Validation' necessary for time-series data?",
-                "options": ["To remove bad data", "To prevent information leakage between training and testing folds", "To handle missing values", "To reduce volatility"],
-                "answer": 1,
-                "explanation": "In time series, data points are often serially correlated. Purging ensures that training data doesn't contain information about the 'future' in the validation set."
             }
         ],
         "resources": [
@@ -310,6 +311,11 @@ ROADMAP_DATA = {
             {"icon": "🌐", "name": "mlfinlab: Financial ML Python Library", "url": "https://github.com/hudson-and-thames/mlfinlab"},
             {"icon": "🎓", "name": "Coursera: Machine Learning Specialization", "url": "https://www.coursera.org/specializations/machine-learning-introduction"},
             {"icon": "🌐", "name": "PyPortfolioOpt: Portfolio Optimization", "url": "https://pyportfolioopt.readthedocs.io/en/latest/"}
+        ],
+        "glossary": [
+            {"term": "Transformer", "definition": "A deep learning architecture that uses attention mechanisms to weigh the influence of different parts of input data."},
+            {"term": "Reinforcement Learning", "definition": "A type of machine learning where an agent learns to make decisions by performing actions and receiving rewards."},
+            {"term": "Meta-Labeling", "definition": "The process of using a second model to decide whether to follow the predictions of a primary model."}
         ]
     },
     "Stage 6": {
@@ -332,9 +338,8 @@ ROADMAP_DATA = {
             {
                 "category": "The Professional Practice of Quant Finance",
                 "items": [
-                    "Tail Risk & Black Swan Management: A 'good' strategy can be killed by a single 'unprecedented' event. You must learn to model Tail Risk and implement hedging strategies (like buying deep out-of-the-money puts) to protect your fund from 'Black Swan' events. We manage for the 1% scenario just as much as the 99% scenario.\n\nExample: During the 2020 COVID crash, most portfolios dropped 30%. A fund with a 'Tail Risk' hedge might have had Put Options that surged 1,000% in value, offsetting the losses in their stock positions.",
-                    "Capacity Analysis & Alpha Decay: Alpha is a finite resource. As you manage more capital, your own trading begins to eat your profits. You must learn to perform Capacity Analysis—determining the 'AUM' (Assets Under Management) limit of your strategy before it becomes too large to execute. You must also monitor for Alpha Decay, recognizing when a market inefficiency has been 'arbitraged away' by competitors.\n\nExample: A strategy that trades 'Micro-cap' stocks might have a capacity of only $10 million. If you try to trade $1 billion, your own buying will push the price up so much that the profit disappears.",
-                    "The Ethics & Integrity of Research: A professional quant is a scientist first. You must maintain a Research Journal with academic rigor, documenting every failed experiment and preventing 'Result Mining'. You have a fiduciary duty to your investors and a systemic duty to the market to operate with transparency, ethics, and intellectual honesty.\n\nExample: Instead of just showing your boss the 'best' backtest, you show them all 50 failed versions and explain why the 51st one is theoretically sound and not just a lucky fluke."
+                    {"text": "Investor Relations & Strategy Communication: You aren't just managing code; you are managing capital. You must learn how to write an 'Investor Letter,' present a Sharpe ratio to non-technical LPs, and manage the psychological expectations during a 10% drawdown.\n\nExample: An LP asks why your strategy is flat while the market is up 20%. You must be able to explain 'Factor Rotation' and why your alpha is uncorrelated, not 'broken'.", "is_interview_prep": True},
+                    "Tail Risk & Black Swan Management: A 'good' strategy can be killed by a single 'unprecedented' event. You must learn to model Tail Risk and implement hedging strategies (like buying deep out-of-the-money puts) to protect your fund from 'Black Swan' events. We manage for the 1% scenario just as much as the 99% scenario.\n\nExample: During the 2020 COVID crash, most portfolios dropped 30%. A fund with a 'Tail Risk' hedge might have had Put Options that surged 1,000% in value, offsetting the losses in their stock positions."
                 ]
             }
         ],
@@ -360,21 +365,24 @@ ROADMAP_DATA = {
             }
         ],
         "resources": [
-            {"icon": "📖", "name": "Active Portfolio Management — Grinold & Kahn", "url": "https://www.amazon.com/Active-Portfolio-Management-Quantitative-Approach/dp/0070248826"},
-            {"icon": "📖", "name": "The Man Who Solved the Market — Zuckerman", "url": "https://www.amazon.com/Man-Who-Solved-Market-Renaissance/dp/073521798X"},
-            {"icon": "🌐", "name": "Interactive Brokers API Documentation", "url": "https://interactivebrokers.github.io/tws-api/"},
-            {"icon": "🌐", "name": "arXiv Quantitative Finance Papers", "url": "https://arxiv.org/list/q-fin/recent"},
-            {"icon": "🎓", "name": "AWS: Cloud for Quant Finance", "url": "https://aws.amazon.com/financial-services/capital-markets/"}
+            {"icon": "📖", "name": "Advances in Financial Machine Learning — Marcos Lopez de Prado", "url": "https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089"},
+            {"icon": "🎓", "name": "Machine Learning for Trading — Georgia Tech (Udacity)", "url": "https://www.udacity.com/course/machine-learning-for-trading--ud501"},
+            {"icon": "💻", "name": "Kaggle: Jane Street Market Prediction Competition", "url": "https://www.kaggle.com/c/jane-street-market-prediction"}
+        ],
+        "glossary": [
+            {"term": "Feature Engineering", "definition": "The process of using domain knowledge to extract features from raw data that make machine learning algorithms work."},
+            {"term": "Overfitting", "definition": "A modeling error that occurs when a function is too closely fit to a limited set of data points, failing to generalize to new data."},
+            {"term": "Cross-Validation", "definition": "A technique for evaluating ML models by training on several subsets of data and testing on the remaining part."}
         ]
     },
     "Stage 7": {
-        "title": "Macroeconomics for Financial Markets & Trading",
-        "duration": "Advanced Elective",
-        "difficulty": "Intermediate",
+        "title": "Macroeconomics for Financial Markets",
+        "duration": "Months 20–24",
+        "difficulty": "Advanced",
         "reading_time": "30h",
-        "prereqs": "Stage 1",
-        "goal": "Master how macroeconomic forces drive asset prices across global markets using institutional frameworks.",
-        "overview": "A comprehensive course designed to teach you how macroeconomic forces drive asset prices across global markets. Built from the same frameworks used by institutional traders, this stage bridges the gap between pure quantitative modeling and global macro reality.",
+        "prereqs": "Stage 1, 2",
+        "goal": "Integrate top-down macroeconomic analysis into your quantitative research framework.",
+        "overview": "No strategy exists in a vacuum. Interest rates, inflation, and geopolitical shifts are the 'weather' in which your 'alpha ships' sail. This stage teaches you to quantify the macro-drivers of market regimes and use them as powerful filters for your directional signals.",
         "topics": [
             {
                 "category": "Monetary Policy & Rates (The Global Cost of Capital)",
@@ -384,17 +392,11 @@ ROADMAP_DATA = {
                 ]
             },
             {
-                "category": "Yield Curve Analysis & Fixed Income (The Market's Crystal Ball)",
-                "items": [
-                    "The Term Structure of Interest Rates: The yield curve is the most powerful leading indicator in finance. You must master the dynamics of 'Bull Flattening,' 'Bear Steepening,' and 'Inversions.' You will learn to use the 2s10s and 3m10y spreads to forecast economic recessions and regime shifts. \n*Example:* An inverted yield curve (short-term rates higher than long-term) has preceded every US recession for decades. As a quant, you model the 'risk premium' embedded in the long end of the curve.",
-                    "Real vs. Nominal Yields: Inflation is the enemy of fixed income. You must understand the relationship between Nominal Yields, Inflation Break-evens, and Real Yields (TIPS). Real yields are the true 'gravity' for high-multiplier tech stocks—when real yields rise, growth valuations compress. \n*Example:* In 2022, Real Yields moved from -1% to +1.5%. This shift was the primary driver behind the 'valuation reset' in the NASDAQ, regardless of individual company earnings."
-                ]
-            },
-            {
                 "category": "Global Macro Frameworks (The Drivers of Flow)",
                 "items": [
                     {"text": "The Global Liquidity Cycle: Markets are driven by the expansion and contraction of central bank balance sheets (M2 liquidity). You must learn to track 'G4 Central Bank Liquidity' to understand the primary tailwind or headwind for all risk assets.\n\nExample: When the Fed initiates 'Quantitative Easing' (QE), liquidity enters the system, suppressing volatility and pushing asset prices higher, regardless of fundamentals.", "is_interview_prep": True},
                     {"text": "China Macro & EM Flows: China's credit cycle is a major driver of global commodities and industrial metals. You must study the 'China Credit Impulse' and how PBOC policy shifts impact Emerging Markets (EM) and the USD/CNY exchange rate.\n\nExample: A contraction in Chinese credit often precedes a drop in Copper prices and Australian Dollar (AUD) weakness, as Australia is a primary commodity exporter to China.", "is_interview_prep": True},
+                    {"text": "Geopolitical Risk Quantification: Learn to model political events (elections, sanctions, wars) as trading signals. You will study how to use prediction markets (Polymarket) and news sentiment to quantify the probability of geopolitical shocks.\n\nExample: Before a major election, a quant monitors the 'Spread' between the top candidates on Polymarket. If the spread narrows, volatility in the currency market (FX) often spikes as participants hedge against uncertainty.", "is_interview_prep": True},
                     "Risk-On vs. Risk-Off Regimes: Macro trading is about identifying the 'dominant theme'—is it Inflation, Growth, or Liquidity? You will learn to identify 'regime shifts' using cross-asset signals, such as the AUD/JPY pair (proxy for global risk appetite) or the Copper/Gold ratio (proxy for global growth).\n\nExample: A breakdown in the Copper/Gold ratio often precedes a stock market correction, as it signals that industrial demand is falling while safety-seeking demand is rising."
                 ]
             },
@@ -446,6 +448,11 @@ ROADMAP_DATA = {
             {"icon": "🎓", "name": "MacroVoices Podcast", "url": "https://www.macrovoices.com/"},
             {"icon": "📖", "name": "The Alchemy of Finance — George Soros", "url": "https://www.amazon.com/Alchemy-Finance-George-Soros/dp/0471445494"},
             {"icon": "🌐", "name": "FRED Economic Data (St. Louis Fed)", "url": "https://fred.stlouisfed.org/"}
+        ],
+        "glossary": [
+            {"term": "Quantitative Easing", "definition": "A monetary policy whereby a central bank purchases government securities or other securities from the market in order to lower interest rates and increase the money supply."},
+            {"term": "Yield Curve", "definition": "A line that plots the interest rates of bonds having equal credit quality but differing maturity dates."},
+            {"term": "Macro-Quant", "definition": "An approach that combines systematic, quantitative investment rules with top-down macroeconomic analysis."}
         ]
     },
     "Stage 8": {
@@ -522,7 +529,12 @@ ROADMAP_DATA = {
             {"icon": "🎓", "name": "CBOE Options Institute: Free Education", "url": "https://www.cboe.com/education/"},
             {"icon": "🌐", "name": "VIX Central: VIX Term Structure Monitor", "url": "http://vixcentral.com/"},
             {"icon": "🎓", "name": "tastytrade: Practical Options Trading", "url": "https://tastytrade.com/learn/"},
-            {"icon": "🌐", "name": "QuantLib: Options Pricing Library", "url": "https://www.quantlib.org/"}
+            {"icon": "🌐", "name": "Quantpedia: The Encyclopedia of Algorithmic Strategies", "url": "https://quantpedia.com/"}
+        ],
+        "glossary": [
+            {"term": "Black-Scholes Model", "definition": "A mathematical model used to estimate the fair price of European-style options."},
+            {"term": "Volatility Risk Premium", "definition": "The difference between the implied volatility (market expectation) and the realized volatility (actual outcome) of an underlying asset."},
+            {"term": "Greeks", "definition": "Financial measures used to assess the risk of an option position, including Delta, Gamma, Theta, and Vega."}
         ]
     },
     "Stage 9": {
@@ -594,6 +606,11 @@ ROADMAP_DATA = {
             {"icon": "🌐", "name": "Solarflare: Introduction to Kernel Bypass", "url": "https://www.xilinx.com/products/boards-and-kits/solarflare-network-adapters.html"},
             {"icon": "🌐", "name": "FIX Protocol Official Documentation", "url": "https://www.fixtrading.org/online-specification/"},
             {"icon": "🎓", "name": "QuantConnect: HFT Research Environment", "url": "https://www.quantconnect.com/"}
+        ],
+        "glossary": [
+            {"term": "HFT", "definition": "High-Frequency Trading; a type of algorithmic trading characterized by high speeds, high turnover rates, and high order-to-trade ratios."},
+            {"term": "FPGA", "definition": "Field Programmable Gate Array; an integrated circuit designed to be configured by a customer after manufacturing, used for ultra-low latency logic."},
+            {"term": "Kernel Bypass", "definition": "A technique that allows an application to bypass the operating system's networking stack to reduce latency."}
         ]
     },
     "Stage 10": {
@@ -643,7 +660,12 @@ ROADMAP_DATA = {
         "resources": [
             {"icon": "🌐", "name": "Dune Analytics: SQL-based On-chain Data", "url": "https://dune.com/"},
             {"icon": "📖", "name": "Mastering Bitcoin — Andreas Antonopoulos", "url": "https://www.amazon.com/Mastering-Bitcoin-Programming-Open-Blockchain/dp/1491954388"},
-            {"icon": "🌐", "name": "Glassnode: Crypto Market Indicators", "url": "https://glassnode.com/"}
+            {"icon": "💻", "name": "Flashbots: MEV Research & Tools", "url": "https://www.flashbots.net/"}
+        ],
+        "glossary": [
+            {"term": "DeFi", "definition": "Decentralized Finance; a blockchain-based form of finance that does not rely on central financial intermediaries."},
+            {"term": "MEV", "definition": "Maximal Extractable Value; the maximum value that can be extracted from block production in excess of the standard block reward and gas fees."},
+            {"term": "Perpetual Swap", "definition": "A type of derivative similar to a futures contract but without an expiration date, using a funding rate mechanism to stay anchored to the spot price."}
         ]
     },
     "Stage 11": {
@@ -694,6 +716,11 @@ ROADMAP_DATA = {
             {"icon": "📖", "name": "Against the Gods — Peter Bernstein", "url": "https://www.amazon.com/Against-Gods-Remarkable-Story-Risk/dp/0471295639"},
             {"icon": "🎓", "name": "CFA Institute: Risk Management Overview", "url": "https://www.cfainstitute.org/en/membership/professional-development/refresher-readings/risk-management"},
             {"icon": "🌐", "name": "Risk.net: Institutional Risk News", "url": "https://www.risk.net/"}
+        ],
+        "glossary": [
+            {"term": "Value-at-Risk (VaR)", "definition": "A statistical technique used to measure the amount of potential loss that could happen in a portfolio over a specified time horizon."},
+            {"term": "Expected Shortfall", "definition": "A risk measure that quantifies the amount of tail risk an investment portfolio has; it is the average loss given that the loss is greater than the VaR."},
+            {"term": "Kelly Criterion", "definition": "A formula used to determine the optimal size of a series of bets in order to maximize the logarithm of wealth."}
         ]
     },
     "Stage 12": {
@@ -744,6 +771,11 @@ ROADMAP_DATA = {
             {"icon": "🌐", "name": "HuggingFace: Transformer Models", "url": "https://huggingface.co/"},
             {"icon": "📖", "name": "Alternative Data — Alexander Denev", "url": "https://www.amazon.com/Book-Alternative-Data-Alexander-Denev/dp/1119601703"},
             {"icon": "🎓", "name": "NLP in Finance — Coursera", "url": "https://www.coursera.org/learn/nlp-finance"}
+        ],
+        "glossary": [
+            {"term": "FinBERT", "definition": "A domain-specific NLP model based on the BERT architecture, pre-trained on a large corpus of financial text."},
+            {"term": "RAG", "definition": "Retrieval-Augmented Generation; a technique that combines LLMs with external data retrieval to improve answer accuracy."},
+            {"term": "Alternative Data", "definition": "Information about a particular company that is published by sources outside of the company itself, such as satellite imagery or social media sentiment."}
         ]
     },
     "Stage 13": {
@@ -789,6 +821,11 @@ ROADMAP_DATA = {
                 "answer": 1,
                 "explanation": "Quants must balance the cost of moving the market (Impact) against the risk of the price moving away from them while they wait to fill (Opportunity Cost)."
             }
+        ],
+        "glossary": [
+            {"term": "Implementation Shortfall", "definition": "The difference between the theoretical price of an order at the time of decision and the actual execution price."},
+            {"term": "Market Impact", "definition": "The price change directly resulting from the execution of a large trade."},
+            {"term": "Dark Pool", "definition": "A private trading venue that does not display its order book to the public, used to minimize market impact."}
         ],
         "resources": [
             {"icon": "📖", "name": "Algorithmic Trading & DMA — Barry Johnson", "url": "https://www.amazon.com/Algorithmic-Trading-DMA-introduction-strategies/dp/0956399207"},
