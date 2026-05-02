@@ -9,18 +9,18 @@ ROADMAP_DATA = {
             {
                 "category": "Market Microstructure (The 'Why')",
                 "items": [
-                    "<b>The Limit Order Book (LOB):</b> How price actually moves. Understand the interaction between aggressive (market) and passive (limit) orders.",
-                    "<b>Liquidity & Slippage:</b> Why a strategy that looks good on paper might fail when executed with size.",
-                    "<b>Market Participants:</b> Identifying the footprint of Market Makers vs. Institutional Flow vs. Arbitrageurs.",
-                    "<b>Asset Classes:</b> Comparing Equities, Futures (leverage/basis), and Options (volatility) mechanics."
+                    "**The Limit Order Book (LOB):** How price actually moves. Understand the interaction between aggressive (market) and passive (limit) orders.",
+                    "**Liquidity & Slippage:** Why a strategy that looks good on paper might fail when executed with size.",
+                    "**Market Participants:** Identifying the footprint of Market Makers vs. Institutional Flow vs. Arbitrageurs.",
+                    "**Asset Classes:** Comparing Equities, Futures (leverage/basis), and Options (volatility) mechanics."
                 ]
             },
             {
                 "category": "The Quantitative Mindset",
                 "items": [
-                    "<b>Alpha vs. Beta:</b> Distinguishing between general market movement and your unique 'edge'.",
-                    "<b>Expected Value (EV):</b> Thinking in terms of Win Rate × Avg Win - Loss Rate × Avg Loss.",
-                    "<b>The 4 Pillars of a Quant Lab:</b> Data → Research → Backtest → Execution."
+                    "**Alpha vs. Beta:** Distinguishing between general market movement and your unique 'edge'.",
+                    "**Expected Value (EV):** Thinking in terms of Win Rate × Avg Win - Loss Rate × Avg Loss.",
+                    "**The 4 Pillars of a Quant Lab:** Data → Research → Backtest → Execution."
                 ]
             }
         ],
@@ -46,17 +46,17 @@ ROADMAP_DATA = {
             {
                 "category": "Probability & Distributions",
                 "items": [
-                    "<b>The Normal Distribution Myth:</b> Understanding why 'Fat Tails' (Kurtosis) cause most models to blow up during crashes.",
-                    "<b>Log-Returns:</b> Why we use log-returns for modeling instead of simple price changes (additivity and symmetry).",
-                    "<b>Conditional Probability:</b> Bayes' Theorem and its application in updating market bias."
+                    "**The Normal Distribution Myth:** Understanding why 'Fat Tails' (Kurtosis) cause most models to blow up during crashes.",
+                    "**Log-Returns:** Why we use log-returns for modeling instead of simple price changes (additivity and symmetry).",
+                    "**Conditional Probability:** Bayes' Theorem and its application in updating market bias."
                 ]
             },
             {
                 "category": "Time Series & Econometrics",
                 "items": [
-                    "<b>Stationarity:</b> Why you can't build a model on raw prices (they wander) and must use stationary data (returns).",
-                    "<b>Cointegration:</b> The secret to Pairs Trading. Finding two assets that 'walk together' even if they drift apart.",
-                    "<b>Hypothesis Testing:</b> Using P-values and T-stats to see if your backtest result is just 'luck'."
+                    "**Stationarity:** Why you can't build a model on raw prices (they wander) and must use stationary data (returns).",
+                    "**Cointegration:** The secret to Pairs Trading. Finding two assets that 'walk together' even if they drift apart.",
+                    "**Hypothesis Testing:** Using P-values and T-stats to see if your backtest result is just 'luck'."
                 ]
             }
         ],
@@ -82,17 +82,17 @@ ROADMAP_DATA = {
             {
                 "category": "The Python Quant Stack",
                 "items": [
-                    "<b>Pandas Mastery:</b> Vectorization is king. If you use a 'for' loop in Pandas, you're doing it wrong. Learn `.apply()`, `.shift()`, and `.rolling()`.",
-                    "<b>NumPy:</b> Fast numerical arrays for high-performance calculations.",
-                    "<b>Visualization:</b> Using Plotly for interactive charts that allow you to zoom into specific trades."
+                    "**Pandas Mastery:** Vectorization is king. If you use a 'for' loop in Pandas, you're doing it wrong. Learn `.apply()`, `.shift()`, and `.rolling()`.",
+                    "**NumPy:** Fast numerical arrays for high-performance calculations.",
+                    "**Visualization:** Using Plotly for interactive charts that allow you to zoom into specific trades."
                 ]
             },
             {
                 "category": "Data Engineering & Integrity",
                 "items": [
-                    "<b>ETL Pipelines:</b> Extract, Transform, Load. How to pull data from APIs (Alpaca, Polygon) and store it locally.",
-                    "<b>Survivorship Bias:</b> Building a 'Point-in-Time' database so you don't test on stocks that only survived to today.",
-                    "<b>Data Cleaning:</b> Handling 'fat-finger' errors and missing ticks in high-frequency data."
+                    "**ETL Pipelines:** Extract, Transform, Load. How to pull data from APIs (Alpaca, Polygon) and store it locally.",
+                    "**Survivorship Bias:** Building a 'Point-in-Time' database so you don't test on stocks that only survived to today.",
+                    "**Data Cleaning:** Handling 'fat-finger' errors and missing ticks in high-frequency data."
                 ]
             }
         ],
@@ -118,17 +118,17 @@ ROADMAP_DATA = {
             {
                 "category": "Alpha Generation",
                 "items": [
-                    "<b>Cross-Sectional Momentum:</b> Buying the 'winners' and selling the 'losers' across an index.",
-                    "<b>Mean Reversion:</b> Trading 'stretched' rubber bands using RSI, Bollinger, or Z-Scores.",
-                    "<b>Factor Models:</b> Decomposing returns into Size, Value, Quality, and Low Volatility components."
+                    "**Cross-Sectional Momentum:** Buying the 'winners' and selling the 'losers' across an index.",
+                    "**Mean Reversion:** Trading 'stretched' rubber bands using RSI, Bollinger, or Z-Scores.",
+                    "**Factor Models:** Decomposing returns into Size, Value, Quality, and Low Volatility components."
                 ]
             },
             {
                 "category": "The Backtesting Protocol",
                 "items": [
-                    "<b>Transaction Cost Modeling:</b> Implementing realistic slippage (0.01% - 0.05%) and commissions.",
-                    "<b>Overfitting (p-hacking):</b> Understanding why testing 1,000 parameter combinations will always find a 'perfect' (but fake) backtest.",
-                    "<b>Walk-Forward Optimization:</b> Testing on 'Unseen' data to ensure the strategy generalizes."
+                    "**Transaction Cost Modeling:** Implementing realistic slippage (0.01% - 0.05%) and commissions.",
+                    "**Overfitting (p-hacking):** Understanding why testing 1,000 parameter combinations will always find a 'perfect' (but fake) backtest.",
+                    "**Walk-Forward Optimization:** Testing on 'Unseen' data to ensure the strategy generalizes."
                 ]
             }
         ],
@@ -154,17 +154,17 @@ ROADMAP_DATA = {
             {
                 "category": "Financial Machine Learning",
                 "items": [
-                    "<b>Labeling:</b> Moving beyond 'price-up/price-down' to the 'Triple Barrier Method'.",
-                    "<b>Feature Engineering:</b> Building features from Order Flow, Sentiment, and Volatility surfaces.",
-                    "<b>Purging & Embargoing:</b> Special cross-validation techniques to prevent data leakage in time series."
+                    "**Labeling:** Moving beyond 'price-up/price-down' to the 'Triple Barrier Method'.",
+                    "**Feature Engineering:** Building features from Order Flow, Sentiment, and Volatility surfaces.",
+                    "**Purging & Embargoing:** Special cross-validation techniques to prevent data leakage in time series."
                 ]
             },
             {
                 "category": "Portfolio Construction",
                 "items": [
-                    "<b>Risk Parity:</b> Allocating based on 'Risk Contribution' rather than dollar amounts.",
-                    "<b>Hierarchical Risk Parity (HRP):</b> Using graph theory to diversify portfolios more robustly.",
-                    "<b>Black-Litterman:</b> Combining market equilibrium with your private views."
+                    "**Risk Parity:** Allocating based on 'Risk Contribution' rather than dollar amounts.",
+                    "**Hierarchical Risk Parity (HRP):** Using graph theory to diversify portfolios more robustly.",
+                    "**Black-Litterman:** Combining market equilibrium with your private views."
                 ]
             }
         ],
@@ -190,17 +190,17 @@ ROADMAP_DATA = {
             {
                 "category": "Institutional Execution",
                 "items": [
-                    "<b>Execution Algorithms:</b> VWAP, TWAP, and Implementation Shortfall. Minimizing your own market impact.",
-                    "<b>OMS/EMS Design:</b> Building the 'Plumbing' that connects your research to the exchange securely.",
-                    "<b>Real-time Monitoring:</b> Tracking 'Tracking Error' and 'Alpha Decay' in live trading."
+                    "**Execution Algorithms:** VWAP, TWAP, and Implementation Shortfall. Minimizing your own market impact.",
+                    "**OMS/EMS Design:** Building the 'Plumbing' that connects your research to the exchange securely.",
+                    "**Real-time Monitoring:** Tracking 'Tracking Error' and 'Alpha Decay' in live trading."
                 ]
             },
             {
                 "category": "Advanced Risk & Psychology",
                 "items": [
-                    "<b>Tail Risk Hedging:</b> Using out-of-the-money options to protect against 'Black Swan' events.",
-                    "<b>Capacity Analysis:</b> Determining at what AUM (Assets Under Management) your strategy stops working.",
-                    "<b>The Professional Journal:</b> Documenting every model failure and iteration with academic rigor."
+                    "**Tail Risk Hedging:** Using out-of-the-money options to protect against 'Black Swan' events.",
+                    "**Capacity Analysis:** Determining at what AUM (Assets Under Management) your strategy stops working.",
+                    "**The Professional Journal:** Documenting every model failure and iteration with academic rigor."
                 ]
             }
         ],
