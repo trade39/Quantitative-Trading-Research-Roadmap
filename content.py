@@ -850,6 +850,168 @@ ROADMAP_DATA = {
             {"icon": "🎓", "name": "Optimal Execution (Almgren) — Original Paper", "url": "https://www.math.nyu.edu/financial_mathematics/content/02_financial/almgren_chriss.pdf"},
             {"icon": "🌐", "name": "IEX: The Speed Bump Explained", "url": "https://www.iextrading.com/"}
         ]
+    },
+    "Stage 14": {
+        "title": "Fixed Income & Credit Quant Modeling",
+        "duration": "Advanced Elective",
+        "difficulty": "Expert",
+        "reading_time": "55h",
+        "prereqs": "Stage 2, 8",
+        "goal": "Master the mathematics of debt, yield curves, and credit derivatives.",
+        "overview": "The bond market dwarfs the equity market and requires entirely distinct mathematical frameworks. This stage covers yield curve modeling, interest rate swaps, and credit default swaps, essential for macro and relative-value funds.",
+        "topics": [
+            {
+                "category": "Yield Curve & Rates Modeling",
+                "items": [
+                    {"text": "Yield Curve Bootstrapping: You must learn to construct the zero-coupon yield curve from market instruments (deposits, FRAs, swaps). This is the foundation of all fixed income pricing.", "is_interview_prep": True},
+                    "Interest Rate Models: Understand term structure models like Vasicek, Cox-Ingersoll-Ross (CIR), and the Hull-White model to price interest rate derivatives and capture the evolution of the yield curve."
+                ]
+            },
+            {
+                "category": "Credit Risk & Derivatives",
+                "items": [
+                    {"text": "Credit Default Swaps (CDS): Learn the mechanics of CDS contracts, how to extract implied default probabilities, and the concept of the 'credit triangle' (spread, default probability, and recovery rate).", "is_interview_prep": True},
+                    "Securitization & MBS: Quantitative evaluation of Mortgage-Backed Securities, including prepayment modeling (CPR/PSA) and structuring collateralized debt obligations (CDOs)."
+                ]
+            }
+        ],
+        "guide": [
+            "1. Build a yield curve bootstrapper in Python using QuantLib.",
+            "2. Read 'Fixed Income Securities' by Bruce Tuckman.",
+            "3. Implement a simple Hull-White tree to price an interest rate option."
+        ],
+        "exercise": "<b>The Curve Trade:</b> Using historical Treasury yield data, calculate the rolling 2s10s spread and run a statistical test to identify regimes of curve steepening vs flattening.",
+        "milestone": "🎯 Construct a pricing model for a 5-year Credit Default Swap that accurately calibrates to current market spreads.",
+        "common_mistakes": [
+            "Assuming parallel shifts: The yield curve rarely moves in parallel. Risk managing bonds strictly via 'Duration' without 'Convexity' and 'Key Rate Durations' will lead to huge hedging errors.",
+            "Ignoring liquidity premiums: Off-the-run bonds trade at a discount to on-the-run bonds strictly due to liquidity, not credit risk."
+        ],
+        "quiz": [
+            {
+                "question": "Which of the following models is specifically designed to guarantee positive interest rates?",
+                "options": ["Vasicek Model", "Cox-Ingersoll-Ross (CIR) Model", "Black-Scholes Model", "Merton Jump-Diffusion Model"],
+                "answer": 1,
+                "explanation": "The CIR model introduces a square root term in its diffusion process, which prevents interest rates from negative values, unlike the Vasicek model."
+            }
+        ],
+        "glossary": [
+            {"term": "Yield Curve", "definition": "A graphical representation of interest rates on debt for a range of maturities."},
+            {"term": "Credit Default Swap (CDS)", "definition": "A financial derivative that allows an investor to swap or offset their credit risk with that of another investor."},
+            {"term": "Duration", "definition": "A measure of the sensitivity of the price of a fixed-income investment to a change in interest rates."}
+        ],
+        "resources": [
+            {"icon": "📖", "name": "Fixed Income Securities — Bruce Tuckman", "url": "https://www.amazon.com/Fixed-Income-Securities-Markets-Practitioners/dp/1118127410"},
+            {"icon": "💻", "name": "QuantLib: Fixed Income Examples", "url": "https://www.quantlib.org/docs.shtml"},
+            {"icon": "🎓", "name": "Hull-White Model Implementation Guide", "url": "http://www.quantlet.com/"}
+        ]
+    },
+    "Stage 15": {
+        "title": "Cloud Infrastructure & Distributed Big Data",
+        "duration": "Advanced Elective",
+        "difficulty": "Expert",
+        "reading_time": "60h",
+        "prereqs": "Stage 3, 6",
+        "goal": "Scale research and backtesting capabilities to handle massive datasets using distributed cloud infrastructure.",
+        "overview": "Institutional quants operate on petabytes of data. This stage bridges the gap between a 'researcher on a laptop' and an 'enterprise quant engineer,' covering Spark, Kafka, and Kubernetes for massive backtesting grids.",
+        "topics": [
+            {
+                "category": "Distributed Computing",
+                "items": [
+                    {"text": "Apache Spark & Dask: Transition from Pandas/Polars to distributed frameworks. You will learn to parallelize tick-level aggregations and backtesting logic across clusters of machines.", "is_interview_prep": True},
+                    "Data Lakes & Parquet: Designing highly optimized storage architectures (like Delta Lake or Iceberg) to store and query decades of L3 order book data instantly."
+                ]
+            },
+            {
+                "category": "Streaming & Orchestration",
+                "items": [
+                    {"text": "Event-Driven Architecture (Kafka): Learn to handle real-time, high-throughput market data streams for live feature generation and alpha calculation.", "is_interview_prep": True},
+                    "Kubernetes (K8s) for Quants: Deploying and orchestrating hundreds of containerized strategy pods and optimization workers on AWS or GCP."
+                ]
+            }
+        ],
+        "guide": [
+            "1. Setup a local PySpark cluster and process a 10GB CSV file.",
+            "2. Deploy a Kafka broker and stream live crypto trades into a Python consumer.",
+            "3. Containerize a backtesting script and deploy it to a local Minikube cluster."
+        ],
+        "exercise": "<b>The Distributed Backtest:</b> Rewrite a moving average strategy using PySpark. Distribute the calculation across 4 worker nodes processing 1000 tickers simultaneously.",
+        "milestone": "🎯 Build a data pipeline that consumes real-time Websocket data, passes it through Kafka, and writes aggregated 1-minute bars to a Parquet data lake.",
+        "common_mistakes": [
+            "Using Pandas for everything: Memory constraints will kill your backtest when you scale to tick data. You must learn lazy evaluation and distributed joins.",
+            "Over-engineering for small data: Don't set up a Kubernetes cluster and Kafka just to trade daily data on 100 stocks. Match the infrastructure to the latency and data requirements."
+        ],
+        "quiz": [
+            {
+                "question": "What is the primary advantage of storing market data in Parquet format rather than CSV?",
+                "options": ["It is human-readable", "It uses a columnar storage format optimized for fast analytical queries", "It streams in real-time", "It uses less CPU to write"],
+                "answer": 1,
+                "explanation": "Parquet is a columnar format, meaning if you only need the 'close' price column, you don't have to read the entire file into memory, massively speeding up quantitative backtests."
+            }
+        ],
+        "glossary": [
+            {"term": "Apache Spark", "definition": "A unified analytics engine for large-scale data processing."},
+            {"term": "Apache Kafka", "definition": "A distributed event streaming platform used for high-performance data pipelines."},
+            {"term": "Kubernetes", "definition": "An open-source system for automating deployment, scaling, and management of containerized applications."}
+        ],
+        "resources": [
+            {"icon": "📖", "name": "Spark: The Definitive Guide", "url": "https://www.amazon.com/Spark-Definitive-Guide-Processing-Simple/dp/1491912219"},
+            {"icon": "💻", "name": "Databricks Community Edition", "url": "https://community.cloud.databricks.com/"},
+            {"icon": "🎓", "name": "Confluent: Kafka Tutorials", "url": "https://developer.confluent.io/"}
+        ]
+    },
+    "Stage 16": {
+        "title": "Behavioral Finance & Market Micro-Psychology",
+        "duration": "Advanced Elective",
+        "difficulty": "Advanced",
+        "reading_time": "40h",
+        "prereqs": "Stage 4, 8",
+        "goal": "Exploit anomalies created by crowded positioning, panic, and institutional constraints.",
+        "overview": "Markets are not perfectly rational. This stage focuses on the mathematical modeling of human irrationality, retail crowding, short squeezes, and utilizing game theory to exploit structural inefficiencies created by fear and greed.",
+        "topics": [
+            {
+                "category": "Behavioral Anomalies & Crowding",
+                "items": [
+                    {"text": "Retail Crowding & Meme Dynamics: Modeling short squeezes and momentum ignition. You will study how coordinated retail flow impacts market maker hedging.", "is_interview_prep": True},
+                    "Dealer Positioning (GEX/DIX): Understanding Gamma Exposure (GEX) and how option dealers are forced to buy or sell the underlying to remain delta-neutral, creating predictable market pin risks or accelerations."
+                ]
+            },
+            {
+                "category": "Game Theory & Panic Execution",
+                "items": [
+                    {"text": "Distressed Liquidations: Anticipating the moves of other participants during forced liquidations (e.g., hedge fund blowups, crypto cascades).", "is_interview_prep": True},
+                    "Cognitive Biases in Trading: Structurally exploiting biases like the 'Disposition Effect' (selling winners too early and riding losers) which creates post-earnings announcement drift."
+                ]
+            }
+        ],
+        "guide": [
+            "1. Read 'Thinking, Fast and Slow' to understand cognitive biases.",
+            "2. Monitor dark pool index (DIX) and gamma exposure (GEX) daily.",
+            "3. Analyze the GameStop (GME) 2021 squeeze from an options market-maker perspective."
+        ],
+        "exercise": "<b>The Squeeze Detector:</b> Build a scanner that cross-references high short interest (>20%) with sudden spikes in call option volume and social media sentiment.",
+        "milestone": "🎯 Develop a strategy that systematically buys stocks experiencing 'Post-Earnings Announcement Drift' due to behavioral under-reaction.",
+        "common_mistakes": [
+            "Betting on rationality: 'The market can remain irrational longer than you can remain solvent.' Shorting a bubble based on fundamentals without accounting for momentum flow is a recipe for ruin.",
+            "Misinterpreting sentiment: High retail bullish sentiment is often a contrarian *bearish* signal, as the marginal buyer is already fully invested."
+        ],
+        "quiz": [
+            {
+                "question": "What is the 'Disposition Effect'?",
+                "options": ["The tendency to panic sell during a flash crash", "The tendency of investors to sell assets that have increased in value, while keeping assets that have dropped in value", "The tendency to follow the crowd", "The tendency to hold onto cash in high interest rate environments"],
+                "answer": 1,
+                "explanation": "The Disposition Effect causes investors to lock in small wins to feel smart, but hold onto losing trades hoping they break even, which creates structural momentum and drift anomalies."
+            }
+        ],
+        "glossary": [
+            {"term": "Gamma Exposure (GEX)", "definition": "The sensitivity of options market makers' delta hedges to changes in the underlying stock price."},
+            {"term": "Short Squeeze", "definition": "A rapid increase in the price of a stock owing primarily to an excess of short selling of a stock rather than underlying fundamentals."},
+            {"term": "Disposition Effect", "definition": "An anomaly related to the tendency of investors to sell assets that have increased in value, while keeping assets that have dropped in value."}
+        ],
+        "resources": [
+            {"icon": "📖", "name": "Thinking, Fast and Slow — Daniel Kahneman", "url": "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555"},
+            {"icon": "🌐", "name": "SqueezeMetrics: GEX and DIX Data", "url": "https://squeezemetrics.com/monitor/dix"},
+            {"icon": "📖", "name": "Misbehaving: The Making of Behavioral Economics — Richard Thaler", "url": "https://www.amazon.com/Misbehaving-Making-Behavioral-Economics-Richard/dp/039335279X"}
+        ]
     }
 }
 
@@ -873,5 +1035,8 @@ TOOLS_CHECKLIST = {
     "Stage 10": ["Dune Analytics", "Ethers.js / Web3.py", "Solidity/Rust", "MetaMask/Hardware Wallets"],
     "Stage 11": ["RiskMetrics", "Monte Carlo Simulators", "GARCH Modeling (arch library)", "VaR/CVaR Engines"],
     "Stage 12": ["HuggingFace Transformers", "NLTK/SpaCy", "BeautifulSoup/Scrapy", "OpenAI/Anthropic APIs"],
-    "Stage 13": ["Smart Order Router (SOR) Simulators", "FIX Protocol Engines", "C++20", "Tick Data Warehouses (KDB+/Timescale)"]
+    "Stage 13": ["Smart Order Router (SOR) Simulators", "FIX Protocol Engines", "C++20", "Tick Data Warehouses (KDB+/Timescale)"],
+    "Stage 14": ["QuantLib", "Python (scipy/numpy)", "Bloomberg Terminal"],
+    "Stage 15": ["Apache Spark", "Apache Kafka", "Docker & Kubernetes", "AWS/GCP/Azure"],
+    "Stage 16": ["SqueezeMetrics API", "Twitter/Reddit Scrapers", "Options Flow Scanners"]
 }
