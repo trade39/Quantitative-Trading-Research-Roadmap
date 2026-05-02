@@ -32,9 +32,11 @@ ROADMAP_DATA = {
         "exercise": "<b>The Spread Analysis:</b> Download 1 day of 1-minute OHLCV data for SPY. In Excel, calculate the average candle size. Research what the typical bid-ask spread is for SPY. Calculate what percentage of your 'candle' is eaten by the spread.",
         "milestone": "🎯 Complete the 'Financial Markets 101' certification and explain the LOB to someone who doesn't trade.",
         "resources": [
-            "📖 Market Wizards — Jack Schwager",
-            "📖 Quantitative Trading — Ernest Chan (Chapters 1-2)",
-            "🎓 CME Group: Introduction to Futures"
+            {"icon": "📖", "name": "Market Wizards — Jack Schwager", "url": "https://www.amazon.com/Market-Wizards-Interviews-Top-Traders/dp/1592803377"},
+            {"icon": "📖", "name": "Quantitative Trading — Ernest Chan (Ch. 1-2)", "url": "https://www.amazon.com/Quantitative-Trading-Build-Algorithmic-Business/dp/1119800064"},
+            {"icon": "🎓", "name": "CME Group: Introduction to Futures", "url": "https://www.cmegroup.com/education/courses/introduction-to-futures.html"},
+            {"icon": "🎓", "name": "Yale: Financial Markets (Shiller) — Coursera", "url": "https://www.coursera.org/learn/financial-markets-global"},
+            {"icon": "🌐", "name": "Investopedia: Limit Order Book Explained", "url": "https://www.investopedia.com/terms/l/limitorderbook.asp"}
         ]
     },
     "Stage 2": {
@@ -68,9 +70,11 @@ ROADMAP_DATA = {
         "exercise": "<b>Statistical Arbitrage Setup:</b> Pick two related stocks (e.g., KO and PEP). Use a simple spreadsheet or Python to plot their price ratio over 1 year. Identify 'mean-reverting' periods where the ratio stretched too far.",
         "milestone": "🎯 Pass the 'Statistics for Finance' module and build a spreadsheet that calculates Z-Scores for any price series.",
         "resources": [
-            "📖 Statistics — Freedman, Pisani & Purves",
-            "🎓 MIT 18.650: Statistics for Applications",
-            "📖 Analysis of Financial Time Series — Ruey Tsay"
+            {"icon": "📖", "name": "Statistics — Freedman, Pisani & Purves", "url": "https://www.amazon.com/Statistics-4th-David-Freedman/dp/0393929728"},
+            {"icon": "🎓", "name": "MIT 18.650: Statistics for Applications", "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"},
+            {"icon": "📖", "name": "Analysis of Financial Time Series — Ruey Tsay", "url": "https://www.amazon.com/Analysis-Financial-Time-Series-Tsay/dp/0470414359"},
+            {"icon": "🎓", "name": "Khan Academy: Statistics & Probability", "url": "https://www.khanacademy.org/math/statistics-probability"},
+            {"icon": "🌐", "name": "QuantLib: Open Source Quant Library", "url": "https://www.quantlib.org/"}
         ]
     },
     "Stage 3": {
@@ -103,9 +107,11 @@ ROADMAP_DATA = {
         "exercise": "<b>The Vectorized Backtester:</b> Build a 10-line Python script using Pandas that calculates the performance of a 'Moving Average Crossover' strategy. No 'if' statements—use only vectorized logic.",
         "milestone": "🎯 Successfully build a local database that auto-updates every night with closing prices for 500 tickers.",
         "resources": [
-            "📖 Python for Finance — Yves Hilpisch",
-            "💻 'QuantConnect' Bootcamps (Free tutorials)",
-            "📖 Python for Data Analysis — Wes McKinney"
+            {"icon": "📖", "name": "Python for Finance — Yves Hilpisch", "url": "https://www.amazon.com/Python-Finance-Mastering-Data-Driven/dp/1492024333"},
+            {"icon": "💻", "name": "QuantConnect Bootcamps (Free)", "url": "https://www.quantconnect.com/learning"},
+            {"icon": "📖", "name": "Python for Data Analysis — Wes McKinney", "url": "https://www.amazon.com/Python-Data-Analysis-Wes-McKinney/dp/109810403X"},
+            {"icon": "🌐", "name": "Pandas Official Documentation", "url": "https://pandas.pydata.org/docs/"},
+            {"icon": "🌐", "name": "Alpaca Markets: Free Market Data API", "url": "https://alpaca.markets/data"}
         ]
     },
     "Stage 4": {
@@ -139,9 +145,11 @@ ROADMAP_DATA = {
         "exercise": "<b>The Alpha Hunt:</b> Research 'The Turn of the Month Effect' or 'The Monday Effect'. Use your Python tools to see if these seasonalities still exist in the S&P 500 today.",
         "milestone": "🎯 Create a 10-page 'Strategy Tear Sheet' including Sharpe, Max Drawdown, Win Rate, and Return Distribution.",
         "resources": [
-            "📖 Algorithmic Trading — Ernest Chan",
-            "📖 Expected Returns — Antti Ilmanen",
-            "🎓 'WorldQuant University' free modules"
+            {"icon": "📖", "name": "Algorithmic Trading — Ernest Chan", "url": "https://www.amazon.com/Algorithmic-Trading-Winning-Strategies-Rationale/dp/1118460146"},
+            {"icon": "📖", "name": "Expected Returns — Antti Ilmanen", "url": "https://www.amazon.com/Expected-Returns-Investors-Harvesting-Rewards/dp/1119990726"},
+            {"icon": "🎓", "name": "WorldQuant University: Free MSc Modules", "url": "https://www.wqu.edu/"},
+            {"icon": "🌐", "name": "SSRN: Factor Investing Research Papers", "url": "https://www.ssrn.com/index.cfm/en/"},
+            {"icon": "💻", "name": "Backtrader: Python Backtesting Framework", "url": "https://www.backtrader.com/"}
         ]
     },
     "Stage 5": {
@@ -175,9 +183,11 @@ ROADMAP_DATA = {
         "exercise": "<b>The Regime Detector:</b> Build a K-Means clustering model in Python that categorizes the market into 3 states: 'Low Vol/Bull', 'High Vol/Bear', and 'Sideways/Chop'.",
         "milestone": "🎯 Implement a machine learning model that achieves a 'Precision' of >55% on out-of-sample directional signals.",
         "resources": [
-            "📖 Advances in Financial Machine Learning — López de Prado",
-            "📖 Options, Futures & Other Derivatives — John Hull",
-            "💻 'QuantAcademy' Deep Learning courses"
+            {"icon": "📖", "name": "Advances in Financial Machine Learning — López de Prado", "url": "https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089"},
+            {"icon": "📖", "name": "Options, Futures & Other Derivatives — John Hull", "url": "https://www.amazon.com/Options-Futures-Other-Derivatives-10th/dp/013447208X"},
+            {"icon": "🌐", "name": "mlfinlab: Financial ML Python Library", "url": "https://github.com/hudson-and-thames/mlfinlab"},
+            {"icon": "🎓", "name": "Coursera: Machine Learning Specialization", "url": "https://www.coursera.org/specializations/machine-learning-introduction"},
+            {"icon": "🌐", "name": "PyPortfolioOpt: Portfolio Optimization", "url": "https://pyportfolioopt.readthedocs.io/en/latest/"}
         ]
     },
     "Stage 6": {
@@ -211,9 +221,11 @@ ROADMAP_DATA = {
         "exercise": "<b>The 'Flash Crash' Test:</b> Simulate how your current 'best' strategy would have performed during the 2010 Flash Crash or the 2020 COVID crash. Did it blow up?",
         "milestone": "🎯 Deploy a live 'Paper Trading' portfolio of 3+ diversified strategies and maintain a Sharpe > 1.5 for 6 months.",
         "resources": [
-            "📖 Active Portfolio Management — Grinold & Kahn",
-            "🎓 'Pioneers in Quantitative Finance' (Documentary/Series)",
-            "📖 The Man Who Solved the Market — Gregory Zuckerman"
+            {"icon": "📖", "name": "Active Portfolio Management — Grinold & Kahn", "url": "https://www.amazon.com/Active-Portfolio-Management-Quantitative-Approach/dp/0070248826"},
+            {"icon": "📖", "name": "The Man Who Solved the Market — Zuckerman", "url": "https://www.amazon.com/Man-Who-Solved-Market-Renaissance/dp/073521798X"},
+            {"icon": "🌐", "name": "Interactive Brokers API Documentation", "url": "https://interactivebrokers.github.io/tws-api/"},
+            {"icon": "🌐", "name": "arXiv Quantitative Finance Papers", "url": "https://arxiv.org/list/q-fin/recent"},
+            {"icon": "🎓", "name": "AWS: Cloud for Quant Finance", "url": "https://aws.amazon.com/financial-services/capital-markets/"}
         ]
     },
     "Stage 7": {
@@ -266,9 +278,11 @@ ROADMAP_DATA = {
         "exercise": "<b>The Yield Curve Playbook:</b> Plot the 2s10s spread over the last 20 years. Highlight the periods where it inverted and measure the time between inversion and the subsequent stock market peak.",
         "milestone": "🎯 Build a 'Macro Regime Monitor' that classifies the current environment into one of four quadrants: Goldilocks, Reflation, Stagflation, or Deflation.",
         "resources": [
-            "📖 Macroeconomics — Gregory Mankiw",
-            "🎓 'Real Vision' / 'Macro Voices' (Institutional macro insights)",
-            "📖 The Alchemy of Finance — George Soros"
+            {"icon": "📖", "name": "Macroeconomics — Gregory Mankiw", "url": "https://www.amazon.com/Macroeconomics-N-Gregory-Mankiw/dp/1319105998"},
+            {"icon": "🎓", "name": "Real Vision: Institutional Macro Insights", "url": "https://www.realvision.com/"},
+            {"icon": "🎓", "name": "MacroVoices Podcast", "url": "https://www.macrovoices.com/"},
+            {"icon": "📖", "name": "The Alchemy of Finance — George Soros", "url": "https://www.amazon.com/Alchemy-Finance-George-Soros/dp/0471445494"},
+            {"icon": "🌐", "name": "FRED Economic Data (St. Louis Fed)", "url": "https://fred.stlouisfed.org/"}
         ]
     }
 }
