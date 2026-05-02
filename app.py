@@ -107,11 +107,20 @@ if page == "Overview":
             target_page = matching_page if matching_page else f"{key}: {stage['title']}"
             
             # Render card visually, then use a Streamlit button styled as a CTA
+            diff_color = "#22C55E" if stage.get('difficulty') == "Beginner" else "#FBBF24" if stage.get('difficulty') == "Intermediate" else "#EF4444" if stage.get('difficulty') == "Expert" else "#F97316"
+            
             st.markdown(f"""
             <div class="glass-card">
-                <span class="stage-badge">{stage['duration']}</span>
-                <h3 style="font-size: 1.05rem; font-weight: 700; color: #E2E8F0; margin-top: 0.85rem; margin-bottom: 0.4rem; letter-spacing: -0.01em;">{key}: {stage['title']}</h3>
-                <p style="font-size: 0.875rem; color: #64748B; line-height: 1.65; margin-bottom: 0;">{stage['goal']}</p>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <span class="stage-badge">{stage['duration']}</span>
+                    <span class="stage-badge" style="background: rgba(255,255,255,0.06); color: {diff_color}; border: 1px solid {diff_color}33;">{stage.get('difficulty', 'TBD')}</span>
+                </div>
+                <h3 style="font-size: 1.05rem; font-weight: 700; color: #E2E8F0; margin-top: 0.5rem; margin-bottom: 0.4rem; letter-spacing: -0.01em;">{key}: {stage['title']}</h3>
+                <p style="font-size: 0.875rem; color: #64748B; line-height: 1.65; margin-bottom: 0.75rem;">{stage['goal']}</p>
+                <div style="display: flex; align-items: center; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.05); pt: 0.75rem; margin-top: 0.75rem; font-size: 0.75rem; color: #94A3B8;">
+                    <span>⏱️ {stage.get('reading_time', 'N/A')} study</span>
+                    <span>🧩 Prereq: {stage.get('prereqs', 'None')}</span>
+                </div>
             </div>
             """, unsafe_allow_html=True)
             st.button(
@@ -132,8 +141,10 @@ elif "Stage" in page:
         st.stop()
     
     st.markdown(f"""
-    <div style="margin-bottom: 0.35rem;">
+    <div style="display: flex; gap: 0.6rem; margin-bottom: 0.5rem;">
         <span class="stage-badge">{stage_data['duration']}</span>
+        <span class="stage-badge" style="background: rgba(255,255,255,0.06); color: #94A3B8;">⏱️ {stage_data.get('reading_time', 'N/A')}</span>
+        <span class="stage-badge" style="background: rgba(255,255,255,0.06); color: #94A3B8;">🧩 Prereq: {stage_data.get('prereqs', 'None')}</span>
     </div>
     <h1 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; color: #F1F5F9; margin-top: 0.25rem; margin-bottom: 0.25rem;">{stage_key}: {stage_data['title']}</h1>
     """, unsafe_allow_html=True)
@@ -141,8 +152,8 @@ elif "Stage" in page:
     # New Overview Section
     if "overview" in stage_data:
         st.markdown(f"""
-        <div class="tutorial-overview">
-            {stage_data['overview']}
+        <div class="glass-card" style="margin-bottom: 2rem; border-left: 4px solid #A78BFA;">
+            <p style="color: #E2E8F0; line-height: 1.7; margin-bottom: 0;">{stage_data['overview']}</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -154,7 +165,11 @@ elif "Stage" in page:
             with st.container():
                 st.markdown(f"<div class='topic-category'>{topic['category']}</div>", unsafe_allow_html=True)
                 for item in topic['items']:
-                    st.markdown(f"• {item}")
+                    item_text = item['text'] if isinstance(item, dict) else item
+                    is_prep = item.get('is_interview_prep', False) if isinstance(item, dict) else False
+                    
+                    badge_html = '<span style="background:#1E293B; color:#A78BFA; font-size:0.65rem; padding:1px 6px; border-radius:4px; margin-left:8px; border:1px solid #A78BFA44; font-weight:700;">INTERVIEW PREP</span>' if is_prep else ''
+                    st.markdown(f"<p style='margin-bottom:0.8rem; line-height:1.6;'>• {item_text}{badge_html}</p>", unsafe_allow_html=True)
         
         # New Step-by-Step Guide Section
         if "guide" in stage_data:
@@ -330,7 +345,7 @@ elif page == "✅ My Progress":
             "title": v["title"],
             "duration": v["duration"],
             "milestone": v.get("milestone", ""),
-            "topics": [item for topic in v["topics"] for item in topic["items"]]
+            "topics": [(item['text'] if isinstance(item, dict) else item) for topic in v["topics"] for item in topic["items"]]
         }
         for k, v in ROADMAP_DATA.items()
     }
