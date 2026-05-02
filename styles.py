@@ -14,63 +14,59 @@ def apply_styles():
         }
 
         /* Sidebar Hover Effect */
-        [data-testid="stSidebar"] {
+        section[data-testid="stSidebar"] {
             width: 80px !important;
             min-width: 80px !important;
-            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-            overflow-x: hidden !important;
-            background-color: rgba(17, 25, 40, 0.75) !important;
+            transition: width 0.3s ease-in-out !important;
+            background-color: rgba(17, 25, 40, 0.8) !important;
             backdrop-filter: blur(15px) !important;
-            border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
-            z-index: 1000 !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+            overflow-x: hidden !important;
         }
 
-        [data-testid="stSidebar"]:hover {
+        section[data-testid="stSidebar"]:hover {
             width: 320px !important;
             min-width: 320px !important;
             background-color: rgba(17, 25, 40, 0.98) !important;
         }
 
-        /* Sidebar Content Fade */
-        [data-testid="stSidebarUserContent"] {
-            opacity: 0;
+        /* Sidebar Content Visibility */
+        [data-testid="stSidebarContent"] {
+            width: 320px !important;
             transition: opacity 0.3s ease;
-            width: 280px !important;
-            padding: 2rem 1rem !important;
         }
 
-        [data-testid="stSidebar"]:hover [data-testid="stSidebarUserContent"] {
-            opacity: 1;
+        section[data-testid="stSidebar"]:not(:hover) [data-testid="stSidebarContent"] {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        /* Adjust Main Content to not be hidden by the narrow sidebar strip */
+        /* Adjust Main Content Area */
         [data-testid="stAppViewContainer"] {
-            padding-left: 0 !important;
+            margin-left: 0 !important;
         }
         
         .main .block-container {
             padding-left: 100px !important;
-            max-width: 1200px !important;
-        }
-
-        /* Hide default sidebar toggle */
-        [data-testid="stSidebarCollapseButton"] {
-            display: none !important;
+            padding-right: 2rem !important;
         }
 
         /* Sidebar indicator when collapsed */
-        [data-testid="stSidebar"]::before {
+        section[data-testid="stSidebar"]::before {
             content: '🚀';
             position: absolute;
-            top: 30px;
+            top: 25px;
             left: 28px;
             font-size: 24px;
-            opacity: 1;
-            transition: opacity 0.3s;
             z-index: 1001;
+            transition: opacity 0.3s;
         }
 
-        [data-testid="stSidebar"]:hover::before {
+        section[data-testid="stSidebar"]:not(:hover)::before {
+            opacity: 1;
+        }
+
+        section[data-testid="stSidebar"]:hover::before {
             opacity: 0;
         }
 
