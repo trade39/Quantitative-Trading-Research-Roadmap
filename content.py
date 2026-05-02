@@ -31,6 +31,12 @@ ROADMAP_DATA = {
         ],
         "exercise": "<b>The Spread Analysis:</b> Download 1 day of 1-minute OHLCV data for SPY. In Excel, calculate the average candle size. Research what the typical bid-ask spread is for SPY. Calculate what percentage of your 'candle' is eaten by the spread.",
         "milestone": "🎯 Complete the 'Financial Markets 101' certification and explain the LOB to someone who doesn't trade.",
+        "common_mistakes": [
+            "**Confusing price action with market direction:** Seeing a candle go up does not mean the market is bullish — check the volume and LOB depth behind it.",
+            "**Treating all markets identically:** The mechanics of a futures contract are fundamentally different from equities. Don't apply equity intuition to FX or commodities without research.",
+            "**Skipping the microstructure layer:** Most retail traders jump straight to indicators. Without understanding who's on the other side of your trade, you are trading blind.",
+            "**Underestimating transaction costs:** A 0.05% per-trade cost sounds tiny but can erase an entire year of alpha in a high-frequency strategy."
+        ],
         "resources": [
             {"icon": "📖", "name": "Market Wizards — Jack Schwager", "url": "https://www.amazon.com/Market-Wizards-Interviews-Top-Traders/dp/1592803377"},
             {"icon": "📖", "name": "Quantitative Trading — Ernest Chan (Ch. 1-2)", "url": "https://www.amazon.com/Quantitative-Trading-Build-Algorithmic-Business/dp/1119800064"},
@@ -69,6 +75,12 @@ ROADMAP_DATA = {
         ],
         "exercise": "<b>Statistical Arbitrage Setup:</b> Pick two related stocks (e.g., KO and PEP). Use a simple spreadsheet or Python to plot their price ratio over 1 year. Identify 'mean-reverting' periods where the ratio stretched too far.",
         "milestone": "🎯 Pass the 'Statistics for Finance' module and build a spreadsheet that calculates Z-Scores for any price series.",
+        "common_mistakes": [
+            "**Assuming normality everywhere:** Using a z-score alert system that assumes normal returns will catastrophically misfire during fat-tail events like crashes or squeezes.",
+            "**P-hacking without knowing it:** Running 30 different correlation tests on the same dataset will inevitably surface a 'significant' result by pure chance.",
+            "**Regressing non-stationary series:** Running OLS on raw prices (not returns) produces spurious $R^2$ values that evaporate in live trading.",
+            "**Ignoring the Multiple Testing Problem:** In finance, statistical significance thresholds must be adjusted (Bonferroni, BHY) when testing many strategies simultaneously."
+        ],
         "resources": [
             {"icon": "📖", "name": "Statistics — Freedman, Pisani & Purves", "url": "https://www.amazon.com/Statistics-4th-David-Freedman/dp/0393929728"},
             {"icon": "🎓", "name": "MIT 18.650: Statistics for Applications", "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"},
@@ -106,6 +118,12 @@ ROADMAP_DATA = {
         ],
         "exercise": "<b>The Vectorized Backtester:</b> Build a 10-line Python script using Pandas that calculates the performance of a 'Moving Average Crossover' strategy. No 'if' statements—use only vectorized logic.",
         "milestone": "🎯 Successfully build a local database that auto-updates every night with closing prices for 500 tickers.",
+        "common_mistakes": [
+            "**Living in Jupyter Notebooks forever:** Notebooks are great for exploration but terrible for production. Structure your code as `.py` modules with tests from day one.",
+            "**Ignoring corporate actions:** Failing to adjust prices for splits and dividends will cause your backtest to 'see' fake crashes and phantom rallies.",
+            "**Downloading data on every run:** Not persisting data locally causes slow research loops and breaks reproducibility if a data vendor changes their API.",
+            "**Using `.iterrows()` in Pandas:** This is a loop in disguise and 100–1000x slower than vectorized operations. If you write `.iterrows()`, stop and rethink."
+        ],
         "resources": [
             {"icon": "📖", "name": "Python for Finance — Yves Hilpisch", "url": "https://www.amazon.com/Python-Finance-Mastering-Data-Driven/dp/1492024333"},
             {"icon": "💻", "name": "QuantConnect Bootcamps (Free)", "url": "https://www.quantconnect.com/learning"},
@@ -144,6 +162,12 @@ ROADMAP_DATA = {
         ],
         "exercise": "<b>The Alpha Hunt:</b> Research 'The Turn of the Month Effect' or 'The Monday Effect'. Use your Python tools to see if these seasonalities still exist in the S&P 500 today.",
         "milestone": "🎯 Create a 10-page 'Strategy Tear Sheet' including Sharpe, Max Drawdown, Win Rate, and Return Distribution.",
+        "common_mistakes": [
+            "**Having no economic thesis:** 'This pattern worked in the backtest' is not a thesis. If you cannot explain *why* an edge exists, it almost certainly won't survive live trading.",
+            "**Optimizing parameters on the full dataset:** Fitting your RSI period or lookback window on all available data and then calling it a 'backtest' is just curve-fitting with extra steps.",
+            "**Ignoring drawdown duration:** A 15% drawdown that lasts 3 years is psychologically far harder to survive than a 25% drawdown that recovers in 3 months.",
+            "**Treating Sharpe Ratio as infallible:** A Sharpe of 2.0 calculated on 6 months of data is statistically meaningless. You need at least 3 years of out-of-sample returns for a reliable signal."
+        ],
         "resources": [
             {"icon": "📖", "name": "Algorithmic Trading — Ernest Chan", "url": "https://www.amazon.com/Algorithmic-Trading-Winning-Strategies-Rationale/dp/1118460146"},
             {"icon": "📖", "name": "Expected Returns — Antti Ilmanen", "url": "https://www.amazon.com/Expected-Returns-Investors-Harvesting-Rewards/dp/1119990726"},
@@ -182,6 +206,12 @@ ROADMAP_DATA = {
         ],
         "exercise": "<b>The Regime Detector:</b> Build a K-Means clustering model in Python that categorizes the market into 3 states: 'Low Vol/Bull', 'High Vol/Bear', and 'Sideways/Chop'.",
         "milestone": "🎯 Implement a machine learning model that achieves a 'Precision' of >55% on out-of-sample directional signals.",
+        "common_mistakes": [
+            "**Using standard K-Fold CV on time series:** Shuffling time-series data before splitting leaks future information into the training set, making results completely unreliable.",
+            "**Feeding raw price as an ML feature:** Price levels are non-stationary and provide no generalizable signal. Always engineer stationary, normalized features (returns, z-scores, ratios).",
+            "**Maximizing Accuracy instead of Precision:** In imbalanced financial datasets, 90% accuracy means nothing if you are predicting 'hold' for every bar. Focus on Precision and Recall of your signal.",
+            "**Ignoring feature correlation:** Highly correlated features don't add information — they add noise and can destabilize tree-based models. Use SHAP/MDA to prune redundant inputs."
+        ],
         "resources": [
             {"icon": "📖", "name": "Advances in Financial Machine Learning — López de Prado", "url": "https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089"},
             {"icon": "📖", "name": "Options, Futures & Other Derivatives — John Hull", "url": "https://www.amazon.com/Options-Futures-Other-Derivatives-10th/dp/013447208X"},
@@ -220,6 +250,12 @@ ROADMAP_DATA = {
         ],
         "exercise": "<b>The 'Flash Crash' Test:</b> Simulate how your current 'best' strategy would have performed during the 2010 Flash Crash or the 2020 COVID crash. Did it blow up?",
         "milestone": "🎯 Deploy a live 'Paper Trading' portfolio of 3+ diversified strategies and maintain a Sharpe > 1.5 for 6 months.",
+        "common_mistakes": [
+            "**Underestimating market impact at scale:** A strategy with 20% annual returns may have a capacity of only $5M. Beyond that, your own orders move the market against you.",
+            "**Treating paper trading as validation:** Paper trading does not simulate slippage, partial fills, or the emotional weight of real capital at risk. Use it for mechanics, not for performance proof.",
+            "**Not monitoring for alpha decay:** An edge that existed in 2018 may be fully arbitraged away by 2025. You must continuously monitor live performance vs. the historical backtest benchmark.",
+            "**Skipping the research journal:** Not documenting failed experiments means you will re-invent them. A research log is not optional — it is institutional best practice."
+        ],
         "resources": [
             {"icon": "📖", "name": "Active Portfolio Management — Grinold & Kahn", "url": "https://www.amazon.com/Active-Portfolio-Management-Quantitative-Approach/dp/0070248826"},
             {"icon": "📖", "name": "The Man Who Solved the Market — Zuckerman", "url": "https://www.amazon.com/Man-Who-Solved-Market-Renaissance/dp/073521798X"},
@@ -277,12 +313,78 @@ ROADMAP_DATA = {
         ],
         "exercise": "<b>The Yield Curve Playbook:</b> Plot the 2s10s spread over the last 20 years. Highlight the periods where it inverted and measure the time between inversion and the subsequent stock market peak.",
         "milestone": "🎯 Build a 'Macro Regime Monitor' that classifies the current environment into one of four quadrants: Goldilocks, Reflation, Stagflation, or Deflation.",
+        "common_mistakes": [
+            "**Trading the headline number, not the internals:** A 'beat' on headline CPI can be bearish for equities if core services inflation is re-accelerating — always decompose the data.",
+            "**Confusing correlation with causation in cross-asset:** The Copper/Gold ratio signals growth expectations — it does not *cause* them. Don't build a trading rule on a ratio without understanding the underlying mechanism.",
+            "**Ignoring central bank credibility:** Policy models assume central banks act rationally and predictably. Political interference or credibility crises (e.g., Turkey, Argentina) can invalidate standard macro frameworks entirely.",
+            "**Being too early on macro trades:** A yield curve inversion can persist for 12–24 months before a recession materializes. Sizing correctly for a long-dated macro trade is as important as being directionally correct."
+        ],
         "resources": [
             {"icon": "📖", "name": "Macroeconomics — Gregory Mankiw", "url": "https://www.amazon.com/Macroeconomics-N-Gregory-Mankiw/dp/1319105998"},
             {"icon": "🎓", "name": "Real Vision: Institutional Macro Insights", "url": "https://www.realvision.com/"},
             {"icon": "🎓", "name": "MacroVoices Podcast", "url": "https://www.macrovoices.com/"},
             {"icon": "📖", "name": "The Alchemy of Finance — George Soros", "url": "https://www.amazon.com/Alchemy-Finance-George-Soros/dp/0471445494"},
             {"icon": "🌐", "name": "FRED Economic Data (St. Louis Fed)", "url": "https://fred.stlouisfed.org/"}
+        ]
+    },
+    "Stage 8": {
+        "title": "Options & Derivatives Pricing",
+        "duration": "Advanced Elective",
+        "goal": "Master the mathematics and market intuition behind derivatives pricing, the Greeks, volatility surfaces, and options-based trading strategies.",
+        "overview": "Options are the most powerful instrument in a quant's toolkit — and the most dangerous if misunderstood. This stage moves beyond directional bets into volatility trading, non-linear payoffs, and the institutional use of derivatives for hedging, income generation, and pure alpha. You will learn why the 'price' of an option is really the 'price of uncertainty.'",
+        "topics": [
+            {
+                "category": "The Black-Scholes Framework & Its Limits",
+                "items": [
+                    "**Black-Scholes-Merton (BSM) Model:** The Nobel Prize-winning foundation of options pricing. You must understand its derivation intuitively: an option's fair value is determined by five inputs — Spot Price, Strike Price, Time to Expiry, Risk-Free Rate, and *Implied Volatility*. The model assumes continuous trading, no dividends, and log-normally distributed returns — all assumptions that break down in the real world.  \n*Example:* BSM would price a 1-month at-the-money SPY put at roughly $5.00. In reality, after a geopolitical shock, the *market* might price it at $7.50 due to higher implied volatility, even if the mathematical 'fair value' hasn't changed.",
+                    "**The Volatility Smile & Skew (BSM's Fatal Flaw):** Under BSM, implied volatility should be *constant* across strikes. In reality, out-of-the-money puts trade at a *higher* implied volatility than at-the-money options (the 'Skew'). This is the market pricing in the risk of a crash — a feature BSM ignores entirely. Mastering the 'Skew' is the gateway to institutional-grade vol trading.  \n*Example:* After the 1987 Black Monday crash, the options market never forgot. Since then, SPX put options at a 10% out-of-the-money strike consistently trade at 4–6 vol points *above* the at-the-money implied vol — the market's permanent 'crash insurance' premium.",
+                    "**Jump-Diffusion & Stochastic Volatility Models:** Because BSM fails for fat tails, quants use more advanced models: **Heston** (volatility is itself stochastic), **SABR** (widely used in fixed income), and **VG/NIG** (variance-gamma models that incorporate jumps). You must understand the conceptual difference between models that assume continuous price paths vs. those that allow for instantaneous 'jumps'.  \n*Example:* During a biotech earnings release, a stock can gap 40% overnight — a 'jump' that a continuous diffusion model assigns zero probability to. A jump-diffusion model like Merton's would correctly price the elevated cost of short-dated options around the event."
+                ]
+            },
+            {
+                "category": "The Greeks (Sensitivities & Risk Management)",
+                "items": [
+                    "**Delta & Delta Hedging:** Delta (Δ) measures how much an option's price changes for a $1 move in the underlying. Market makers *delta-hedge* their books constantly — buying or selling the underlying to remain 'Delta-Neutral,' profiting from the bid-ask spread while eliminating directional exposure.  \n*Example:* You sell a call option with a Delta of 0.40. To hedge, you buy 40 shares of the stock for every 100-share option contract. If the stock rises $1, your option loss is offset by your stock gain.",
+                    "**Gamma, Theta & the P&L of a Hedged Book:** Gamma (Γ) measures the *rate of change* of Delta. Theta (Θ) measures time decay — the amount an option loses in value per day. The core tension of options market making is **Gamma vs. Theta**: long options positions have positive Gamma (you benefit from large moves) but negative Theta (you pay for that privilege daily).  \n*Example:* You buy a straddle (a call + a put) on NVDA earnings. Every day that NVDA stays flat, you lose Theta. But if NVDA gaps 20%, your Gamma means your Delta skyrockets, generating a large profit that exceeds all the Theta you paid.",
+                    "**Vega & Rho (Volatility & Rate Sensitivity):** Vega (ν) measures sensitivity to changes in implied volatility. A long option position is always 'long Vega' — it benefits if the market becomes more fearful (higher IV). Rho measures sensitivity to interest rates — critically important for long-dated options (LEAPS) where the risk-free rate discount is significant.  \n*Example:* In early 2022, when the Fed began hiking rates aggressively, long-dated tech call options (LEAPS) suffered not from the underlying price alone, but from their Rho exposure — the higher discount rate compressed their present value."
+                ]
+            },
+            {
+                "category": "Volatility as an Asset Class",
+                "items": [
+                    "**Implied vs. Realized Volatility:** Implied Volatility (IV) is the market's *forecast* of future volatility embedded in option prices. Realized Volatility (RV) is the *actual* volatility that occurred. The **Volatility Risk Premium (VRP)** is the persistent tendency for IV to *exceed* RV on average, meaning option sellers are systematically paid for bearing tail risk.  \n*Example:* SPX implied volatility (VIX) averages around 19%, but realized volatility historically averages closer to 15%. Systematically selling options and delta-hedging captures this ~4-point 'VRP' — the core of many hedge fund 'vol selling' strategies.",
+                    "**The Volatility Surface:** The 3D surface of implied volatility across all strikes (the 'Skew') and all expiration dates (the 'Term Structure') is the full picture of the options market's expectations. You must learn to 'read' the surface — a steep term structure signals calm short-term but fear longer-term; a flat surface signals uniform uncertainty.  \n*Example:* Before a major FOMC meeting, short-dated IV spikes (expensive near-term options) while long-dated IV remains calm. The surface 'kinks' at the event date. Traders 'buy the kink' by buying cheap long-dated options and selling the expensive short-dated ones in a **Calendar Spread**.",
+                    "**The VIX & Volatility Term Structure:** The VIX Index measures the implied volatility of 30-day SPX options. **VIX Futures** trade the *expected* VIX in the future. The most reliable volatility trade is exploiting 'Contango' in the VIX futures curve — when future VIX is priced above spot VIX, futures roll down over time, creating a structural shorting opportunity.  \n*Example:* The ETF XIV (short VIX) returned over 50% per year for 7 years by mechanically shorting VIX futures in contango — until February 2018, when a single day's volatility spike caused a 96% loss, a reminder that VRP harvesting carries catastrophic tail risk."
+                ]
+            },
+            {
+                "category": "Options Strategies & Institutional Applications",
+                "items": [
+                    "**Directional Options Strategies:** Buying naked calls or puts is not a quant strategy — it is speculation. You must master *defined-risk* spreads: **Bull Call Spreads**, **Bear Put Spreads**, and **Risk Reversals** that give you directional exposure while capping premium outlay and making your breakeven explicit.  \n*Example:* Instead of buying a $500 TSLA call outright, you buy the $500/$550 Call Spread for $15. Your max loss is $15; your max profit is $35. Your Vega exposure is dramatically lower, meaning a vol crush after earnings hurts you far less.",
+                    "**Income & Hedging Strategies (Institutional Use):** Institutions use options for yield enhancement (**Covered Calls**, **Cash-Secured Puts**) and portfolio protection (**Protective Puts**, **Collars**). A quant's role is to price these strategies systematically and determine when buying insurance is mathematically justified vs. when it destroys returns.  \n*Example:* A pension fund holding $1 billion of S&P 500 exposure might buy a 3-month 10% out-of-the-money put for 0.4% of NAV. The quant runs a backtest to determine that this hedge *saves* more than 0.4% in avoided drawdown during crash regimes, making the insurance net-positive EV."
+                ]
+            }
+        ],
+        "guide": [
+            "1. <b>Start with Options Pricing Calculators:</b> Use an online BSM calculator (CBOE has one free). Input different strikes and expiries and observe how IV changes the price more than any other input.",
+            "2. <b>Simulate a Delta Hedge:</b> Using daily SPY data, simulate being short a call option and delta-hedging it daily. Calculate your P&L from Gamma gains vs. Theta paid.",
+            "3. <b>Read the VIX Term Structure Daily:</b> Every morning, look at the VIX Futures curve on vixcentral.com. Notice if it is in Contango (normal) or Backwardation (fear). Track what happens to markets under each regime."
+        ],
+        "exercise": "<b>The Volatility Surface Builder:</b> Use Python and the `yfinance` library to download options chain data for SPY. Extract the implied volatility for each strike and expiry. Plot the 3D surface using Plotly. Identify the Skew — do out-of-the-money puts have higher IV than calls?",
+        "milestone": "🎯 Build a delta-hedging simulation that correctly calculates daily P&L (Gamma PnL + Theta decay) for a short straddle position over a 30-day period.",
+        "common_mistakes": [
+            "**Buying options without understanding Theta:** Buying weekly options and holding them through time decay is the fastest way to lose money in options. Time is *always* working against the buyer.",
+            "**Ignoring Implied Volatility Rank (IVR):** Buying options when IV is at a 52-week high (expensive) and selling them when IV is at a 52-week low (cheap) is a common and costly error.",
+            "**Confusing Delta with probability of profit:** A 0.30 Delta option does not have a 30% probability of being in-the-money at expiry. The correct measure is N(d2), not N(d1), from the BSM formula.",
+            "**Selling naked options without tail-risk management:** Selling uncovered puts or calls for premium income is seductive until a black swan event delivers a loss that exceeds years of collected premium in a single day."
+        ],
+        "resources": [
+            {"icon": "📖", "name": "Options, Futures & Other Derivatives — John Hull", "url": "https://www.amazon.com/Options-Futures-Other-Derivatives-10th/dp/013447208X"},
+            {"icon": "📖", "name": "The Volatility Surface — Jim Gatheral", "url": "https://www.amazon.com/Volatility-Surface-Practitioners-Guide/dp/0471792519"},
+            {"icon": "🎓", "name": "CBOE Options Institute: Free Education", "url": "https://www.cboe.com/education/"},
+            {"icon": "🌐", "name": "VIX Central: VIX Term Structure Monitor", "url": "http://vixcentral.com/"},
+            {"icon": "🎓", "name": "tastytrade: Practical Options Trading", "url": "https://tastytrade.com/learn/"},
+            {"icon": "🌐", "name": "QuantLib: Options Pricing Library", "url": "https://www.quantlib.org/"}
         ]
     }
 }
@@ -300,5 +402,7 @@ TOOLS_CHECKLIST = {
     "Stage 1-2": ["Excel/Sheets", "Basic Python", "yFinance"],
     "Stage 3-4": ["Pandas", "Zipline/Backtrader", "PostgreSQL", "Git"],
     "Stage 5": ["scikit-learn", "PyTorch/TF", "QuantLib", "Interactive Brokers API"],
-    "Stage 6": ["Custom execution infra", "Bloomberg/Refinitiv", "AWS/GCP"]
+    "Stage 6": ["Custom execution infra", "Bloomberg/Refinitiv", "AWS/GCP", "FIX Protocol"],
+    "Stage 7": ["FRED API", "TradingView/ThinkOrSwim", "Economic Calendars"],
+    "Stage 8": ["OptionStat", "CBOE Tools", "Greeks Calculators"]
 }
