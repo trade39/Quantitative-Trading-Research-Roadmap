@@ -40,6 +40,20 @@ ROADMAP_DATA = {
             "Skipping the microstructure layer: Most retail traders jump straight to indicators. Without understanding who's on the other side of your trade, you are trading blind.",
             "Underestimating transaction costs: A 0.05% per-trade cost sounds tiny but can erase an entire year of alpha in a high-frequency strategy."
         ],
+        "quiz": [
+            {
+                "question": "Which participant type typically provides liquidity by placing limit orders at both the bid and the ask?",
+                "options": ["High-Frequency Takers", "Market Makers", "Retail Speculators", "Institutional Buyers"],
+                "answer": 1,
+                "explanation": "Market Makers profit from the bid-ask spread and provide liquidity by sitting on both sides of the Limit Order Book (LOB)."
+            },
+            {
+                "question": "If you buy 1,000 shares but only 500 are available at your price, and the next 500 are 2 cents higher, what have you experienced?",
+                "options": ["Arbitrage", "Alpha", "Slippage", "Basis Risk"],
+                "answer": 2,
+                "explanation": "Slippage is the difference between your intended price and the actual execution price, usually caused by lack of depth in the LOB."
+            }
+        ],
         "resources": [
             {"icon": "📖", "name": "Market Wizards — Jack Schwager", "url": "https://www.amazon.com/Market-Wizards-Interviews-Top-Traders/dp/1592803377"},
             {"icon": "📖", "name": "Quantitative Trading — Ernest Chan (Ch. 1-2)", "url": "https://www.amazon.com/Quantitative-Trading-Build-Algorithmic-Business/dp/1119800064"},
@@ -87,6 +101,20 @@ ROADMAP_DATA = {
             "Regressing non-stationary series: Running OLS on raw prices (not returns) produces spurious $R^2$ values that evaporate in live trading.",
             "Ignoring the Multiple Testing Problem: In finance, statistical significance thresholds must be adjusted (Bonferroni, BHY) when testing many strategies simultaneously."
         ],
+        "quiz": [
+            {
+                "question": "Why do quants use Log-Returns instead of simple percentage returns for time-series modeling?",
+                "options": ["They are more accurate", "They are time-additive", "They prevent losses", "They are easier to calculate"],
+                "answer": 1,
+                "explanation": "Log-returns ($ln(P_t/P_{t-1})$) are additive over time, meaning the return of two days is simply the sum of their individual log-returns."
+            },
+            {
+                "question": "If two non-stationary price series have a linear combination that is stationary, they are said to be:",
+                "options": ["Correlated", "Vectorized", "Cointegrated", "Normally Distributed"],
+                "answer": 2,
+                "explanation": "Cointegration is a statistical property where two 'drifting' variables never stay too far apart, forming the basis of pairs trading."
+            }
+        ],
         "resources": [
             {"icon": "📖", "name": "Statistics — Freedman, Pisani & Purves", "url": "https://www.amazon.com/Statistics-4th-David-Freedman/dp/0393929728"},
             {"icon": "🎓", "name": "MIT 18.650: Statistics for Applications", "url": "https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/"},
@@ -132,6 +160,14 @@ ROADMAP_DATA = {
             "Ignoring corporate actions: Failing to adjust prices for splits and dividends will cause your backtest to 'see' fake crashes and phantom rallies.",
             "Downloading data on every run: Not persisting data locally causes slow research loops and breaks reproducibility if a data vendor changes their API.",
             "Using `.iterrows()` in Pandas: This is a loop in disguise and 100–1000x slower than vectorized operations. If you write `.iterrows()`, stop and rethink."
+        ],
+        "quiz": [
+            {
+                "question": "What is the primary performance benefit of Vectorization in NumPy/Pandas?",
+                "options": ["Easier code", "Avoids memory leaks", "Replaces slow Python loops with C", "Prevents Overfitting"],
+                "answer": 2,
+                "explanation": "Vectorization performs operations on entire arrays at once using optimized C/C++ backends, bypassing Python's slow global interpreter lock (GIL) and loops."
+            }
         ],
         "resources": [
             {"icon": "📖", "name": "Python for Finance — Yves Hilpisch", "url": "https://www.amazon.com/Python-Finance-Mastering-Data-Driven/dp/1492024333"},
@@ -180,6 +216,20 @@ ROADMAP_DATA = {
             "Ignoring drawdown duration: A 15% drawdown that lasts 3 years is psychologically far harder to survive than a 25% drawdown that recovers in 3 months.",
             "Treating Sharpe Ratio as infallible: A Sharpe of 2.0 calculated on 6 months of data is statistically meaningless. You need at least 3 years of out-of-sample returns for a reliable signal."
         ],
+        "quiz": [
+            {
+                "question": "A strategy that returns 20% but experiences a 40% drawdown is often considered 'uninvestable'. Which metric best captures this relationship?",
+                "options": ["Log-Return", "Sharpe Ratio", "Information Ratio", "Skewness"],
+                "answer": 1,
+                "explanation": "The Sharpe Ratio measures excess return per unit of volatility, helping quants determine if the returns justify the risk/drawdown."
+            },
+            {
+                "question": "Which bias occurs if you test a strategy only on stocks currently in the S&P 500, ignoring those that went bankrupt?",
+                "options": ["Look-ahead Bias", "Overfitting", "Survivorship Bias", "Small Sample Bias"],
+                "answer": 2,
+                "explanation": "Survivorship bias creates an upward tilt in results by only including the 'winners' that survived until today."
+            }
+        ],
         "resources": [
             {"icon": "📖", "name": "Algorithmic Trading — Ernest Chan", "url": "https://www.amazon.com/Algorithmic-Trading-Winning-Strategies-Rationale/dp/1118460146"},
             {"icon": "📖", "name": "Expected Returns — Antti Ilmanen", "url": "https://www.amazon.com/Expected-Returns-Investors-Harvesting-Rewards/dp/1119990726"},
@@ -227,6 +277,20 @@ ROADMAP_DATA = {
             "Maximizing Accuracy instead of Precision: In imbalanced financial datasets, 90% accuracy means nothing if you are predicting 'hold' for every bar. Focus on Precision and Recall of your signal.",
             "Ignoring feature correlation: Highly correlated features don't add information — they add noise and can destabilize tree-based models. Use SHAP/MDA to prune redundant inputs."
         ],
+        "quiz": [
+            {
+                "question": "What is the purpose of 'Meta-Labeling' in a financial machine learning pipeline?",
+                "options": ["To predict price", "To filter false positive signals from a primary model", "To replace OLS regression", "To speed up training"],
+                "answer": 1,
+                "explanation": "Meta-labeling (López de Prado) uses a secondary model to decide *whether* to take a trade suggested by a primary model, improving overall signal precision."
+            },
+            {
+                "question": "Why is 'Purged Cross-Validation' necessary for time-series data?",
+                "options": ["To remove bad data", "To prevent information leakage between training and testing folds", "To handle missing values", "To reduce volatility"],
+                "answer": 1,
+                "explanation": "In time series, data points are often serially correlated. Purging ensures that training data doesn't contain information about the 'future' in the validation set."
+            }
+        ],
         "resources": [
             {"icon": "📖", "name": "Advances in Financial Machine Learning — López de Prado", "url": "https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089"},
             {"icon": "📖", "name": "Options, Futures & Other Derivatives — John Hull", "url": "https://www.amazon.com/Options-Futures-Other-Derivatives-10th/dp/013447208X"},
@@ -273,6 +337,14 @@ ROADMAP_DATA = {
             "Treating paper trading as validation: Paper trading does not simulate slippage, partial fills, or the emotional weight of real capital at risk. Use it for mechanics, not for performance proof.",
             "Not monitoring for alpha decay: An edge that existed in 2018 may be fully arbitraged away by 2025. You must continuously monitor live performance vs. the historical backtest benchmark.",
             "Skipping the research journal: Not documenting failed experiments means you will re-invent them. A research log is not optional — it is institutional best practice."
+        ],
+        "quiz": [
+            {
+                "question": "What does a VWAP (Volume Weighted Average Price) execution algorithm aim to achieve?",
+                "options": ["The highest possible profit", "Execution that matches the day's volume profile to minimize market impact", "Instant order filling", "Arbitrage between exchanges"],
+                "answer": 1,
+                "explanation": "VWAP algorithms slice large orders into smaller ones throughout the day to hide institutional footprints and minimize price distortion."
+            }
         ],
         "resources": [
             {"icon": "📖", "name": "Active Portfolio Management — Grinold & Kahn", "url": "https://www.amazon.com/Active-Portfolio-Management-Quantitative-Approach/dp/0070248826"},
@@ -340,6 +412,20 @@ ROADMAP_DATA = {
             "Ignoring central bank credibility: Policy models assume central banks act rationally and predictably. Political interference or credibility crises (e.g., Turkey, Argentina) can invalidate standard macro frameworks entirely.",
             "Being too early on macro trades: A yield curve inversion can persist for 12–24 months before a recession materializes. Sizing correctly for a long-dated macro trade is as important as being directionally correct."
         ],
+        "quiz": [
+            {
+                "question": "Which yield curve regime is historically most associated with an impending recession?",
+                "options": ["Bull Steepening", "Bear Flattening", "Inversion (Short rates > Long rates)", "Parallel Shift Up"],
+                "answer": 2,
+                "explanation": "Yield curve inversion has preceded almost every major US recession, signaling that the market expects lower future growth and inflation."
+            },
+            {
+                "question": "What is the impact of rising 'Real Yields' on growth-oriented technology stocks?",
+                "options": ["Prices rise due to liquidity", "Valuations compress as the discount rate increases", "No correlation", "Dividends increase"],
+                "answer": 1,
+                "explanation": "Real yields act as 'gravity' for valuations. As the risk-free real return rises, the present value of future earnings (high in growth stocks) drops."
+            }
+        ],
         "resources": [
             {"icon": "📖", "name": "Macroeconomics — Gregory Mankiw", "url": "https://www.amazon.com/Macroeconomics-N-Gregory-Mankiw/dp/1319105998"},
             {"icon": "🎓", "name": "Real Vision: Institutional Macro Insights", "url": "https://www.realvision.com/"},
@@ -401,6 +487,20 @@ ROADMAP_DATA = {
             "Ignoring Implied Volatility Rank (IVR): Buying options when IV is at a 52-week high (expensive) and selling them when IV is at a 52-week low (cheap) is a common and costly error.",
             "Confusing Delta with probability of profit: A 0.30 Delta option does not have a 30% probability of being in-the-money at expiry. The correct measure is N(d2), not N(d1), from the BSM formula.",
             "Selling naked options without tail-risk management: Selling uncovered puts or calls for premium income is seductive until a black swan event delivers a loss that exceeds years of collected premium in a single day."
+        ],
+        "quiz": [
+            {
+                "question": "Which 'Greek' measures an option's sensitivity to time decay?",
+                "options": ["Delta", "Gamma", "Theta", "Vega"],
+                "answer": 2,
+                "explanation": "Theta (Θ) represents the daily loss in an option's value as it approaches expiration, assuming no change in the underlying price or volatility."
+            },
+            {
+                "question": "What does a 'Positive Gamma' position mean for an options trader?",
+                "options": ["They lose money if the market moves", "Their Delta increases as the underlying moves in their favor", "They are short volatility", "They benefit from time passing"],
+                "answer": 1,
+                "explanation": "Positive Gamma means your directional exposure (Delta) grows in the direction of the move, allowing you to profit from large 'jumps' in price."
+            }
         ],
         "resources": [
             {"icon": "📖", "name": "Options, Futures & Other Derivatives — John Hull", "url": "https://www.amazon.com/Options-Futures-Other-Derivatives-10th/dp/013447208X"},
