@@ -13,56 +13,23 @@ def apply_styles():
             color: #E2E8F0;
         }
 
-        /* Sidebar Hover Effect */
-        section[data-testid="stSidebar"] {
-            width: 80px !important;
-            min-width: 80px !important;
-            transition: width 0.3s ease-in-out !important;
-            background-color: rgba(17, 25, 40, 0.8) !important;
-            backdrop-filter: blur(15px) !important;
-            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
-            overflow-x: hidden !important;
-            z-index: 1000 !important;
+        /* Standard Sidebar Styles */
+        [data-testid="stSidebar"] {
+            background-color: rgba(17, 25, 40, 0.75);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        section[data-testid="stSidebar"]:hover {
-            width: 320px !important;
-            min-width: 320px !important;
-            background-color: rgba(17, 25, 40, 0.98) !important;
+        /* Reset main content padding to default */
+        .main .block-container {
+            max-width: 1200px !important;
+            padding-top: 2rem !important;
         }
 
-        /* Sidebar Content Visibility */
-        [data-testid="stSidebarContent"] {
-            width: 320px !important;
-        }
-
-        /* Hide menu items when narrow to avoid messy clipping */
-        section[data-testid="stSidebar"]:not(:hover) [data-testid="stSidebarNav"],
-        section[data-testid="stSidebar"]:not(:hover) [data-testid="stSidebarUserContent"] {
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        /* Force the sidebar collapse button (the arrow) to the left so it's always visible in the 80px strip */
-        [data-testid="stSidebarCollapseButton"] {
-            position: absolute !important;
-            left: 20px !important;
-            right: auto !important;
-            top: 20px !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            z-index: 10001 !important;
-            color: #00F2FF !important;
-        }
-
-        /* Adjust Main Content Area */
-        [data-testid="stAppViewContainer"] {
-            margin-left: 0 !important;
-        }
         
         .main .block-container {
-            padding-left: 100px !important;
-            padding-right: 2rem !important;
+            padding-top: 5rem !important;
+            padding-bottom: 5rem !important;
         }
 
 
